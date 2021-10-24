@@ -1,15 +1,15 @@
 <template>
-  <hello-world />
+  <v-container>
+    <v-row justify=center>
+      <v-col align=center>
+        <h1>Home view</h1>
+      </v-col> 
+    </v-row>
+  </v-container>
 </template>
 
 <script>
-import HelloWorld from "../components/HelloWorld";
-
 export default {
   name: "Home",
-
-  components: {
-    HelloWorld,
-  },
 };
 </script>
