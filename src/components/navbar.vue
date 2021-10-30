@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <!-- W.I.P. --->
     <v-navigation-drawer
       v-if="$vuetify.breakpoint.xsOnly"
@@ -106,7 +106,7 @@
         depressed
       >
         <v-icon v-if="$vuetify.breakpoint.smOnly" color="secondary"
-          >mdi-login-variant</v-icon
+          >mdi-account-circle</v-icon
         >
         <span
           v-if="$vuetify.breakpoint.mdAndUp"
@@ -121,7 +121,7 @@
         </v-btn>
       </div>
     </v-app-bar>
-  </v-app>
+  </div>
 </template>
 
 <script>
