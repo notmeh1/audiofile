@@ -2,14 +2,14 @@
 <template>
   <v-container>
     <v-row class="login px-2">
-      <v-col class="login__bg" cols="5">
+      <v-col class="login__bg" cols="12" md="5">
         <img
           class="login__img"
           src="../../assets/img/hero-login-img.png"
           alt="Login img"
         />
       </v-col>
-      <v-col class="login__form px-12" cols="7">
+      <v-col class="login__form px-12" cols="12" md="7">
         <h2 class="login__title py-10">Inicia tu sesión</h2>
         <v-form ref="loginForm" v-model="valid" lazy-validation class="my-10">
           <v-text-field
