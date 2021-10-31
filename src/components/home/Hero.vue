@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row class="hero mx-1">
-      <v-col class="hero__bg">
+      <v-col class="hero__bg-left" md="4">
         <h1 class="hero__title pa-4">
           Lorem ipsum dolor sit amet, consectetur
         </h1>
@@ -12,8 +12,12 @@
         </p>
         <Search class="pb-8" />
       </v-col>
-      <v-col>
-        <img src="" alt="" />
+      <v-col class="hero__bg-right" md="8">
+        <img
+          class="hero__img"
+          src="../../assets/img/hero-img.png"
+          alt="hero img"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -30,7 +34,7 @@ export default {
 .hero {
   display: flex;
   flex-direction: column;
-  &__bg {
+  &__bg-left {
     background-color: #f0f6ff;
     border-radius: 0 0 50px 50px;
   }
@@ -44,6 +48,28 @@ export default {
   &__text {
     text-align: center;
     line-height: 30px;
+  }
+}
+
+@media (min-width: 1264px) {
+  .hero {
+    flex-direction: row;
+    &__bg-left {
+      border-radius: 0 0 0 50px;
+      padding-top: 10% !important;
+    }
+    &__bg-right {
+      background-color: #f4b40e;
+      border-radius: 0 0 50px 0;
+    }
+    &__img {
+      width: 120%;
+      margin-bottom: -6px;
+    }
+  }
+  .col-md-8 {
+    padding: 0 !important;
+    overflow: hidden;
   }
 }
 </style>

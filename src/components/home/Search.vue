@@ -30,10 +30,10 @@ export default {};
 .v-text-field.v-text-field--enclosed:not(.v-text-field--rounded)
   > .v-input__control
   > .v-input__slot {
-  padding: 0 0 0 12px;
+  padding: 0 0 0 12px !important;
 }
 
 .v-icon.v-icon {
-  color: white;
+  color: white !important;
 }
 </style>
