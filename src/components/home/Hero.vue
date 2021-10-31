@@ -38,6 +38,9 @@ export default {
     background-color: #f0f6ff;
     border-radius: 0 0 50px 50px;
   }
+  &__bg-right {
+    display: none;
+  }
   &__title {
     font-size: 50px;
     line-height: 60px;
@@ -61,6 +64,7 @@ export default {
     &__bg-right {
       background-color: #f4b40e;
       border-radius: 0 0 50px 0;
+      display: inline-block;
     }
     &__img {
       width: 120%;
