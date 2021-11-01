@@ -27,6 +27,8 @@
               </v-list-item-content>
             </v-list-item>
           </v-card>
+        </v-col>
+        <v-col>
           <v-card class="mx-auto card" color="#F9F6F6" flat>
             <v-list-item three-line>
               <v-list-item-avatar
@@ -50,6 +52,8 @@
               </v-list-item-content>
             </v-list-item>
           </v-card>
+        </v-col>
+        <v-col>
           <v-card class="mx-auto card" color="#F9F6F6" flat>
             <v-list-item three-line>
               <v-list-item-avatar
@@ -73,6 +77,8 @@
               </v-list-item-content>
             </v-list-item>
           </v-card>
+        </v-col>
+        <v-col>
           <v-card class="mx-auto card" color="#F9F6F6" flat>
             <v-list-item three-line>
               <v-list-item-avatar
@@ -96,6 +102,8 @@
               </v-list-item-content>
             </v-list-item>
           </v-card>
+        </v-col>
+        <v-col>
           <v-card class="mx-auto card" color="#F9F6F6" flat>
             <v-list-item three-line>
               <v-list-item-avatar
@@ -119,6 +127,8 @@
               </v-list-item-content>
             </v-list-item>
           </v-card>
+        </v-col>
+        <v-col>
           <v-card class="mx-auto card" color="#F9F6F6" flat>
             <v-list-item three-line>
               <v-list-item-avatar
@@ -144,7 +154,7 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-row>
+      <v-row class="justify-center">
         <v-pagination v-model="page" :length="6" color="#4A2AA7"></v-pagination>
       </v-row>
     </v-container>
