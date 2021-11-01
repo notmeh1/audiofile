@@ -1,12 +1,17 @@
 <template>
-  <v-footer       :class="[
-        $vuetify.breakpoint.xsOnly ? 'mx-0 tile' : 'mx-3 mb-1 rounded-simple',
-      ]" color="secondary" justify="center" :height="$vuetify.breakpoint.xsOnly ? '100px' : '175px'" dark>
+  <v-footer
+    :class="[
+      $vuetify.breakpoint.xsOnly ? 'mx-0 tile' : 'mx-3 mb-1 rounded-simple',
+    ]"
+    color="secondary"
+    justify="center"
+    :height="$vuetify.breakpoint.xsOnly ? '100px' : '175px'"
+    dark
+  >
     <v-col>
       <v-row justify="center">
         <v-card
           class="d-flex rounded-simple mx-2 px-7"
-          
           :width="$vuetify.breakpoint.smAndUp ? '200px' : 'auto'"
           color="primary"
           :height="$vuetify.breakpoint.xsOnly ? '55px' : '75px'"
