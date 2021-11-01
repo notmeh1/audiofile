@@ -2,8 +2,8 @@
 <template>
   <div>
     <v-container>
-      <v-row class="agregarResenas">
-        <v-col>
+      <v-row class="agregarResenas justify-center">
+        <v-col cols="12" md="8">
           <h2 class="agregarResenas__title my-5">
             Busca una canción y agrega una reseña
           </h2>
