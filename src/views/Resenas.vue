@@ -12,6 +12,7 @@
       <v-row>
         <v-col>
           <FiltrosResenas />
+          <CardResenas />
         </v-col>
       </v-row>
     </v-container>
@@ -20,8 +21,9 @@
 
 <script>
 import FiltrosResenas from "../components/resenas/FiltrosResenas.vue";
+import CardResenas from "../components/resenas/CardResenas.vue";
 export default {
-  components: { FiltrosResenas },
+  components: { FiltrosResenas, CardResenas },
 };
 </script>
 
