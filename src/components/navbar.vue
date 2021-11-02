@@ -82,16 +82,25 @@
       <v-toolbar-items class="hidden-xs-only">
         <v-btn
           :to="{ name: 'Home' }"
-          class="font-weight-light mx-2"
+          class="font-weight-light text-body-2 mx-2"
           color="secondary"
           depressed
           exact
           >Inicio</v-btn
         >
-        <v-btn :to="{ name:'Reviews' }" class="font-weight-light mx-2" color="secondary" depressed exact
+        <v-btn
+          :to="{ name: '' }"
+          class="font-weight-light text-body-2 mx-2"
+          color="secondary"
+          depressed
+          exact
           >Reseñas</v-btn
         >
-        <v-btn class="font-weight-light mx-2" color="secondary" depressed exact
+        <v-btn
+          class="font-weight-light text-body-2 mx-2"
+          color="secondary"
+          depressed
+          exact
           >Agregar Reseña</v-btn
         >
       </v-toolbar-items>
@@ -110,7 +119,7 @@
         >
         <span
           v-if="$vuetify.breakpoint.mdAndUp"
-          class="font-weight-regular"
+          class="font-weight-bold text-body-2 secondary--text"
           color="secondary"
           >Iniciar sesion</span
         ></v-btn
