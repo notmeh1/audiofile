@@ -127,7 +127,6 @@
         <span
           v-if="$vuetify.breakpoint.mdAndUp"
           class="font-weight-bold text-body-2 secondary--text"
-          color="secondary"
           >Iniciar sesion</span
         ></v-btn
       >
