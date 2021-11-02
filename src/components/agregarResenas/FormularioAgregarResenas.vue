@@ -1,7 +1,7 @@
 .
 <template>
   <div>
-    <v-container>
+    <v-container fluid>
       <v-row class="agregarResenas justify-center">
         <v-col cols="12" md="8">
           <h2 class="agregarResenas__title my-5">

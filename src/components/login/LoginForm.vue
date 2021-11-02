@@ -1,6 +1,6 @@
 .
 <template>
-  <v-container>
+  <v-container fluid>
     <v-row class="login px-2">
       <v-col class="login__bg" cols="12" md="5">
         <img
