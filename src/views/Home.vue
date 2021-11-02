@@ -2,9 +2,6 @@
   <div>
     <v-container class="home">
       <v-row justify="center">
-        <v-col align="center">
-          <h1>Home view</h1>
-        </v-col>
         <Hero class="mb-5" />
       </v-row>
     </v-container>
