@@ -30,7 +30,7 @@
           color="secondary"
           depressed
           exact
-          to="/resenas"
+          :to="{ name: 'Reseñas' }"
           >Reseñas</v-btn
         >
         <v-btn class="font-weight-light mx-2" color="secondary" depressed exact
