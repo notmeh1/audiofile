@@ -21,6 +21,14 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "reseñas" */ "../views/Resenas.vue"),
   },
+  {
+    path: "/agregar-resenas",
+    name: "Agregar Reseñas",
+    component: () =>
+      import(
+        /* webpackChunkName: "agregar reseñas" */ "../views/AgregarResenas.vue"
+      ),
+  },
 ];
 
 const router = new VueRouter({
