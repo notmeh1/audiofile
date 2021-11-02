@@ -13,7 +13,7 @@ export default new Vuetify({
         primary: "#581EFF",
         secondary: "#3A2085",
         tertiary: "#E7EDFF",
-        cardBackground: "#E7EDFF",
+        cardBackground: "#F6FAFF",
       },
     },
   },
