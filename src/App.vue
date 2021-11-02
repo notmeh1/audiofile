@@ -1,18 +1,20 @@
 <template>
   <v-app>
-    <Navbar/>
-    <v-main>
-      <v-container fluid>
-      <router-view />
-      </v-container>
-    </v-main>
-    <Footer/>
+    <div class="tertiary">
+      <Navbar />
+      <v-main>
+        <v-container fluid>
+          <router-view />
+        </v-container>
+      </v-main>
+      <Footer />
+    </div>
   </v-app>
 </template>
 
 <script>
-import Navbar from "./components/navbar.vue"
-import Footer from "./components/footer.vue"
+import Navbar from "./components/navbar.vue";
+import Footer from "./components/footer.vue";
 
 export default {
   name: "App",
@@ -23,7 +25,7 @@ export default {
   components: {
     Navbar,
     Footer,
-  }
+  },
 };
 </script>
 
