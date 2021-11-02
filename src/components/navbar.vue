@@ -25,7 +25,12 @@
           exact
           >Inicio</v-btn
         >
-        <v-btn class="font-weight-light mx-2" color="secondary" depressed exact
+        <v-btn
+          class="font-weight-light mx-2"
+          color="secondary"
+          depressed
+          exact
+          to="/resenas"
           >Reseñas</v-btn
         >
         <v-btn class="font-weight-light mx-2" color="secondary" depressed exact
@@ -88,7 +93,12 @@
           exact
           >Inicio</v-btn
         >
-        <v-btn :to="{ name:'Reviews' }" class="font-weight-light mx-2" color="secondary" depressed exact
+        <v-btn
+          :to="{ name: 'Reviews' }"
+          class="font-weight-light mx-2"
+          color="secondary"
+          depressed
+          exact
           >Reseñas</v-btn
         >
         <v-btn class="font-weight-light mx-2" color="secondary" depressed exact
