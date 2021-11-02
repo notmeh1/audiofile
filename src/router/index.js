@@ -7,7 +7,27 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: () => import(/* webpackChunkName: "home" */"../views/Home.vue"),
+    component: () => import(/* webpackChunkName: "home" */ "../views/Home.vue"),
+  },
+  {
+    path: "/iniciar-sesion",
+    name: "Iniciar Sesión",
+    component: () =>
+      import(/* webpackChunkName: "login" */ "../views/Login.vue"),
+  },
+  {
+    path: "/resenas",
+    name: "Reseñas",
+    component: () =>
+      import(/* webpackChunkName: "reseñas" */ "../views/Resenas.vue"),
+  },
+  {
+    path: "/agregar-resenas",
+    name: "Agregar Reseñas",
+    component: () =>
+      import(
+        /* webpackChunkName: "agregar reseñas" */ "../views/AgregarResenas.vue"
+      ),
   },
   {
     path: "/resenas/resena",
