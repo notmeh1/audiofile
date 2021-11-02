@@ -32,7 +32,8 @@ const routes = [
   {
     path: "/resenas/resena",
     name: "Reseña",
-    component: () => import(/* webpackChunkName: "review" */"../views/Reseña.vue"),
+    component: () =>
+      import(/* webpackChunkName: "reseña" */ "../views/Reseña.vue"),
   },
 ];
 

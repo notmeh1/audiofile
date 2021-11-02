@@ -52,7 +52,7 @@
     </v-navigation-drawer>
     <v-app-bar
       :class="[
-        $vuetify.breakpoint.xsOnly ? 'mx-0 tile' : 'mx-3 mt-1 rounded-simple',
+        $vuetify.breakpoint.xsOnly ? 'mx-0 tile' : 'mx-3 rounded-simple', // mt-1 for navbar
       ]"
       color="secondary"
       :height="$vuetify.breakpoint.xsOnly ? '50px' : '75px'"
@@ -94,7 +94,7 @@
           >Inicio</v-btn
         >
         <v-btn
-          :to="{ name: 'Reviews' }"
+          :to="{ name: 'Reseñas' }"
           class="font-weight-light text-body-2 mx-2"
           color="secondary"
           depressed
@@ -102,6 +102,7 @@
           >Reseñas</v-btn
         >
         <v-btn
+          :to="{ name: 'Agregar Reseñas' }"
           class="font-weight-light text-body-2 mx-2"
           color="secondary"
           depressed
@@ -112,6 +113,7 @@
 
       <v-spacer></v-spacer>
       <v-btn
+        :to="{ name: 'Iniciar Sesión' }"
         class="hidden-xs-only rounded-simple mr-7"
         :width="$vuetify.breakpoint.smOnly ? 'auto' : '190px'"
         height="65%"

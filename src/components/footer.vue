@@ -1,7 +1,7 @@
 <template>
   <v-footer
     :class="[
-      $vuetify.breakpoint.xsOnly ? 'mx-0 tile' : 'mx-3 mb-1 rounded-simple',
+      $vuetify.breakpoint.xsOnly ? 'mx-0 tile' : 'mx-3 rounded-simple', // mb-1 for footer
     ]"
     color="secondary"
     justify="center"

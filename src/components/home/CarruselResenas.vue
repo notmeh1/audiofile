@@ -158,6 +158,9 @@
 <script>
 import { Carousel, Slide } from "vue-carousel";
 export default {
+  data: () => ({
+    show: true,
+  }),
   components: {
     Carousel,
     Slide,

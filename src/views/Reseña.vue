@@ -2,10 +2,12 @@
   <v-container class="rounded-simple px-5 white" fluid>
     <v-row justify="end">
       <v-btn
+        :to="{ name: 'Reseñas' }"
         class="rounded-lg mx-3 px-8 my-5"
         color="secondary"
         height="50px"
         depressed
+        exact
         ><v-icon class="pr-">mdi-location-exit</v-icon
         ><span class="font-weight-regular text-body-2">Volver</span></v-btn
       >
