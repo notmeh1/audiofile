@@ -95,11 +95,7 @@
         >
         <v-btn
           :to="{ name: 'Reviews' }"
-<<<<<<< HEAD
           class="font-weight-light text-body-2 mx-2"
-=======
-          class="font-weight-light mx-2"
->>>>>>> dev
           color="secondary"
           depressed
           exact
