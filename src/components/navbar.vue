@@ -89,7 +89,7 @@
           >Inicio</v-btn
         >
         <v-btn
-          :to="{ name: '' }"
+          :to="{ name: 'Reviews' }"
           class="font-weight-light text-body-2 mx-2"
           color="secondary"
           depressed
