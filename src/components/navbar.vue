@@ -52,7 +52,7 @@
     </v-navigation-drawer>
     <v-app-bar
       :class="[
-        $vuetify.breakpoint.xsOnly ? 'mx-0 tile' : 'mx-3 rounded-simple', // mt-1 for navbar
+        $vuetify.breakpoint.xsOnly ? 'mx-0 tile' : 'mx-3 mt-1 rounded-simple', // mt-1 for navbar
       ]"
       color="secondary"
       :height="$vuetify.breakpoint.xsOnly ? '50px' : '75px'"

@@ -40,6 +40,7 @@
           </v-btn>
 
           <v-btn color="#F4B40E" class="mr-4" @click="reset">
+            <v-icon>mdi-spotify</v-icon>
             Iniciar sesión con Spotify
           </v-btn>
           <p class="login__register my-5">
