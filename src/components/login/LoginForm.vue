@@ -11,10 +11,8 @@
       </v-col>
       <v-col class="login__form px-12" cols="12" md="7">
         <h2 class="login__title py-10">Inicia tu sesión</h2>
-        <v-form ref="loginForm" v-model="valid" lazy-validation class="my-10">
+        <v-form ref="loginForm" lazy-validation class="my-10">
           <v-text-field
-            v-model="email"
-            :rules="emailRules"
             label="Ingresa tu correo"
             required
             solo
@@ -22,8 +20,6 @@
           ></v-text-field>
 
           <v-text-field
-            v-model="password"
-            :rules="password"
             label="Ingresa tu contraseña"
             required
             solo
@@ -31,15 +27,13 @@
           ></v-text-field>
 
           <v-btn
-            :disabled="!valid"
             color="normal"
             class="mr-4"
-            @click="validate"
           >
             Iniciar sesión
           </v-btn>
 
-          <v-btn color="#F4B40E" class="mr-4" @click="reset">
+          <v-btn color="#F4B40E" class="mr-4">
             <v-icon>mdi-spotify</v-icon>
             Iniciar sesión con Spotify
           </v-btn>
