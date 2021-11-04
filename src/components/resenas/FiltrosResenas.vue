@@ -28,7 +28,7 @@
           ></v-text-field>
         </v-col>
         <v-col class="text-center" cols="12" md="3">
-          <v-btn class="filtros__btn mb-2" color="#4A2AA7"
+          <v-btn :to="{ name: 'Agregar Reseñas' }" class="filtros__btn mb-2" color="#4A2AA7"
             ><v-icon>mdi-plus-circle-outline</v-icon> Agregar Reseña</v-btn
           >
         </v-col>
@@ -38,7 +38,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data: () => ({
+    songInput: null,
+  }),
+};
 </script>
 
 <style lang="scss">

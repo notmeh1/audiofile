@@ -26,6 +26,10 @@ export default {
     Navbar,
     Footer,
   },
+  mounted() {
+    this.$store.dispatch("spotify/fetchId")
+    this.$store.dispatch("foros/getForoList")
+  },
 };
 </script>
 

@@ -3,7 +3,7 @@
   <div>
     <v-container>
       <v-row>
-        <v-col>
+        <v-col v-for="foro in foroList" :key="foro.id">
           <v-card class="mx-auto card" color="#F9F6F6" flat>
             <v-list-item three-line>
               <v-list-item-avatar
@@ -14,140 +14,13 @@
               ></v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title class="text-h5 mb-1 card__title">
-                  Lorem ipsum
+                  {{foro.titulo}}
                 </v-list-item-title>
                 <v-list-item-subtitle class="card__text"
-                  >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Elementum, nisl arcu elit turpis in quisque
-                  turpis...</v-list-item-subtitle
+                  >{{foro.descripcion}}</v-list-item-subtitle
                 >
                 <v-card-actions>
-                  <v-btn :to="{ name: 'Reseña' }" color="#4A2AA7"> Ver reseña </v-btn>
-                </v-card-actions>
-              </v-list-item-content>
-            </v-list-item>
-          </v-card>
-        </v-col>
-        <v-col>
-          <v-card class="mx-auto card" color="#F9F6F6" flat>
-            <v-list-item three-line>
-              <v-list-item-avatar
-                tile
-                size="80"
-                height="100"
-                color="grey"
-              ></v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="text-h5 mb-1 card__title">
-                  Lorem ipsum
-                </v-list-item-title>
-                <v-list-item-subtitle class="card__text"
-                  >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Elementum, nisl arcu elit turpis in quisque
-                  turpis...</v-list-item-subtitle
-                >
-                <v-card-actions>
-                  <v-btn color="#4A2AA7"> Ver reseña </v-btn>
-                </v-card-actions>
-              </v-list-item-content>
-            </v-list-item>
-          </v-card>
-        </v-col>
-        <v-col>
-          <v-card class="mx-auto card" color="#F9F6F6" flat>
-            <v-list-item three-line>
-              <v-list-item-avatar
-                tile
-                size="80"
-                height="100"
-                color="grey"
-              ></v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="text-h5 mb-1 card__title">
-                  Lorem ipsum
-                </v-list-item-title>
-                <v-list-item-subtitle class="card__text"
-                  >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Elementum, nisl arcu elit turpis in quisque
-                  turpis...</v-list-item-subtitle
-                >
-                <v-card-actions>
-                  <v-btn color="#4A2AA7"> Ver reseña </v-btn>
-                </v-card-actions>
-              </v-list-item-content>
-            </v-list-item>
-          </v-card>
-        </v-col>
-        <v-col>
-          <v-card class="mx-auto card" color="#F9F6F6" flat>
-            <v-list-item three-line>
-              <v-list-item-avatar
-                tile
-                size="80"
-                height="100"
-                color="grey"
-              ></v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="text-h5 mb-1 card__title">
-                  Lorem ipsum
-                </v-list-item-title>
-                <v-list-item-subtitle class="card__text"
-                  >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Elementum, nisl arcu elit turpis in quisque
-                  turpis...</v-list-item-subtitle
-                >
-                <v-card-actions>
-                  <v-btn color="#4A2AA7"> Ver reseña </v-btn>
-                </v-card-actions>
-              </v-list-item-content>
-            </v-list-item>
-          </v-card>
-        </v-col>
-        <v-col>
-          <v-card class="mx-auto card" color="#F9F6F6" flat>
-            <v-list-item three-line>
-              <v-list-item-avatar
-                tile
-                size="80"
-                height="100"
-                color="grey"
-              ></v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="text-h5 mb-1 card__title">
-                  Lorem ipsum
-                </v-list-item-title>
-                <v-list-item-subtitle class="card__text"
-                  >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Elementum, nisl arcu elit turpis in quisque
-                  turpis...</v-list-item-subtitle
-                >
-                <v-card-actions>
-                  <v-btn color="#4A2AA7"> Ver reseña </v-btn>
-                </v-card-actions>
-              </v-list-item-content>
-            </v-list-item>
-          </v-card>
-        </v-col>
-        <v-col>
-          <v-card class="mx-auto card" color="#F9F6F6" flat>
-            <v-list-item three-line>
-              <v-list-item-avatar
-                tile
-                size="80"
-                height="100"
-                color="grey"
-              ></v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="text-h5 mb-1 card__title">
-                  Lorem ipsum
-                </v-list-item-title>
-                <v-list-item-subtitle class="card__text"
-                  >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Elementum, nisl arcu elit turpis in quisque
-                  turpis...</v-list-item-subtitle
-                >
-                <v-card-actions>
-                  <v-btn color="#4A2AA7"> Ver reseña </v-btn>
+                  <v-btn :to="{ path: `/resenas/${foro.codigo}` }" color="#4A2AA7"> Ver reseña </v-btn>
                 </v-card-actions>
               </v-list-item-content>
             </v-list-item>
@@ -155,14 +28,21 @@
         </v-col>
       </v-row>
       <v-row class="justify-center">
-        <v-pagination v-model="page" :length="6" color="#4A2AA7"></v-pagination>
+        <v-pagination :length="6" color="#4A2AA7"></v-pagination>
       </v-row>
     </v-container>
   </div>
 </template>
 
 <script>
-export default {};
+import {mapState} from "vuex";
+export default {
+  computed: {
+    ...mapState({
+      foroList: (state) => state.foros.foroList
+    })
+  }
+};
 </script>
 
 <style lang="scss">
