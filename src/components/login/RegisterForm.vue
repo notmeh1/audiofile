@@ -13,10 +13,16 @@
         <h2 class="login__title py-10">Registrate</h2>
         <v-form ref="registerForm" @submit.prevent="registrarse" class="my-10">
           <v-text-field
+            v-model="form.nombre"
+            :rules="[required]"
+            label="Ingresa tu nombre"
+            solo
+            color="white"
+          ></v-text-field>
+          <v-text-field
             v-model="form.email"
             :rules="[required]"
             label="Ingresa tu correo"
-            required
             solo
             color="white"
           ></v-text-field>
@@ -25,7 +31,6 @@
             v-model="form.password"
             :rules="[required]"
             label="Ingresa tu contraseña"
-            required
             solo
             color="white"
           ></v-text-field>
@@ -48,11 +53,15 @@ import Firebase from "firebase";
 export default {
   data: () => ({
     form: {
+      nombre: "",
       email: "",
       password: "",
     },
   }),
   methods: {
+    required(value) {
+      return !!value || "Este campo es obligatorio";
+    },
     registrarse() {
       Firebase.auth()
         .createUserWithEmailAndPassword(this.form.email, this.form.password)
