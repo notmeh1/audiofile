@@ -2,11 +2,6 @@
 <template>
   <div>
     <v-autocomplete
-      v-model="select"
-      :loading="loading"
-      :items="items"
-      :search-input.sync="search"
-      cache-items
       class="mx-4 my-2"
       flat
       hide-no-data

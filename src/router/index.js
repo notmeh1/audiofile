@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import Store from "../store";
 
 Vue.use(VueRouter);
 
@@ -41,6 +42,23 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const currentUser = Store.state.session.user; // {user} | null
+  const requiredLogin = to.meta.requiredLogin; // undefined | true
+
+  console.log({ currentUser, requiredLogin });
+
+  if (requiredLogin) {
+    if (currentUser) {
+      next();
+    } else {
+      next({ name: "Home" });
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;

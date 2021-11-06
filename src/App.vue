@@ -1,18 +1,18 @@
 <template>
   <v-app>
-    <Navbar/>
+    <Navbar />
     <v-main>
       <v-container fluid>
-      <router-view />
+        <router-view />
       </v-container>
     </v-main>
-    <Footer/>
+    <Footer />
   </v-app>
 </template>
 
 <script>
-import Navbar from "./components/navbar.vue"
-import Footer from "./components/footer.vue"
+import Navbar from "./components/navbar.vue";
+import Footer from "./components/footer.vue";
 
 export default {
   name: "App",
@@ -20,10 +20,13 @@ export default {
   data: () => ({
     //
   }),
+  mounted() {
+    this.$store.dispatch("session/subscribeToAuthStateChange");
+  },
   components: {
     Navbar,
     Footer,
-  }
+  },
 };
 </script>
 

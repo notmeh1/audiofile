@@ -11,35 +11,37 @@
       </v-col>
       <v-col class="login__form px-12" cols="12" md="7">
         <h2 class="login__title py-10">Inicia tu sesión</h2>
-        <v-form ref="loginForm" v-model="valid" lazy-validation class="my-10">
+        <v-form
+          ref="userForm"
+          @submit.prevent="handleFormSubmit"
+          lazy-validation
+          class="my-10"
+        >
           <v-text-field
-            v-model="email"
-            :rules="emailRules"
+            v-model="form.email"
+            :rules="[required]"
             label="Ingresa tu correo"
-            required
             solo
+            type="email"
+            name="email"
             color="white"
           ></v-text-field>
 
           <v-text-field
-            v-model="password"
-            :rules="password"
+            v-model="form.password"
+            :rules="[required]"
             label="Ingresa tu contraseña"
-            required
             solo
+            type="password"
+            name="password"
             color="white"
           ></v-text-field>
 
-          <v-btn
-            :disabled="!valid"
-            color="normal"
-            class="mr-4"
-            @click="validate"
-          >
+          <v-btn color="normal" class="mr-4" type="submit">
             Iniciar sesión
           </v-btn>
 
-          <v-btn color="#F4B40E" class="mr-4" @click="reset">
+          <v-btn color="#F4B40E" class="mr-4">
             Iniciar sesión con Spotify
           </v-btn>
           <p class="login__register my-5">
@@ -53,7 +55,28 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data: () => ({
+    form: {
+      email: "",
+      password: "",
+    },
+  }),
+  methods: {
+    async handleFormSubmit() {
+      if (this.$refs.userForm.validate()) {
+        try {
+          await this.$store.dispatch("session/signIn", this.form);
+        } catch (e) {
+          this.color = "error";
+        }
+      }
+    },
+    required(value) {
+      return !!value || "Este campo es obligatorio";
+    },
+  },
+};
 </script>
 
 <style lang="scss">
