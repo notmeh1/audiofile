@@ -25,12 +25,7 @@
           exact
           >Inicio</v-btn
         >
-        <v-btn
-          class="font-weight-light mx-2"
-          color="secondary"
-          depressed
-          exact
-          :to="{ name: 'Reseñas' }"
+        <v-btn class="font-weight-light mx-2" color="secondary" depressed exact
           >Reseñas</v-btn
         >
         <v-btn class="font-weight-light mx-2" color="secondary" depressed exact
