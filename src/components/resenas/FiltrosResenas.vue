@@ -28,7 +28,10 @@
           ></v-text-field>
         </v-col>
         <v-col class="text-center" cols="12" md="3">
-          <v-btn class="filtros__btn mb-2" color="#4A2AA7"
+          <v-btn
+            class="filtros__btn mb-2"
+            color="#4A2AA7"
+            :to="{ name: 'Agregar Reseñas' }"
             ><v-icon>mdi-plus-circle-outline</v-icon> Agregar Reseña</v-btn
           >
         </v-col>

@@ -89,20 +89,25 @@
           >Inicio</v-btn
         >
         <v-btn
-          :to="{ name: 'Reviews' }"
+          :to="{ name: 'Reseñas' }"
           class="font-weight-light mx-2"
           color="secondary"
           depressed
           exact
           >Reseñas</v-btn
         >
-        <v-btn class="font-weight-light mx-2" color="secondary" depressed exact
+        <v-btn
+          class="font-weight-light mx-2"
+          color="secondary"
+          depressed
+          exact
+          :to="{ name: 'Agregar Reseñas' }"
           >Agregar Reseña</v-btn
         >
       </v-toolbar-items>
 
       <v-spacer></v-spacer>
-      <SignIn />
+      <SignIn v-show="!$store.state.session.user" />
       <SignOut v-show="$store.state.session.user" />
       <div class="hidden-sm-and-up">
         <v-btn icon class="rounded-simple mr-1" @click="drawer = !drawer">

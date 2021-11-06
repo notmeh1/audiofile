@@ -92,7 +92,7 @@ export default {
     border-radius: 0 0 50px 50px;
   }
   &__register {
-    color: white;
+    color: #4a2aa7;
   }
 }
 .theme--light.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state)

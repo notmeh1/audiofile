@@ -35,6 +35,9 @@ const routes = [
       import(
         /* webpackChunkName: "agregar reseñas" */ "../views/AgregarResenas.vue"
       ),
+    meta: {
+      requiredLogin: true,
+    },
   },
 ];
 
@@ -54,7 +57,7 @@ router.beforeEach((to, from, next) => {
     if (currentUser) {
       next();
     } else {
-      next({ name: "Home" });
+      next({ name: "Iniciar Sesión" });
     }
   } else {
     next();
