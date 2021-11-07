@@ -4,6 +4,7 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 import { sessionModule } from "./modules/session";
+import { resenasModule } from "./modules/resenas";
 
 export default new Vuex.Store({
   state: {},
@@ -11,5 +12,6 @@ export default new Vuex.Store({
   actions: {},
   modules: {
     session: sessionModule,
+    resenas: resenasModule,
   },
 });
