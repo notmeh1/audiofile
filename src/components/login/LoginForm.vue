@@ -1,6 +1,6 @@
 .
 <template>
-  <v-container fluid>
+  <v-container>
     <v-row class="login px-2">
       <v-col class="login__bg" cols="12" md="5">
         <img
@@ -28,7 +28,6 @@
           ></v-text-field>
 
           <v-text-field
-
             v-model="form.password"
             :rules="[required]"
             label="Ingresa tu contraseña"
@@ -47,7 +46,9 @@
           </v-btn>
           <p class="login__register my-5">
             ¿Aún no te registras?
-            <v-btn to="/registro" text plain color="white">Registrarse</v-btn>
+            <v-btn to="/registrarse" text plain color="white"
+              >Registrarse</v-btn
+            >
           </p>
         </v-form>
       </v-col>

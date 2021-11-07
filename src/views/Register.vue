@@ -1,12 +1,5 @@
 <template>
   <div>
-    <v-container class="home">
-      <v-row justify="center">
-        <v-col align="center">
-          <h1>Register view</h1>
-        </v-col>
-      </v-row>
-    </v-container>
     <RegisterForm />
   </div>
 </template>
