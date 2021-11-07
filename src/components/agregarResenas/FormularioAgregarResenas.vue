@@ -9,6 +9,8 @@
           </h2>
           <v-form class="my-5">
             <v-text-field
+            v-model="searchInput"
+            @input="searchByName()"
               outlined
               append-icon="mdi-playlist-music"
               label="Nombre canción"
@@ -32,7 +34,22 @@
 </template>
 
 <script>
-export default {};
+import Axios from "axios";
+export default {
+  data: () => ({
+    searchInput: null,
+  }),
+  methods: {
+    searchByName() {
+      Axios.get(`https://api.spotify.com/v1/search?query=${encodeURIComponent(
+        this.searchInput
+      )}&type=album,playlist,artist`).then(result => {
+        console.log(result)
+      })
+    
+    }
+  }
+};
 </script>
 
 <style lang="scss">

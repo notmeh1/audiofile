@@ -3,22 +3,22 @@ import Axios from "axios";
 export const spotifyModule = {
   namespaced: true,
   state: {
-      currentData: null,
+    currentData: null,
   },
   getters: {},
   mutations: {
-      UPDATE_CURRENT_DATA(state, dataResponse) {
-        state.currentData = dataResponse
-      }
+    UPDATE_CURRENT_DATA(state, dataResponse) {
+      state.currentData = dataResponse;
+    },
   },
   actions: {
-    async fetchId({commit}) {
+    async fetchId({ commit }) {
       const clientId = "a97c91eefb5b468ebc720b375cd75603";
       const clientSecret = "f53fc38924f049509d3edcb9afd89595";
 
       const serialize = function (obj) {
-        var str = [];
-        for (var p in obj) {
+        const str = [];
+        for (const p in obj) {
           // eslint-disable-next-line no-prototype-builtins
           if (obj.hasOwnProperty(p)) {
             str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
@@ -49,9 +49,9 @@ export const spotifyModule = {
           },
         }
       );
-        const data = dataResponse.data
-        commit("UPDATE_CURRENT_DATA", data)
-        console.log(dataResponse);
+      const data = dataResponse.data;
+      commit("UPDATE_CURRENT_DATA", data);
+      console.log(dataResponse);
     },
   },
 };

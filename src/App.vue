@@ -26,9 +26,16 @@ export default {
     Navbar,
     Footer,
   },
+  methods: {
+
+  },
   mounted() {
-    this.$store.dispatch("spotify/fetchId")
-    this.$store.dispatch("foros/getForoList")
+    //this.$store.dispatch("spotify/fetchId");
+    console.log(window.location.hash.length);
+    this.$store.dispatch("foros/getForoList");
+    if (window.location.hash.length > 0) {
+      this.$store.dispatch("spotifyAuth/handleRedirect")
+    }
   },
 };
 </script>
