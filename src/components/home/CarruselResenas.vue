@@ -33,16 +33,10 @@
                 >
 
                 <v-spacer></v-spacer>
-
-                <v-btn icon @click="show = !show">
-                  <v-icon>{{
-                    show ? "mdi-chevron-up" : "mdi-chevron-down"
-                  }}</v-icon>
-                </v-btn>
               </v-card-actions>
 
               <v-expand-transition>
-                <div v-show="show">
+                <div>
                   <v-divider></v-divider>
 
                   <v-card-text>
@@ -79,16 +73,10 @@
                 >
 
                 <v-spacer></v-spacer>
-
-                <v-btn icon @click="show = !show">
-                  <v-icon>{{
-                    show ? "mdi-chevron-up" : "mdi-chevron-down"
-                  }}</v-icon>
-                </v-btn>
               </v-card-actions>
 
               <v-expand-transition>
-                <div v-show="show">
+                <div>
                   <v-divider></v-divider>
 
                   <v-card-text>
@@ -125,16 +113,10 @@
                 >
 
                 <v-spacer></v-spacer>
-
-                <v-btn icon @click="show = !show">
-                  <v-icon>{{
-                    show ? "mdi-chevron-up" : "mdi-chevron-down"
-                  }}</v-icon>
-                </v-btn>
               </v-card-actions>
 
               <v-expand-transition>
-                <div v-show="show">
+                <div>
                   <v-divider></v-divider>
 
                   <v-card-text>

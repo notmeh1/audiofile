@@ -25,12 +25,7 @@
           exact
           >Inicio</v-btn
         >
-        <v-btn
-          class="font-weight-light mx-2"
-          color="secondary"
-          depressed
-          exact
-          :to="{ name: 'Reseñas' }"
+        <v-btn class="font-weight-light mx-2" color="secondary" depressed exact
           >Reseñas</v-btn
         >
         <v-btn class="font-weight-light mx-2" color="secondary" depressed exact
@@ -112,24 +107,8 @@
       </v-toolbar-items>
 
       <v-spacer></v-spacer>
-      <v-btn
-        :to="{ name: 'Iniciar Sesión' }"
-        class="hidden-xs-only rounded-simple mr-7"
-        :width="$vuetify.breakpoint.smOnly ? 'auto' : '190px'"
-        height="65%"
-        color="white"
-        light
-        depressed
-      >
-        <v-icon v-if="$vuetify.breakpoint.smOnly" color="secondary"
-          >mdi-account-circle</v-icon
-        >
-        <span
-          v-if="$vuetify.breakpoint.mdAndUp"
-          class="font-weight-bold text-body-2 secondary--text"
-          >Iniciar sesion</span
-        ></v-btn
-      >
+      <SignIn v-show="!$store.state.session.user" />
+      <SignOut v-show="$store.state.session.user" />
       <div class="hidden-sm-and-up">
         <v-btn icon class="rounded-simple mr-1" @click="drawer = !drawer">
           <v-icon>mdi-dots-horizontal</v-icon>
@@ -140,9 +119,15 @@
 </template>
 
 <script>
+import SignIn from "./login/SignIn.vue";
+import SignOut from "./login/SignOut.vue";
 export default {
   data: () => ({
     drawer: false,
   }),
+  components: {
+    SignIn,
+    SignOut,
+  },
 };
 </script>

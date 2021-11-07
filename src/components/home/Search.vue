@@ -2,7 +2,6 @@
 <template>
   <div>
     <v-autocomplete
-      cache-items
       class="mx-4 my-2"
       flat
       hide-no-data

@@ -22,6 +22,9 @@ export default {
   data: () => ({
     //
   }),
+  mounted() {
+    this.$store.dispatch("session/subscribeToAuthStateChange");
+  },
   components: {
     Navbar,
     Footer,
