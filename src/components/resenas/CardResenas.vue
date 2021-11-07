@@ -14,13 +14,11 @@
               ></v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title class="text-h5 mb-1 card__title">
-                  Lorem ipsum
+                  {{ value.cancion }}
                 </v-list-item-title>
-                <v-list-item-subtitle class="card__text"
-                  >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Elementum, nisl arcu elit turpis in quisque
-                  turpis...</v-list-item-subtitle
-                >
+                <v-list-item-subtitle class="card__text">{{
+                  value.resena
+                }}</v-list-item-subtitle>
                 <v-card-actions>
                   <v-btn :to="{ name: 'Reseña' }" color="#4A2AA7"> Ver reseña </v-btn>
                 </v-card-actions>
@@ -28,141 +26,15 @@
             </v-list-item>
           </v-card>
         </v-col>
-        <v-col>
-          <v-card class="mx-auto card" color="#F9F6F6" flat>
-            <v-list-item three-line>
-              <v-list-item-avatar
-                tile
-                size="80"
-                height="100"
-                color="grey"
-              ></v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="text-h5 mb-1 card__title">
-                  Lorem ipsum
-                </v-list-item-title>
-                <v-list-item-subtitle class="card__text"
-                  >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Elementum, nisl arcu elit turpis in quisque
-                  turpis...</v-list-item-subtitle
-                >
-                <v-card-actions>
-                  <v-btn color="#4A2AA7"> Ver reseña </v-btn>
-                </v-card-actions>
-              </v-list-item-content>
-            </v-list-item>
-          </v-card>
-        </v-col>
-        <v-col>
-          <v-card class="mx-auto card" color="#F9F6F6" flat>
-            <v-list-item three-line>
-              <v-list-item-avatar
-                tile
-                size="80"
-                height="100"
-                color="grey"
-              ></v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="text-h5 mb-1 card__title">
-                  Lorem ipsum
-                </v-list-item-title>
-                <v-list-item-subtitle class="card__text"
-                  >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Elementum, nisl arcu elit turpis in quisque
-                  turpis...</v-list-item-subtitle
-                >
-                <v-card-actions>
-                  <v-btn color="#4A2AA7"> Ver reseña </v-btn>
-                </v-card-actions>
-              </v-list-item-content>
-            </v-list-item>
-          </v-card>
-        </v-col>
-        <v-col>
-          <v-card class="mx-auto card" color="#F9F6F6" flat>
-            <v-list-item three-line>
-              <v-list-item-avatar
-                tile
-                size="80"
-                height="100"
-                color="grey"
-              ></v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="text-h5 mb-1 card__title">
-                  Lorem ipsum
-                </v-list-item-title>
-                <v-list-item-subtitle class="card__text"
-                  >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Elementum, nisl arcu elit turpis in quisque
-                  turpis...</v-list-item-subtitle
-                >
-                <v-card-actions>
-                  <v-btn color="#4A2AA7"> Ver reseña </v-btn>
-                </v-card-actions>
-              </v-list-item-content>
-            </v-list-item>
-          </v-card>
-        </v-col>
-        <v-col>
-          <v-card class="mx-auto card" color="#F9F6F6" flat>
-            <v-list-item three-line>
-              <v-list-item-avatar
-                tile
-                size="80"
-                height="100"
-                color="grey"
-              ></v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="text-h5 mb-1 card__title">
-                  Lorem ipsum
-                </v-list-item-title>
-                <v-list-item-subtitle class="card__text"
-                  >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Elementum, nisl arcu elit turpis in quisque
-                  turpis...</v-list-item-subtitle
-                >
-                <v-card-actions>
-                  <v-btn color="#4A2AA7"> Ver reseña </v-btn>
-                </v-card-actions>
-              </v-list-item-content>
-            </v-list-item>
-          </v-card>
-        </v-col>
-        <v-col>
-          <v-card class="mx-auto card" color="#F9F6F6" flat>
-            <v-list-item three-line>
-              <v-list-item-avatar
-                tile
-                size="80"
-                height="100"
-                color="grey"
-              ></v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="text-h5 mb-1 card__title">
-                  Lorem ipsum
-                </v-list-item-title>
-                <v-list-item-subtitle class="card__text"
-                  >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Elementum, nisl arcu elit turpis in quisque
-                  turpis...</v-list-item-subtitle
-                >
-                <v-card-actions>
-                  <v-btn color="#4A2AA7"> Ver reseña </v-btn>
-                </v-card-actions>
-              </v-list-item-content>
-            </v-list-item>
-          </v-card>
-        </v-col>
-      </v-row>
-      <v-row class="justify-center">
-        <v-pagination :length="6" color="#4A2AA7"></v-pagination>
       </v-row>
     </v-container>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["value"],
+};
 </script>
 
 <style lang="scss">
