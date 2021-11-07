@@ -1,12 +1,14 @@
 <template>
   <v-app>
-    <Navbar />
-    <v-main>
-      <v-container fluid>
-        <router-view />
-      </v-container>
-    </v-main>
-    <Footer />
+    <div class="tertiary">
+      <Navbar />
+      <v-main>
+        <v-container fluid>
+          <router-view />
+        </v-container>
+      </v-main>
+      <Footer />
+    </div>
   </v-app>
 </template>
 

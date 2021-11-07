@@ -47,7 +47,7 @@
     </v-navigation-drawer>
     <v-app-bar
       :class="[
-        $vuetify.breakpoint.xsOnly ? 'mx-0 tile' : 'mx-3 mt-1 rounded-simple',
+        $vuetify.breakpoint.xsOnly ? 'mx-0 tile' : 'mx-3 mt-1 rounded-simple', // mt-1 for navbar
       ]"
       color="secondary"
       :height="$vuetify.breakpoint.xsOnly ? '50px' : '75px'"
@@ -82,7 +82,7 @@
       <v-toolbar-items class="hidden-xs-only">
         <v-btn
           :to="{ name: 'Home' }"
-          class="font-weight-light mx-2"
+          class="font-weight-light text-body-2 mx-2"
           color="secondary"
           depressed
           exact
@@ -90,18 +90,18 @@
         >
         <v-btn
           :to="{ name: 'Reseñas' }"
-          class="font-weight-light mx-2"
+          class="font-weight-light text-body-2 mx-2"
           color="secondary"
           depressed
           exact
           >Reseñas</v-btn
         >
         <v-btn
-          class="font-weight-light mx-2"
+          :to="{ name: 'Agregar Reseñas' }"
+          class="font-weight-light text-body-2 mx-2"
           color="secondary"
           depressed
           exact
-          :to="{ name: 'Agregar Reseñas' }"
           >Agregar Reseña</v-btn
         >
       </v-toolbar-items>

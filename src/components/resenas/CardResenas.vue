@@ -20,7 +20,7 @@
                   value.resena
                 }}</v-list-item-subtitle>
                 <v-card-actions>
-                  <v-btn color="#4A2AA7"> Ver reseña </v-btn>
+                  <v-btn :to="{ name: 'Reseña' }" color="#4A2AA7"> Ver reseña </v-btn>
                 </v-card-actions>
               </v-list-item-content>
             </v-list-item>
