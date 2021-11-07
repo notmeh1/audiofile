@@ -12,9 +12,11 @@
       <v-row>
         <v-col>
           <FiltrosResenas />
-          <v-col v-for="resena in $store.state.resenas.data" :key="resena.id">
-            <CardResenas :value="resena" />
-          </v-col>
+          <v-row>
+            <v-col v-for="resena in $store.state.resenas.data" :key="resena.id">
+              <CardResenas :value="resena" />
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
       <v-row class="justify-center">
