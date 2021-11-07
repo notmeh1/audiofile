@@ -101,12 +101,6 @@ export default {
     color: white;
   }
 }
-.theme--light.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state)
-  > .v-input__control
-  > .v-input__slot
-  fieldset {
-  color: white !important;
-}
 @media (min-width: 1264px) {
   .login {
     flex-direction: row;
