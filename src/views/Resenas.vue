@@ -1,14 +1,7 @@
 .
 <template>
   <div>
-    <v-container class="home">
-      <v-row justify="center">
-        <v-col align="center">
-          <h1>Reseñas view</h1>
-        </v-col>
-      </v-row>
-    </v-container>
-    <v-container class="resenas">
+    <v-container class="resenas" fluid>
       <v-row>
         <v-col>
           <FiltrosResenas />
