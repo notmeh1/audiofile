@@ -3,7 +3,7 @@
   <div>
     <v-container>
       <v-row>
-        <v-col>
+        <v-col v-for="foro in foroList" :key="foro.id">
           <v-card class="mx-auto card" color="#F9F6F6" flat>
             <v-list-item three-line>
               <v-list-item-avatar
@@ -14,27 +14,34 @@
               ></v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title class="text-h5 mb-1 card__title">
-                  {{ value.cancion }}
+                  {{foro.titulo}}
                 </v-list-item-title>
-                <v-list-item-subtitle class="card__text">{{
-                  value.resena
-                }}</v-list-item-subtitle>
+                <v-list-item-subtitle class="card__text"
+                  >{{foro.descripcion}}</v-list-item-subtitle
+                >
                 <v-card-actions>
-                  <v-btn :to="{ name: 'Reseña' }" color="#4A2AA7">
-                    Ver reseña
-                  </v-btn>
+                  <v-btn :to="{ path: `/resenas/${foro.codigo}` }" color="#4A2AA7"> Ver reseña </v-btn>
                 </v-card-actions>
               </v-list-item-content>
             </v-list-item>
           </v-card>
         </v-col>
       </v-row>
+      <v-row class="justify-center">
+        <v-pagination :length="6" color="#4A2AA7"></v-pagination>
+      </v-row>
     </v-container>
   </div>
 </template>
 
 <script>
+import {mapState} from "vuex";
 export default {
+  computed: {
+    ...mapState({
+      foroList: (state) => state.foros.foroList
+    })
+  },
   props: ["value"],
 };
 </script>

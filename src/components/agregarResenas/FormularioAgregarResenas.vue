@@ -9,6 +9,7 @@
           </h2>
           <v-form class="my-5" ref="formResena" @submit.prevent="crearResena">
             <v-text-field
+            @input="searchByName()"
               outlined
               append-icon="mdi-playlist-music"
               label="Nombre canción"
@@ -38,6 +39,8 @@
 
 <script>
 import Firebase from "firebase";
+import Axios from "axios";
+
 export default {
   data: () => ({
     formResena: {
@@ -60,6 +63,14 @@ export default {
     required(value) {
       return !!value || "Este campo es obligatorio";
     },
+        searchByName() {
+      Axios.get(`https://api.spotify.com/v1/search?query=${encodeURIComponent(
+        this.formResena.cancion
+      )}&type=album,playlist,artist`).then(result => {
+        console.log(result)
+      })
+    
+    }
   },
 };
 </script>

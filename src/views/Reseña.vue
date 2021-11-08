@@ -28,7 +28,7 @@
               contain
             />
           </v-row>
-          <h2 class="mx-3 py-3 font-weight-black">Lorem Ipsum</h2>
+          <h2 class="mx-3 py-3 font-weight-black">{{ getData.cancion }}</h2>
           <div class="mb-10">
             <p class="px-3 my-2">
               <v-icon class="mr-2" color="secondary">mdi-playlist-music</v-icon
@@ -58,9 +58,10 @@
           color="cardBackground"
           flat
         >
-          <h2 class="mx-4 pt-2 font-weight-black">Reseña</h2>
+          <h2 class="mx-4 pt-2 font-weight-black">{{ getData.titulo }}</h2>
           <v-card-text class="secondary--text font-light"
-            >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+            >{{ getData.descripcion
+            }}<!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
             donec integer diam nulla non adipiscing vitae sit ultrices. Gravida
             molestie bibendum ullamcorper amet. Vel vel nulla libero magna enim
             convallis placerat. Gravida parturient gravida venenatis, egestas id
@@ -76,7 +77,7 @@
             bibendum sit sed. Pellentesque mattis faucibus scelerisque
             ullamcorper et, in nulla elementum. Diam quam volutpat ut sed
             fringilla ut. Viverra turpis tristique purus nunc nunc. Pellentesque
-            sit risus nibh in convallis.</v-card-text
+            sit risus nibh in convallis. --></v-card-text
           >
         </v-card>
       </v-col>
@@ -136,5 +137,23 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    getCodigo() {
+      return this.$route.params.codigo;
+    },
+    getData() {
+      if (this.$store.state.foros.foroList) {
+        return this.$store.state.foros.foroList.find(
+          (foro) => foro.codigo === this.getCodigo
+        );
+      } else {
+        return false;
+      }
+    },
+  },
+  mounted() {
+    console.log(this.getCodigo, this.getData);
+  },
+};
 </script>

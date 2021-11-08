@@ -37,11 +37,15 @@
             color="white"
           ></v-text-field>
 
-          <v-btn color="normal" class="mr-4" type="submit">
+          <v-btn
+            color="normal"
+            class="mr-4"
+          >
             Iniciar sesión
           </v-btn>
 
-          <v-btn color="#F4B40E" class="mr-4">
+          <v-btn @click="loginSpotify()" color="#F4B40E" class="mr-4">
+            <v-icon>mdi-spotify</v-icon>
             Iniciar sesión con Spotify
           </v-btn>
           <p class="login__register my-5">
@@ -76,6 +80,9 @@ export default {
     },
     required(value) {
       return !!value || "Este campo es obligatorio";
+    },
+    loginSpotify() {
+      this.$store.dispatch('spotifyAuth/authSpotify')
     },
   },
 };
