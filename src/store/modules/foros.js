@@ -1,5 +1,4 @@
-import { collection, onSnapshot } from "firebase/firestore";
-import { database } from "../../plugins/firebase";
+import Firebase from "firebase";
 
 export const forosModule = {
     namespaced: true,
@@ -18,15 +17,25 @@ export const forosModule = {
         },
     },
     actions: {
-        async getForoList({commit}) {
-            let list = [];
-            await onSnapshot(collection(database, "foros"), (doc) => {
-              doc.forEach((foro) => {
-                list.push({ id: foro.id, ...foro.data() });
-                commit("GET_FORO_LIST", list);
-                //console.log(list)
-              }, (list = []));
-            });
-        }
+      async getForoList({commit}) {
+        let list = []
+        Firebase.firestore()
+          .collection("foros")
+          .onSnapshot((doc) => {
+            doc.forEach((foro) => {
+              list.push({ id: foro.id, ...foro.data() });
+              commit("GET_FORO_LIST", list);
+            })
+            console.log("Current data: ", doc.data());
+          }, (list = []));
+        //let list = [];
+        //await onSnapshot(collection(database, "foros"), (doc) => {
+        //  doc.forEach((foro) => {
+        //    list.push({ id: foro.id, ...foro.data() });
+        //    commit("GET_FORO_LIST", list);
+        //    //console.log(list)
+        //  }, (list = []));
+        //});
+      },
     },
 }
