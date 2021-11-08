@@ -41,7 +41,8 @@ export default {
     ...mapState({
       foroList: (state) => state.foros.foroList
     })
-  }
+  },
+  props: ["value"],
 };
 </script>
 

@@ -10,20 +10,20 @@
         />
       </v-col>
       <v-col class="login__form px-12" cols="12" md="7">
-        <h2 class="login__title py-10">Inicia tu sesión</h2>
-        <v-form
-          ref="userForm"
-          @submit.prevent="handleFormSubmit"
-          lazy-validation
-          class="my-10"
-        >
+        <h2 class="login__title py-10">Registrate</h2>
+        <v-form ref="registerForm" @submit.prevent="registrarse" class="my-10">
+          <v-text-field
+            v-model="form.nombre"
+            :rules="[required]"
+            label="Ingresa tu nombre"
+            solo
+            color="white"
+          ></v-text-field>
           <v-text-field
             v-model="form.email"
             :rules="[required]"
             label="Ingresa tu correo"
             solo
-            type="email"
-            name="email"
             color="white"
           ></v-text-field>
 
@@ -32,26 +32,14 @@
             :rules="[required]"
             label="Ingresa tu contraseña"
             solo
-            type="password"
-            name="password"
             color="white"
           ></v-text-field>
 
-          <v-btn
-            color="normal"
-            class="mr-4"
-          >
-            Iniciar sesión
-          </v-btn>
-
-          <v-btn @click="loginSpotify()" color="#F4B40E" class="mr-4">
-            <v-icon>mdi-spotify</v-icon>
-            Iniciar sesión con Spotify
-          </v-btn>
+          <v-btn color="normal" class="mr-4" type="submit"> Registrarse </v-btn>
           <p class="login__register my-5">
-            ¿Aún no te registras?
-            <v-btn to="/registrarse" text plain color="white"
-              >Registrarse</v-btn
+            Ya estas registrado?
+            <v-btn to="/iniciar-sesion" text plain color="white"
+              >Iniciar Sesión</v-btn
             >
           </p>
         </v-form>
@@ -61,28 +49,27 @@
 </template>
 
 <script>
+import Firebase from "firebase";
 export default {
   data: () => ({
     form: {
+      nombre: "",
       email: "",
       password: "",
     },
   }),
   methods: {
-    async handleFormSubmit() {
-      if (this.$refs.userForm.validate()) {
-        try {
-          await this.$store.dispatch("session/signIn", this.form);
-        } catch (e) {
-          this.color = "error";
-        }
-      }
-    },
     required(value) {
       return !!value || "Este campo es obligatorio";
     },
-    loginSpotify() {
-      this.$store.dispatch('spotifyAuth/authSpotify')
+    registrarse() {
+      Firebase.auth()
+        .createUserWithEmailAndPassword(this.form.email, this.form.password)
+        .then((data) => {
+          data.user.updateProfile().then(() => {
+            this.$router.push("/");
+          });
+        });
     },
   },
 };
@@ -105,8 +92,14 @@ export default {
     border-radius: 0 0 50px 50px;
   }
   &__register {
-    color: white;
+    color: #4a2aa7;
   }
+}
+.theme--light.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state)
+  > .v-input__control
+  > .v-input__slot
+  fieldset {
+  color: white !important;
 }
 @media (min-width: 1264px) {
   .login {
