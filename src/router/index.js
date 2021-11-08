@@ -45,6 +45,23 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "reseña" */ "../views/Reseña.vue"),
   },
+  {
+    path: "/resenas/:id",
+    name: "Interior Reseñas",
+    component: () =>
+      import(/* webpackChunkName: "reseña" */ "../views/Reseña.vue"),
+  },
+  {
+    path: "/editar-resenas/:id",
+    name: "Editar Reseñas",
+    component: () =>
+      import(
+        /* webpackChunkName: "Editar reseñas" */ "../views/EditResenas.vue"
+      ),
+    meta: {
+      requiredLogin: true,
+    },
+  },
 ];
 
 const router = new VueRouter({
