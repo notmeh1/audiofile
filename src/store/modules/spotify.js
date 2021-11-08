@@ -4,12 +4,16 @@ export const spotifyModule = {
   namespaced: true,
   state: {
     currentData: null,
+    songResult: [],
   },
   getters: {},
   mutations: {
     UPDATE_CURRENT_DATA(state, dataResponse) {
       state.currentData = dataResponse;
     },
+    STORE_SONG_RESULT(state, resultList) {
+      state.songResult = resultList
+    }
   },
   actions: {
     async fetchId({ commit }) {
@@ -53,5 +57,8 @@ export const spotifyModule = {
       commit("UPDATE_CURRENT_DATA", data);
       console.log(dataResponse);
     },
+    storeSongResult({commit}, resultList) {
+      commit('STORE_SONG_RESULT', resultList)
+    }
   },
 };

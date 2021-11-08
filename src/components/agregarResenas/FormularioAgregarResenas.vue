@@ -9,14 +9,18 @@
           </h2>
           <v-form class="my-5" ref="formResena" @submit.prevent="crearResena">
             <v-text-field
-            @input="searchByName()"
+              @input="searchByName()"
               outlined
               append-icon="mdi-playlist-music"
               label="Nombre canción"
               color="#4a2aa7"
               v-model="formResena.cancion"
               :rules="[required]"
-            ></v-text-field>
+            >
+            </v-text-field>
+            <v-list>
+              <v-list-item-title>Hola</v-list-item-title>
+            </v-list>
             <v-textarea
               outlined
               append-icon="mdi-file-document-edit-outline"
@@ -39,7 +43,7 @@
 
 <script>
 import Firebase from "firebase";
-import Axios from "axios";
+import store from "../../store/index";
 
 export default {
   data: () => ({
@@ -63,14 +67,33 @@ export default {
     required(value) {
       return !!value || "Este campo es obligatorio";
     },
-        searchByName() {
-      Axios.get(`https://api.spotify.com/v1/search?query=${encodeURIComponent(
-        this.formResena.cancion
-      )}&type=album,playlist,artist`).then(result => {
-        console.log(result)
-      })
-    
-    }
+    searchByName() {
+      const ACCESS_TOKEN = localStorage.getItem("accessToken");
+      const fetchOptions = {
+        method: "GET",
+        headers: new Headers({
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
+        }),
+      };
+      fetch(
+        `https://api.spotify.com/v1/search?q=track:"${encodeURIComponent(
+          this.formResena.cancion
+        )}"&type=track&limit=7`,
+        fetchOptions
+      )
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (json) {
+          const resultList = json.tracks.items
+          console.log(resultList)
+          store.dispatch('spotify/storeSongResult', resultList)
+          return resultList
+        })
+        //.catch(function (error) {
+        //  console.log(error);
+        //});
+    },
   },
 };
 </script>

@@ -107,8 +107,8 @@
       </v-toolbar-items>
 
       <v-spacer></v-spacer>
-      <SignIn v-show="!$store.state.session.user" />
-      <SignOut v-show="$store.state.session.user" />
+      <SignIn v-if="!$store.state.session.user" />
+      <SignOut v-if="$store.state.session.user" />
       <div class="hidden-sm-and-up">
         <v-btn icon class="rounded-simple mr-1" @click="drawer = !drawer">
           <v-icon>mdi-dots-horizontal</v-icon>
@@ -121,6 +121,7 @@
 <script>
 import SignIn from "./login/SignIn.vue";
 import SignOut from "./login/SignOut.vue";
+//import {mapState} from "vuex";
 export default {
   data: () => ({
     drawer: false,
@@ -129,5 +130,13 @@ export default {
     SignIn,
     SignOut,
   },
+  computed: {
+    //...mapState({
+    //  isLoggedIn: (state) => state.session.user
+    //})
+  },
+  mounted() {
+    console.log(this.isLoggedIn)
+  }
 };
 </script>

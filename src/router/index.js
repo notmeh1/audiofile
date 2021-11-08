@@ -36,7 +36,7 @@ const routes = [
         /* webpackChunkName: "agregar reseñas" */ "../views/AgregarResenas.vue"
       ),
     meta: {
-      requiredLogin: true,
+      requiredLogin: false,
     },
   },
   {

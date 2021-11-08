@@ -4,7 +4,7 @@
     <v-btn
       class="hidden-xs-only rounded-simple mr-7"
       :width="$vuetify.breakpoint.smOnly ? 'auto' : '190px'"
-      height="65%"
+      height="45px"
       color="white"
       light
       depressed
@@ -15,7 +15,7 @@
       >
       <span
         v-if="$vuetify.breakpoint.mdAndUp"
-        class="font-weight-regular"
+        class="font-weight-bold text-body-2 secondary--text"
         color="secondary"
         >Iniciar sesion</span
       ></v-btn

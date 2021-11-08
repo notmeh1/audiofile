@@ -6,14 +6,14 @@
         <v-col>
           <FiltrosResenas />
           <v-row>
-            <v-col v-for="resena in $store.state.resenas.data" :key="resena.id">
-              <CardResenas :value="resena" />
+            <v-col>
+              <CardResenas />
             </v-col>
           </v-row>
         </v-col>
       </v-row>
       <v-row class="justify-center">
-        <v-pagination v-model="page" :length="6" color="#4A2AA7"></v-pagination>
+        <v-pagination :length="6" color="#4A2AA7"></v-pagination>
       </v-row>
     </v-container>
   </div>
@@ -22,13 +22,9 @@
 <script>
 import FiltrosResenas from "../components/resenas/FiltrosResenas.vue";
 import CardResenas from "../components/resenas/CardResenas.vue";
-import Store from "../store";
+
 export default {
   components: { FiltrosResenas, CardResenas },
-  beforeRouteEnter(to, from, next) {
-    Store.dispatch("resenas/traerTodasLasResenas");
-    next();
-  },
 };
 </script>
 
