@@ -13,13 +13,13 @@
         ><span class="font-weight-regular text-body-2">Volver</span></v-btn
       >
       <v-btn
-        :to="{ name: 'Reseñas' }"
         class="rounded-lg mx-3 px-8 my-5"
         color="secondary"
         height="50px"
         depressed
         exact
         v-show="$store.state.session.user"
+        @click="editarForo(item)"
         ><v-icon class="pr-">mdi-pencil-outline</v-icon
         ><span class="font-weight-regular text-body-2">Editar</span></v-btn
       >
@@ -151,6 +151,21 @@ export default {
   data: () => ({
     foro: null,
   }),
+  methods: {
+    editarForo(item) {
+      this.$router.push(`editar-resenas/${item.id}`);
+    },
+    borrarCurso(item) {
+      Firebase.firestore()
+        .collection("foros")
+        .doc(item.id)
+        .delete()
+        .then(() => {
+          console.log("elemento borrado");
+          this.$store.dispatch("resenas/traerTodasLasResenas");
+        });
+    },
+  },
 };
 </script>
 

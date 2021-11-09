@@ -7,7 +7,7 @@
           <v-form
             class="my-5"
             ref="formEditResena"
-            @submit.prevent="editarResena"
+            @submit.prevent="actualizarResena"
           >
             <v-text-field
               outlined
@@ -55,7 +55,7 @@ export default {
     foro: null,
   }),
   methods: {
-    editarResena() {
+    actualizarResena() {
       if (this.$refs.formEditResena.validate()) {
         this.loading = true;
         Firebase.firestore()
