@@ -1,71 +1,61 @@
-import Axios from "axios";
+//import Axios from "axios";
 
 export const spotifyModule = {
   namespaced: true,
   state: {
-    currentData: null,
+    songIdList: null,
+    currentSongData: null,
     songResult: [],
+    songList: [],
   },
   getters: {},
   mutations: {
-    UPDATE_CURRENT_DATA(state, dataResponse) {
-      state.currentData = dataResponse;
+    STORE_SONG_LIST(state, songList) {
+      state.songList = songList
     },
     STORE_SONG_RESULT(state, resultList) {
-      state.songResult = resultList
+      state.songResult = resultList;
+    },
+    STORE_CURRENT_SONG(state, currentData) {
+      state.currentSongData = currentData;
     },
     FILTER_SONG_ID(state, songId) {
-      let filter = state.songResult.filter((song) => song.id === songId)
-      state.songResult = filter
+      let filter = state.songResult.filter((song) => song.id === songId);
+      state.songResult = filter;
+    },
+    CLEAN_SEARCH(state) {
+      state.songList = []
     }
   },
   actions: {
-    async fetchId({ commit }) {
-      const clientId = "a97c91eefb5b468ebc720b375cd75603";
-      const clientSecret = "f53fc38924f049509d3edcb9afd89595";
-
-      const serialize = function (obj) {
-        const str = [];
-        for (const p in obj) {
-          // eslint-disable-next-line no-prototype-builtins
-          if (obj.hasOwnProperty(p)) {
-            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-          }
-        }
-        return str.join("&");
+    fetchSongResult({ commit }, searchInput) {
+      const ACCESS_TOKEN = localStorage.getItem("accessToken");
+      const fetchOptions = {
+        method: "GET",
+        headers: new Headers({
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
+        }),
       };
-
-      const tokenResponse = await Axios.post(
-        "https://accounts.spotify.com/api/token",
-        serialize({ grant_type: "client_credentials" }),
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            Authorization:
-              "Basic " +
-              new Buffer(`${clientId}:${clientSecret}`).toString("base64"),
-          },
-        }
-      );
-      console.log({ tokenResponse });
-      const dataResponse = await Axios.get(
-        // "https://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg",
-        "https://api.spotify.com/v1/tracks/4GBJomKlZNRnODfpL299pw?si=4d1784fdc7aa44b7",
-        {
-          headers: {
-            Authorization: `Bearer ${tokenResponse.data.access_token}`,
-          },
-        }
-      );
-      const data = dataResponse.data;
-      commit("UPDATE_CURRENT_DATA", data);
-      console.log(dataResponse);
+      fetch(
+        `https://api.spotify.com/v1/search?q=track:"${encodeURIComponent(
+          searchInput
+        )}"&type=track&limit=7`,
+        fetchOptions
+      )
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (json) {
+          const resultList = json.tracks.items;
+          commit("STORE_SONG_RESULT", resultList);
+          return resultList;
+        });
     },
-    storeSongResult({commit}, resultList) {
-      commit('STORE_SONG_RESULT', resultList)
+    filterSongId({ commit }, songId) {
+      commit("FILTER_SONG_ID", songId);
     },
-    filterSongId({commit}, songId) {
-      commit('FILTER_SONG_ID', songId)
-    } 
+    cleanSearch({commit}) {
+      commit('CLEAN_SEARCH')
+    }
   },
 };

@@ -15,6 +15,7 @@
     <v-row>
       <v-col lg="3">
         <v-card
+          v-if="getData"
           class="secondary--text rounded-simple px-3 mb-5"
           color="cardBackground"
           flat
@@ -22,13 +23,13 @@
           <v-row class="py-4" justify="center">
             <v-img
               class=""
-              src="../assets/profileimg.png"
+              :src="getData.songImg"
               max-width="200px"
               max-height="200px"
               contain
             />
           </v-row>
-          <h2 class="mx-3 py-3 font-weight-black">{{ getData.cancion }}</h2>
+          <h2 class="mx-3 py-3 font-weight-black">{{ getData.songName }}</h2>
           <div class="mb-10">
             <p class="px-3 my-2">
               <v-icon class="mr-2" color="secondary">mdi-playlist-music</v-icon
@@ -169,7 +170,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.getId, this.getData);
+    
   },
 };
 </script>

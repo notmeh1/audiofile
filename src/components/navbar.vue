@@ -135,8 +135,5 @@ export default {
     //  isLoggedIn: (state) => state.session.user
     //})
   },
-  mounted() {
-    console.log(this.isLoggedIn)
-  }
 };
 </script>
