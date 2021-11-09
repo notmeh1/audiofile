@@ -19,7 +19,7 @@
         depressed
         exact
         v-show="$store.state.session.user"
-        @click="editarForo(item)"
+        @click="editarForo(foros)"
         ><v-icon class="pr-">mdi-pencil-outline</v-icon
         ><span class="font-weight-regular text-body-2">Editar</span></v-btn
       >
@@ -151,14 +151,17 @@ export default {
   data: () => ({
     foro: null,
   }),
+  mounted() {
+    this.$store.dispatch("resenas/traerTodasLasResenas");
+  },
   methods: {
-    editarForo(item) {
-      this.$router.push(`editar-resenas/${item.id}`);
+    editarForo() {
+      this.$router.push(`editarResenas/${this.resenas.id}`);
     },
-    borrarCurso(item) {
+    borrarForo() {
       Firebase.firestore()
         .collection("foros")
-        .doc(item.id)
+        .doc(this.resenas.id)
         .delete()
         .then(() => {
           console.log("elemento borrado");
