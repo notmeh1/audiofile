@@ -62,7 +62,7 @@
         <v-row class="mx-1">
           <h2 class="mx-4 pt-2 font-weight-black">Reseña</h2>
           <v-rating
-            v-model="rating"
+            v-model="getData.valoracion"
             color="primary"
             empty-icon="mdi-star-outline"
             full-icon="mdi-star"
@@ -70,6 +70,7 @@
             hover
             length="5"
             size="24"
+            readonly
           ></v-rating>
 
         </v-row>
