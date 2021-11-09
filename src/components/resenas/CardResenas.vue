@@ -20,7 +20,7 @@
                   >{{foro.descripcion}}</v-list-item-subtitle
                 >
                 <v-card-actions>
-                  <v-btn :to="{ path: `/resenas/${foro.codigo}` }" color="#4A2AA7"> Ver reseña </v-btn>
+                  <v-btn :to="{ path: `/resenas/${foro.id}` }" color="#4A2AA7"> Ver reseña </v-btn>
                 </v-card-actions>
               </v-list-item-content>
             </v-list-item>

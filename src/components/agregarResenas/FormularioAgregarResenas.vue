@@ -10,17 +10,29 @@
           <v-form class="my-5" ref="formResena" @submit.prevent="crearResena">
             <v-text-field
               @input="searchByName()"
+              :value="formResena.songId"
               outlined
               append-icon="mdi-playlist-music"
               label="Nombre canción"
               color="#4a2aa7"
-              v-model="formResena.cancion"
+              v-model="searchInput"
               :rules="[required]"
             >
             </v-text-field>
-            <v-list>
-              <v-list-item-title>Hola</v-list-item-title>
-            </v-list>
+
+              <v-card @click="selectSong(song.id)" class="pointer d-flex my-1" v-for="song in songResult" :key="song.id" absolute>
+              
+              <v-img
+              class="mr-auto my-1"
+              :src="song.album.images[0].url"
+              max-width="10%"
+              width="64px"
+              height="64px"
+              contain
+            />
+                <v-card-title>{{song.name}} - {{song.artists[0].name}}</v-card-title>
+              </v-card>
+            
             <v-textarea
               outlined
               append-icon="mdi-file-document-edit-outline"
@@ -44,14 +56,21 @@
 <script>
 import Firebase from "firebase";
 import store from "../../store/index";
+import {mapState} from "vuex";
 
 export default {
   data: () => ({
+    searchInput: null,
     formResena: {
-      cancion: "",
+      songId: "",
       resena: "",
     },
   }),
+  computed: {
+    ...mapState({
+      songResult: (state) => state.spotify.songResult
+    })
+  },
   methods: {
     crearResena() {
       if (this.$refs.formResena.validate()) {
@@ -77,7 +96,7 @@ export default {
       };
       fetch(
         `https://api.spotify.com/v1/search?q=track:"${encodeURIComponent(
-          this.formResena.cancion
+          this.searchInput
         )}"&type=track&limit=7`,
         fetchOptions
       )
@@ -94,6 +113,10 @@ export default {
         //  console.log(error);
         //});
     },
+    selectSong(songId) {
+      this.formResena.songId = songId
+      store.dispatch('spotify/filterSongId', songId)
+    }
   },
 };
 </script>
@@ -110,5 +133,8 @@ export default {
   &__btn {
     color: white;
   }
+}
+.pointer {
+  cursor: pointer
 }
 </style>

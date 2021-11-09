@@ -13,6 +13,10 @@ export const spotifyModule = {
     },
     STORE_SONG_RESULT(state, resultList) {
       state.songResult = resultList
+    },
+    FILTER_SONG_ID(state, songId) {
+      let filter = state.songResult.filter((song) => song.id === songId)
+      state.songResult = filter
     }
   },
   actions: {
@@ -59,6 +63,9 @@ export const spotifyModule = {
     },
     storeSongResult({commit}, resultList) {
       commit('STORE_SONG_RESULT', resultList)
-    }
+    },
+    filterSongId({commit}, songId) {
+      commit('FILTER_SONG_ID', songId)
+    } 
   },
 };
