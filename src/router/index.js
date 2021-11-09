@@ -36,11 +36,11 @@ const routes = [
         /* webpackChunkName: "agregar reseñas" */ "../views/AgregarResenas.vue"
       ),
     meta: {
-      requiredLogin: true,
+      requiredLogin: false,
     },
   },
   {
-    path: "/resenas/:codigo",
+    path: "/resenas/:id",
     name: "Reseña",
     component: () =>
       import(/* webpackChunkName: "reseña" */ "../views/Reseña.vue"),

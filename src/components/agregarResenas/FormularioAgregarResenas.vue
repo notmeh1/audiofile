@@ -9,14 +9,30 @@
           </h2>
           <v-form class="my-5" ref="formResena" @submit.prevent="crearResena">
             <v-text-field
-            @input="searchByName()"
+              @input="searchByName()"
+              :value="formResena.songId"
               outlined
               append-icon="mdi-playlist-music"
               label="Nombre canción"
               color="#4a2aa7"
-              v-model="formResena.cancion"
+              v-model="searchInput"
               :rules="[required]"
-            ></v-text-field>
+            >
+            </v-text-field>
+
+              <v-card @click="selectSong(song.id)" class="pointer d-flex my-1" v-for="song in songResult" :key="song.id" absolute>
+              
+              <v-img
+              class="mr-auto my-1"
+              :src="song.album.images[0].url"
+              max-width="10%"
+              width="64px"
+              height="64px"
+              contain
+            />
+                <v-card-title>{{song.name}} - {{song.artists[0].name}}</v-card-title>
+              </v-card>
+            
             <v-textarea
               outlined
               append-icon="mdi-file-document-edit-outline"
@@ -39,15 +55,22 @@
 
 <script>
 import Firebase from "firebase";
-import Axios from "axios";
+import store from "../../store/index";
+import {mapState} from "vuex";
 
 export default {
   data: () => ({
+    searchInput: null,
     formResena: {
-      cancion: "",
+      songId: "",
       resena: "",
     },
   }),
+  computed: {
+    ...mapState({
+      songResult: (state) => state.spotify.songResult
+    })
+  },
   methods: {
     crearResena() {
       if (this.$refs.formResena.validate()) {
@@ -63,13 +86,36 @@ export default {
     required(value) {
       return !!value || "Este campo es obligatorio";
     },
-        searchByName() {
-      Axios.get(`https://api.spotify.com/v1/search?query=${encodeURIComponent(
-        this.formResena.cancion
-      )}&type=album,playlist,artist`).then(result => {
-        console.log(result)
-      })
-    
+    searchByName() {
+      const ACCESS_TOKEN = localStorage.getItem("accessToken");
+      const fetchOptions = {
+        method: "GET",
+        headers: new Headers({
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
+        }),
+      };
+      fetch(
+        `https://api.spotify.com/v1/search?q=track:"${encodeURIComponent(
+          this.searchInput
+        )}"&type=track&limit=7`,
+        fetchOptions
+      )
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (json) {
+          const resultList = json.tracks.items
+          console.log(resultList)
+          store.dispatch('spotify/storeSongResult', resultList)
+          return resultList
+        })
+        //.catch(function (error) {
+        //  console.log(error);
+        //});
+    },
+    selectSong(songId) {
+      this.formResena.songId = songId
+      store.dispatch('spotify/filterSongId', songId)
     }
   },
 };
@@ -87,5 +133,8 @@ export default {
   &__btn {
     color: white;
   }
+}
+.pointer {
+  cursor: pointer
 }
 </style>

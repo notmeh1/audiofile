@@ -20,15 +20,12 @@
                   >{{foro.descripcion}}</v-list-item-subtitle
                 >
                 <v-card-actions>
-                  <v-btn :to="{ path: `/resenas/${foro.codigo}` }" color="#4A2AA7"> Ver reseña </v-btn>
+                  <v-btn :to="{ path: `/resenas/${foro.id}` }" color="#4A2AA7"> Ver reseña </v-btn>
                 </v-card-actions>
               </v-list-item-content>
             </v-list-item>
           </v-card>
         </v-col>
-      </v-row>
-      <v-row class="justify-center">
-        <v-pagination :length="6" color="#4A2AA7"></v-pagination>
       </v-row>
     </v-container>
   </div>

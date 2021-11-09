@@ -58,9 +58,22 @@
           color="cardBackground"
           flat
         >
-          <h2 class="mx-4 pt-2 font-weight-black">{{ getData.titulo }}</h2>
+        <v-row class="mx-1">
+          <h2 class="mx-4 pt-2 font-weight-black">Reseña</h2>
+          <v-rating
+            v-model="rating"
+            color="primary"
+            empty-icon="mdi-star-outline"
+            full-icon="mdi-star"
+            half-icon="mdi-star-halffull"
+            hover
+            length="5"
+            size="24"
+          ></v-rating>
+
+        </v-row>
           <v-card-text class="secondary--text font-light"
-            >{{ getData.descripcion
+            >{{ getData.resena
             }}<!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
             donec integer diam nulla non adipiscing vitae sit ultrices. Gravida
             molestie bibendum ullamcorper amet. Vel vel nulla libero magna enim
@@ -138,14 +151,17 @@
 
 <script>
 export default {
+  data: () => ({
+    rating: 4.3,
+  }),
   computed: {
-    getCodigo() {
-      return this.$route.params.codigo;
+    getId() {
+      return this.$route.params.id;
     },
     getData() {
       if (this.$store.state.foros.foroList) {
         return this.$store.state.foros.foroList.find(
-          (foro) => foro.codigo === this.getCodigo
+          (foro) => foro.id === this.getId
         );
       } else {
         return false;
@@ -153,7 +169,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.getCodigo, this.getData);
+    console.log(this.getId, this.getData);
   },
 };
 </script>

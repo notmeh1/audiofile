@@ -38,6 +38,7 @@
           ></v-text-field>
 
           <v-btn
+          @click="handleFormSubmit()"
             color="normal"
             class="mr-4"
           >

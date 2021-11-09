@@ -4,12 +4,20 @@ export const spotifyModule = {
   namespaced: true,
   state: {
     currentData: null,
+    songResult: [],
   },
   getters: {},
   mutations: {
     UPDATE_CURRENT_DATA(state, dataResponse) {
       state.currentData = dataResponse;
     },
+    STORE_SONG_RESULT(state, resultList) {
+      state.songResult = resultList
+    },
+    FILTER_SONG_ID(state, songId) {
+      let filter = state.songResult.filter((song) => song.id === songId)
+      state.songResult = filter
+    }
   },
   actions: {
     async fetchId({ commit }) {
@@ -53,5 +61,11 @@ export const spotifyModule = {
       commit("UPDATE_CURRENT_DATA", data);
       console.log(dataResponse);
     },
+    storeSongResult({commit}, resultList) {
+      commit('STORE_SONG_RESULT', resultList)
+    },
+    filterSongId({commit}, songId) {
+      commit('FILTER_SONG_ID', songId)
+    } 
   },
 };
