@@ -32,6 +32,17 @@
             />
                 <v-card-title>{{song.name}} - {{song.artists[0].name}}</v-card-title>
               </v-card>
+                        <v-rating
+            v-model="formResena.valoracion"
+            color="primary"
+            empty-icon="mdi-star-outline"
+            full-icon="mdi-star"
+            half-icon="mdi-star-halffull"
+            hover
+            length="5"
+            size="24"
+            
+          ></v-rating>
             
             <v-textarea
               outlined
@@ -64,6 +75,7 @@ export default {
     formResena: {
       songId: "",
       resena: "",
+      valoracion: null,
     },
   }),
   computed: {
@@ -89,12 +101,12 @@ export default {
     },
     selectSong(song) {
       console.log(song)
+      store.dispatch('spotify/filterSongId', song.id)
       this.formResena.songId = song.id
       this.formResena.songName = song.name
       this.formResena.songImg = song.album.images[0].url
       this.formResena.songArtistOne = song.artists[0].name
       this.formResena.songArtistTwo = song.artists[1].name
-      store.dispatch('spotify/filterSongId', song.id)
     }
   },
 };
