@@ -30,9 +30,7 @@ export default {
     
     },
   mounted() {
-    //this.$store.dispatch("spotify/fetchId");
     this.$store.dispatch("session/subscribeToAuthStateChange");
-    console.log(window.location.hash.length);
     this.$store.dispatch("foros/getForoList");
     if (window.location.hash.length > 0) {
       this.$store.dispatch("spotifyAuth/handleRedirect")

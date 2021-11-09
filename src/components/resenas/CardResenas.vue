@@ -6,21 +6,24 @@
         <v-col v-for="foro in foroList" :key="foro.id">
           <v-card class="mx-auto card" color="#F9F6F6" flat>
             <v-list-item three-line>
-              <v-list-item-avatar
-                tile
-                size="80"
-                height="100"
-                color="grey"
-              ></v-list-item-avatar>
+            <v-img
+              class="rounded-simple"
+              :src="foro.songImg"
+              max-width="64px"
+              max-height="64px"
+              contain
+            />
               <v-list-item-content>
                 <v-list-item-title class="text-h5 mb-1 card__title">
-                  {{foro.titulo}}
+                  {{ foro.songName }}
                 </v-list-item-title>
-                <v-list-item-subtitle class="card__text"
-                  >{{foro.descripcion}}</v-list-item-subtitle
-                >
+                <v-list-item-subtitle class="card__text">{{
+                  foro.descripcion
+                }}</v-list-item-subtitle>
                 <v-card-actions>
-                  <v-btn :to="{ path: `/resenas/${foro.id}` }" color="#4A2AA7"> Ver reseña </v-btn>
+                  <v-btn :to="{ path: `/resenas/${foro.id}` }" color="#4A2AA7">
+                    Ver reseña
+                  </v-btn>
                 </v-card-actions>
               </v-list-item-content>
             </v-list-item>
@@ -32,12 +35,12 @@
 </template>
 
 <script>
-import {mapState} from "vuex";
+import { mapState } from "vuex";
 export default {
   computed: {
     ...mapState({
-      foroList: (state) => state.foros.foroList
-    })
+      foroList: (state) => state.foros.foroList,
+    }),
   },
   props: ["value"],
 };
