@@ -9,7 +9,7 @@
           </h2>
           <v-form class="my-5" ref="formResena" @submit.prevent="crearResena">
             <v-text-field
-              @input="searchByName()"
+              @input="$store.dispatch('spotify/fetchSongResult', searchInput)"
               :value="formResena.songId"
               outlined
               append-icon="mdi-playlist-music"
@@ -20,7 +20,7 @@
             >
             </v-text-field>
 
-              <v-card @click="selectSong(song.id)" class="pointer d-flex my-1" v-for="song in songResult" :key="song.id" absolute>
+              <v-card @click="selectSong(song)" class="pointer d-flex my-1" v-for="song in songResult" :key="song.id" absolute>
               
               <v-img
               class="mr-auto my-1"
@@ -78,6 +78,7 @@ export default {
           .collection("foros")
           .add(this.formResena)
           .then(() => {
+            this.$store.dispatch('spotify/cleanSearch')
             this.$router.push("/resenas");
           })
           .catch(() => {});
@@ -86,36 +87,14 @@ export default {
     required(value) {
       return !!value || "Este campo es obligatorio";
     },
-    searchByName() {
-      const ACCESS_TOKEN = localStorage.getItem("accessToken");
-      const fetchOptions = {
-        method: "GET",
-        headers: new Headers({
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
-        }),
-      };
-      fetch(
-        `https://api.spotify.com/v1/search?q=track:"${encodeURIComponent(
-          this.searchInput
-        )}"&type=track&limit=7`,
-        fetchOptions
-      )
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (json) {
-          const resultList = json.tracks.items
-          console.log(resultList)
-          store.dispatch('spotify/storeSongResult', resultList)
-          return resultList
-        })
-        //.catch(function (error) {
-        //  console.log(error);
-        //});
-    },
-    selectSong(songId) {
-      this.formResena.songId = songId
-      store.dispatch('spotify/filterSongId', songId)
+    selectSong(song) {
+      console.log(song)
+      this.formResena.songId = song.id
+      this.formResena.songName = song.name
+      this.formResena.songImg = song.album.images[0].url
+      this.formResena.songArtistOne = song.artists[0].name
+      this.formResena.songArtistTwo = song.artists[1].name
+      store.dispatch('spotify/filterSongId', song.id)
     }
   },
 };
