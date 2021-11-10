@@ -32,17 +32,12 @@
           <h2 class="mx-3 py-3 font-weight-black">{{ getData.songName }}</h2>
           <div class="mb-10">
             <p class="px-3 my-2">
-              <v-icon class="mr-2" color="secondary">mdi-playlist-music</v-icon
-              >Lorem Ipsum
+              <v-icon class="mr-2" color="secondary">mdi-account-music</v-icon
+              >{{getData.songArtistOne}}
             </p>
             <p class="px-3 my-2">
               <v-icon class="mr-2" color="secondary"
-                >mdi-text-box-multiple-outline</v-icon
-              >Lorem Ipsum
-            </p>
-            <p class="px-3 my-2">
-              <v-icon class="mr-2" color="secondary"
-                >mdi-music-box-multiple-outline</v-icon
+                >{{}}</v-icon
               >Lorem Ipsum
             </p>
           </div>
@@ -59,11 +54,11 @@
           color="cardBackground"
           flat
         >
-        <v-row class="mx-1">
+        <v-row class="mx-1 mt-1">
           <h2 class="mx-4 pt-2 font-weight-black">Reseña</h2>
           <v-rating
             v-model="getData.valoracion"
-            color="primary"
+            color="secondary"
             empty-icon="mdi-star-outline"
             full-icon="mdi-star"
             half-icon="mdi-star-halffull"
@@ -74,6 +69,7 @@
           ></v-rating>
 
         </v-row>
+        <v-col>
           <v-card-text class="secondary--text font-light"
             >{{ getData.resena
             }}<!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
@@ -94,6 +90,7 @@
             fringilla ut. Viverra turpis tristique purus nunc nunc. Pellentesque
             sit risus nibh in convallis. --></v-card-text
           >
+          </v-col>
         </v-card>
       </v-col>
     </v-row>

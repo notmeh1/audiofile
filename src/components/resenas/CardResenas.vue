@@ -3,30 +3,53 @@
   <div>
     <v-container>
       <v-row>
-        <v-col v-for="foro in foroList" :key="foro.id">
-          <v-card class="mx-auto card" color="#F9F6F6" flat>
-            <v-list-item three-line>
-            <v-img
-              class="rounded-simple"
-              :src="foro.songImg"
-              max-width="64px"
-              max-height="64px"
-              contain
-            />
-              <v-list-item-content>
-                <v-list-item-title class="text-h5 mb-1 card__title">
+        <v-col v-for="foro in foroList" :key="foro.id" cols="3">
+          <v-card
+            :to="{ path: `/resenas/${foro.id}` }"
+            class="pointer mx-auto card d-flex"
+            color="#F9F6F6"
+            flat
+          >
+            <v-row align="center">
+              <v-col class="px-0" cols="4" align="center">
+                <v-img
+                  class="rounded-lg ml-3"
+                  :src="foro.songImg"
+                  max-width="64px"
+                  max-height="64px"
+                  contain
+                />
+              </v-col>
+              <v-col class="px-0">
+                <v-card-title
+                  class="
+                    font-weight-bold
+                    text-body-1
+                    mb-1
+                    pb-0
+                    card__title
+                    secondary--text
+                  "
+                >
                   {{ foro.songName }}
-                </v-list-item-title>
-                <v-list-item-subtitle class="card__text">{{
-                  foro.descripcion
-                }}</v-list-item-subtitle>
-                <v-card-actions>
-                  <v-btn :to="{ path: `/resenas/${foro.id}` }" color="#4A2AA7">
-                    Ver reseña
-                  </v-btn>
-                </v-card-actions>
-              </v-list-item-content>
-            </v-list-item>
+                </v-card-title>
+                <v-rating
+                  class="ml-2"
+                  v-model="foro.valoracion"
+                  color="secondary"
+                  empty-icon="mdi-star-outline"
+                  full-icon="mdi-star"
+                  half-icon="mdi-star-halffull"
+                  hover
+                  length="5"
+                  size="12"
+                  readonly
+                ></v-rating>
+                <v-card-subtitle class="card__text pt-0">{{
+                  foro.songArtistOne
+                }}</v-card-subtitle>
+              </v-col>
+            </v-row>
           </v-card>
         </v-col>
       </v-row>
@@ -58,12 +81,11 @@ export default {
 }
 .card {
   margin-bottom: 10px;
-  &__title {
-    color: #4a2aa7;
-    font-weight: 900 !important;
-  }
   &__text {
     color: #4a2aa7;
   }
+}
+.pointer {
+  cursor: pointer;
 }
 </style>

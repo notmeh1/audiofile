@@ -76,6 +76,7 @@ export default {
       songId: "",
       resena: "",
       valoracion: null,
+      comentarios: {},
     },
   }),
   computed: {

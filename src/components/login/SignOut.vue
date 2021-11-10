@@ -2,12 +2,11 @@
 <template>
   <div>
     <v-btn
-      class="hidden-xs-only rounded-simple mr-7"
+      class="hidden-xs-only mr-7"
       :width="$vuetify.breakpoint.smOnly ? 'auto' : '190px'"
       height="65%"
-      color="white"
-      light
       depressed
+      icon
       @click="handleLogout"
     >
       <v-icon v-if="$vuetify.breakpoint.smOnly" color="secondary"
