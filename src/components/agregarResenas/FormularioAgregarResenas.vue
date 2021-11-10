@@ -103,11 +103,13 @@ export default {
     selectSong(song) {
       console.log(song)
       store.dispatch('spotify/filterSongId', song.id)
-      this.formResena.songId = song.id
-      this.formResena.songName = song.name
-      this.formResena.songImg = song.album.images[0].url
-      this.formResena.songArtistOne = song.artists[0].name
-      this.formResena.songArtistTwo = song.artists[1].name
+      const form = this.formResena
+      form.songId = song.id
+      form.songName = song.name
+      form.songImg = song.album.images[0].url
+      form.songArtistOne = song.artists[0].name
+      form.album = song.album.name
+      console.log(this.formResena)
     }
   },
 };

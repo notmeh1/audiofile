@@ -114,6 +114,7 @@
             />
 
             <v-textarea
+              v-model="userData.comentario"
               class="rounded-simple mx-4"
               width="87%"
               label="Escribir reseña"
@@ -121,8 +122,10 @@
               solo
             >
             </v-textarea>
+              <v-btn color="secondary" @click="saveComment()">Enviar</v-btn>
           </div>
-          <div class="d-flex my-3 pb-3">
+          <template v-if="getData">
+          <div v-for="item in getData.comentarios" :key="item.comentario" class="d-flex my-3 pb-3">
             <v-img
               class="rounded-circle mx-auto border"
               src="../assets/profileimg.png"
@@ -133,15 +136,16 @@
             />
             <v-card class="rounded-simple mx-auto" width="87%" flat>
               <v-card-text class="secondary--text"
-                >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+                >{{item}}<!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
                 donec integer diam nulla non adipiscing vitae sit ultrices.
                 Gravida molestie bibendum ullamcorper amet. Vel vel nulla libero
                 magna enim convallis placerat. Gravida parturient gravida
                 venenatis, egestas id euismod faucibus elementum
-                dictum.</v-card-text
+                dictum. --></v-card-text
               >
             </v-card>
           </div>
+          </template>
         </v-card>
       </v-col>
     </v-row>
@@ -149,8 +153,13 @@
 </template>
 
 <script>
+import Firebase from "firebase";
 export default {
   data: () => ({
+    userData: {
+      userId: "",
+      comentario: "",
+    },
     rating: 4.3,
   }),
   computed: {
@@ -167,8 +176,13 @@ export default {
       }
     },
   },
-  mounted() {
-    
+  methods: {
+    saveComment() {
+      const jaja = this.userData
+      Firebase.firestore().collection('foros').doc(this.getId).set({
+        comentarios: {jaja}
+      }, {merge: true});
+    }
   },
 };
 </script>
