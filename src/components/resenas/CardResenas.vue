@@ -18,7 +18,7 @@
                   {{ foro.songName }}
                 </v-list-item-title>
                 <v-list-item-subtitle class="card__text">{{
-                  foro.descripcion
+                  foro.songArtistOne
                 }}</v-list-item-subtitle>
                 <v-card-actions>
                   <v-btn :to="{ path: `/resenas/${foro.id}` }" color="#4A2AA7">
