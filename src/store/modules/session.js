@@ -18,6 +18,7 @@ export const sessionModule = {
 
   mutations: {
     SET_USER(state, newUser) {
+      localStorage.setItem('userEmail', newUser.email)
       state.user = newUser;
     },
   },
