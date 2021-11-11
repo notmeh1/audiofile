@@ -19,6 +19,8 @@
             color="#4A2AA7"
             class="mx-2 filtros__border"
           ></v-text-field>
+          <!-- spotify api no da info sobre generos en musica-->
+          <!--
           <v-text-field
             label="Genero"
             outlined
@@ -26,6 +28,7 @@
             color="#4A2AA7"
             class="mx-2 filtros__border"
           ></v-text-field>
+          --->
         </v-col>
         <v-col class="text-center" cols="12" md="3">
           <v-btn :to="{ name: 'Agregar Reseñas' }" class="filtros__btn mb-2" color="#4A2AA7"

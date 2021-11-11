@@ -70,21 +70,6 @@ export default {
 </script>
 
 <style lang="scss">
-.v-sheet.v-card {
-  border-radius: 20px !important;
-}
-.v-application .rounded-0 {
-  border-radius: 15px !important;
-}
-.theme--light.v-btn {
-  color: white;
-}
-.card {
-  margin-bottom: 10px;
-  &__text {
-    color: #4a2aa7;
-  }
-}
 .pointer {
   cursor: pointer;
 }
