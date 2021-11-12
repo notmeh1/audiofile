@@ -1,23 +1,24 @@
 <template>
-  <v-container>
-    <v-row class="hero mx-1">
-      <v-col class="hero__bg-left" md="4">
-        <h1 class="hero__title pa-4">
-          Lorem ipsum dolor sit amet, consectetur
-        </h1>
-        <p class="hero__text px-4 py-4">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras volutpat
+  <v-container class="rounded-simple white pt-0" fluid>
+    <v-row>
+      <v-col lg="4" xl="6" align=right>
+        <v-card class="mx-3 mt-5" flat>
+          <p class="mt-10 text-h2 secondary--text text-center font-weight-black">Lorem ipsum dolor sit amet, consectetur</p>
+          <p class="text-h5 secondary--text text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras volutpat
           suscipit porta odio justo, egestas. Auctor porttitor sed augue
-          elementum interdum.
-        </p>
-        <Search class="pb-8" />
+          elementum interdum.</p>
+          <Search/>
+        </v-card>
       </v-col>
-      <v-col class="hero__bg-right" md="8">
-        <img
-          class="hero__img"
-          src="../../assets/img/hero-img.png"
-          alt="hero img"
+      <v-col class="homeBg rounded-r-simple pb-0" lg="8" xl="6" align=left>
+        <v-card class="rounded-r-simple" color="homeBg" width="1200px" flat>
+        <v-img
+        class=""
+        src="../../assets/img/hero-img.png"
+        width="100%"
+        height="700px"
         />
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -49,7 +50,6 @@ export default {
     font-weight: 900;
   }
   &__text {
-    text-align: center;
     line-height: 30px;
   }
 }

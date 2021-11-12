@@ -8,7 +8,7 @@
         height="50px"
         depressed
         exact
-        ><v-icon class="pr-">mdi-location-exit</v-icon
+        ><v-icon class="pr-2">mdi-location-exit</v-icon
         ><span class="font-weight-regular text-body-2">Volver</span></v-btn
       >
     </v-row>
@@ -33,12 +33,11 @@
           <div class="mb-10">
             <p class="px-3 my-2">
               <v-icon class="mr-2" color="secondary">mdi-account-music</v-icon
-              >{{getData.songArtistOne}}
+              >{{ getData.songArtistOne }}
             </p>
             <p class="px-3 my-2">
-              <v-icon class="mr-2" color="secondary"
-                >{{}}</v-icon
-              >Lorem Ipsum
+              <v-icon class="mr-2" color="secondary">mdi-album</v-icon
+              >{{ getData.album }}
             </p>
           </div>
           <v-card-actions class="justify-center">
@@ -54,25 +53,39 @@
           color="cardBackground"
           flat
         >
-        <v-row class="mx-1 mt-1">
-          <h2 class="mx-4 pt-2 font-weight-black">Reseña</h2>
-          <v-rating
-            v-model="getData.valoracion"
-            color="secondary"
-            empty-icon="mdi-star-outline"
-            full-icon="mdi-star"
-            half-icon="mdi-star-halffull"
-            hover
-            length="5"
-            size="24"
-            readonly
-          ></v-rating>
-
-        </v-row>
-        <v-col>
-          <v-card-text class="secondary--text font-light"
-            >{{ getData.resena
-            }}<!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+          <v-row class="mx-1 mt-1" align=center>
+            <v-img
+              class="rounded-circle mt-2 mr-2"
+              src="../assets/profileimg.png"
+              max-width="6%"
+              width="48px"
+              height="48px"
+              contain
+            />
+            <div>
+            <p class="mb-3 mt-1">Nombre de usuario</p>
+            <v-row class="ml-1">
+            <v-rating
+              class="mt-0"
+              v-model="getData.valoracion"
+              color="secondary"
+              empty-icon="mdi-star-outline"
+              full-icon="mdi-star"
+              half-icon="mdi-star-halffull"
+              hover
+              length="5"
+              size="16"
+              readonly
+              dense
+            ></v-rating>
+            <p class="ml-2 mt-1 mb-1 text-subtitle-2">({{getData.valoracion}})</p>
+            </v-row>
+            </div>
+          </v-row>
+          <v-col>
+            <v-card-text class="mx-3 text--text font-light"
+              >{{ getData.resena
+              }} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
             donec integer diam nulla non adipiscing vitae sit ultrices. Gravida
             molestie bibendum ullamcorper amet. Vel vel nulla libero magna enim
             convallis placerat. Gravida parturient gravida venenatis, egestas id
@@ -89,7 +102,7 @@
             ullamcorper et, in nulla elementum. Diam quam volutpat ut sed
             fringilla ut. Viverra turpis tristique purus nunc nunc. Pellentesque
             sit risus nibh in convallis. --></v-card-text
-          >
+            >
           </v-col>
         </v-card>
       </v-col>
@@ -122,29 +135,34 @@
               solo
             >
             </v-textarea>
-              <v-btn color="secondary" @click="saveComment()">Enviar</v-btn>
+            <v-btn color="secondary" @click="saveComment()">Enviar</v-btn>
           </div>
           <template v-if="getData">
-          <div v-for="item in getData.comentarios" :key="item.comentario" class="d-flex my-3 pb-3">
-            <v-img
-              class="rounded-circle mx-auto border"
-              src="../assets/profileimg.png"
-              max-width="6%"
-              width="48px"
-              height="48px"
-              contain
-            />
-            <v-card class="rounded-simple mx-auto" width="87%" flat>
-              <v-card-text class="secondary--text"
-                >{{item}}<!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+            <div
+              v-for="item in getData.comentarios"
+              :key="item.comentario"
+              class="d-flex my-3 pb-3"
+            >
+              <v-img
+                class="rounded-circle mx-auto border"
+                src="../assets/profileimg.png"
+                max-width="6%"
+                width="48px"
+                height="48px"
+                contain
+              />
+              <v-card class="rounded-simple mx-auto" width="87%" flat>
+                <v-card-text class="secondary--text"
+                  >{{ item
+                  }}<!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
                 donec integer diam nulla non adipiscing vitae sit ultrices.
                 Gravida molestie bibendum ullamcorper amet. Vel vel nulla libero
                 magna enim convallis placerat. Gravida parturient gravida
                 venenatis, egestas id euismod faucibus elementum
                 dictum. --></v-card-text
-              >
-            </v-card>
-          </div>
+                >
+              </v-card>
+            </div>
           </template>
         </v-card>
       </v-col>
@@ -178,11 +196,14 @@ export default {
   },
   methods: {
     saveComment() {
-      const jaja = this.userData
-      Firebase.firestore().collection('foros').doc(this.getId).set({
-        comentarios: {jaja}
-      }, {merge: true});
-    }
+      const jaja = this.userData;
+      Firebase.firestore().collection("foros").doc(this.getId).set(
+        {
+          comentarios: { jaja },
+        },
+        { merge: true }
+      );
+    },
   },
 };
 </script>

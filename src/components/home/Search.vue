@@ -1,34 +1,32 @@
 .
 <template>
-  <div>
+  <v-row>
+    <v-col></v-col>
+    <v-col lg="12" xl="6">
     <v-autocomplete
-      class="mx-4 my-2"
+      class="mx-5 my-2 rounded-lg shrink"
+      background-color="cardBackground"
       flat
       hide-no-data
       hide-details
       label="Busca tu canción favorita"
-      solo-inverted
+      solo
+      filled
       append-icon="mdi-magnify"
     ></v-autocomplete>
-  </div>
+    </v-col>
+    <v-col></v-col>
+  </v-row>
 </template>
 
 <script>
 export default {};
 </script>
 
-<style>
-.v-input__icon {
-  background-color: #581eff;
-  padding: 25px;
-}
+<style scoped>
 .v-text-field.v-text-field--enclosed:not(.v-text-field--rounded)
   > .v-input__control
   > .v-input__slot {
   padding: 0 0 0 12px !important;
-}
-
-.v-icon.v-icon {
-  color: white !important;
 }
 </style>
