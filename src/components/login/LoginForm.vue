@@ -1,61 +1,80 @@
-.
 <template>
-  <v-container>
-    <v-row class="login px-2">
-      <v-col class="login__bg" cols="12" md="5">
-        <img
-          class="login__img"
+  <v-container class="rounded-simple px-5 pb-0 white" fluid>
+    <v-row align=end>
+      <v-col class="pa-0" cols="6" align=right>
+        <v-img
+          width="800px"
+          height="700px"
+          class="img"
           src="../../assets/img/hero-login-img.png"
           alt="Login img"
+          absolute
         />
       </v-col>
-      <v-col class="login__form px-12" cols="12" md="7">
-        <h2 class="login__title py-10">Inicia tu sesión</h2>
-        <v-form
-          ref="userForm"
-          @submit.prevent="handleFormSubmit"
-          lazy-validation
-          class="my-10"
-        >
-          <v-text-field
-            v-model="form.email"
-            :rules="[required]"
-            label="Ingresa tu correo"
-            solo
-            type="email"
-            name="email"
-            color="white"
-          ></v-text-field>
-
-          <v-text-field
-            v-model="form.password"
-            :rules="[required]"
-            label="Ingresa tu contraseña"
-            solo
-            type="password"
-            name="password"
-            color="white"
-          ></v-text-field>
-
-          <v-btn
-          @click="handleFormSubmit()"
-            color="normal"
-            class="mr-4"
+      <v-col cols="6" align=left>
+        <v-card class="ma-0 py-5 px-10 rounded-simple" color="secondary" width="800px" height="700px">
+          <h2 class="white--text text-h3 font-weight-bold mt-10 pt-10 pl-5">
+            Inicia tu sesión
+          </h2>
+          <v-form
+            ref="userForm"
+            @submit.prevent="handleFormSubmit"
+            lazy-validation
+            class="my-10 pl-5"
           >
-            Iniciar sesión
-          </v-btn>
+            <p class="mb-2 font-weight-regular white--text">
+              Ingresa tu correo
+            </p>
+            <v-text-field
+              v-model="form.email"
+              :rules="[required]"
+              solo
+              type="email"
+              name="email"
+              color="white"
+            ></v-text-field>
+            <p class="mb-2 font-weight-regular white--text">
+              Ingresa tu contraseña
+            </p>
+            <v-text-field
+              v-model="form.password"
+              :rules="[required]"
+              solo
+              type="password"
+              name="password"
+              color="white"
+            ></v-text-field>
 
-          <v-btn @click="loginSpotify()" color="#F4B40E" class="mr-4">
-            <v-icon>mdi-spotify</v-icon>
-            Iniciar sesión con Spotify
-          </v-btn>
-          <p class="login__register my-5">
-            ¿Aún no te registras?
-            <v-btn to="/registrarse" text plain color="white"
-              >Registrarse</v-btn
+            <v-btn
+              @click="handleFormSubmit()"
+              color="normal"
+              height="45px"
+              class="mr-4 px-10 rounded-lg"
             >
-          </p>
-        </v-form>
+              <span class="text-subtitle-2 textColor--text font-weight-bold"
+                >Iniciar sesión</span
+              >
+            </v-btn>
+
+            <v-btn
+              @click="loginSpotify()"
+              color="#F4B40E"
+              height="45px"
+              class="mr-4 px-7 rounded-lg"
+            >
+              <v-icon class="mr-2">mdi-spotify</v-icon>
+              <span class="text-body-2 font-weight-bold"
+                >Iniciar sesión con Spotify</span
+              >
+            </v-btn>
+            <p class="my-5 white--text">
+              ¿Aún no te registras?
+              <v-btn to="/registrarse" text plain color="white"
+                ><span class="text-body-1">Registrate aquí</span></v-btn
+              >
+            </p>
+          </v-form>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -83,52 +102,14 @@ export default {
       return !!value || "Este campo es obligatorio";
     },
     loginSpotify() {
-      this.$store.dispatch('spotifyAuth/authSpotify')
+      this.$store.dispatch("spotifyAuth/authSpotify");
     },
   },
 };
 </script>
 
 <style lang="scss">
-.login {
-  display: flex;
-  flex-direction: column;
-  &__img {
-    display: none;
-  }
-  &__title {
-    color: white;
-    text-align: center;
-    font-size: 30px;
-  }
-  &__form {
-    background-color: #4a2aa7;
-    border-radius: 0 0 50px 50px;
-  }
-  &__register {
-    color: white;
-  }
-}
-@media (min-width: 1264px) {
-  .login {
-    flex-direction: row;
-    &__bg {
-      background-color: #f0f6ff;
-      border-radius: 0 0 0 50px;
-      padding: 0 !important;
-    }
-    &__img {
-      display: inline-block;
-      width: 170%;
-      margin-left: -200px;
-      margin-bottom: -6px;
-    }
-    &__title {
-      font-size: 40px;
-    }
-    &__form {
-      border-radius: 0 0 50px 0;
-    }
-  }
+.img {
+  z-index: 1;
 }
 </style>

@@ -12,9 +12,6 @@
           </v-row>
         </v-col>
       </v-row>
-      <v-row class="justify-center">
-        <v-pagination :length="6" color="#4A2AA7"></v-pagination>
-      </v-row>
     </v-container>
   </div>
 </template>

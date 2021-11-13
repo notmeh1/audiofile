@@ -6,7 +6,7 @@
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras<br />
         volutpat suscipit porta odio justo, egestas.
       </p>
-      <v-btn class="rounded-simple px-5" height="45px" depressed light
+      <v-btn :to="{ name: 'Registrarse' }" class="rounded-simple px-5" height="45px" depressed light
         ><span class="secondary--text font-weight-bold">Registrate</span></v-btn
       >
     </v-col>

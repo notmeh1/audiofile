@@ -5,7 +5,7 @@
         <Hero class="mb-5" />
       </v-row>
     </v-container>
-    <v-container fluid> 
+    <v-container fluid>
       <v-row>
         <v-col>
           <CarruselResenas />
@@ -18,7 +18,7 @@
       </v-row>
       <v-row>
         <v-col>
-          <RegisterFooter/>
+          <RegisterFooter v-if="!isUserLogged" />
         </v-col>
       </v-row>
     </v-container>
@@ -30,10 +30,16 @@ import Hero from "../components/home/Hero.vue";
 import CarruselResenas from "../components/home/CarruselResenas.vue";
 import CarruselPlaylist from "../components/home/CarruselPlaylist.vue";
 import RegisterFooter from "../components/home/RegisterFooter.vue";
+import { mapState } from "vuex";
 
 export default {
   name: "Home",
   components: { Hero, CarruselResenas, CarruselPlaylist, RegisterFooter },
+  computed: {
+    ...mapState({
+      isUserLogged: (state) => state.session.user,
+    }),
+  },
 };
 </script>
 <style lang="scss">
