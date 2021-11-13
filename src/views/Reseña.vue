@@ -11,6 +11,16 @@
         ><v-icon class="pr-2">mdi-location-exit</v-icon
         ><span class="font-weight-regular text-body-2">Volver</span></v-btn
       >
+      <v-btn
+        class="rounded-lg mx-3 px-8 my-5"
+        color="secondary"
+        height="50px"
+        depressed
+        exact
+        @click="borrarResena()"
+        v-if="isAdmin"
+        ><v-icon>mdi-trash-can-outline</v-icon>Eliminar</v-btn
+      >
     </v-row>
     <v-row>
       <v-col lg="3">
@@ -53,7 +63,7 @@
           color="cardBackground"
           flat
         >
-          <v-row class="mx-1 mt-1" align=center>
+          <v-row class="mx-1 mt-1" align="center">
             <v-img
               class="rounded-circle mt-2 mr-2"
               src="../assets/profileimg.png"
@@ -63,45 +73,47 @@
               contain
             />
             <div>
-            <p class="mb-3 mt-1">Nombre de usuario</p>
-            <v-row class="ml-1">
-            <v-rating
-              class="mt-0"
-              v-model="getData.valoracion"
-              color="secondary"
-              empty-icon="mdi-star-outline"
-              full-icon="mdi-star"
-              half-icon="mdi-star-halffull"
-              hover
-              length="5"
-              size="16"
-              readonly
-              dense
-            ></v-rating>
-            <p class="ml-2 mt-1 mb-1 text-subtitle-2">({{getData.valoracion}})</p>
-            </v-row>
+              <p class="mb-3 mt-1">Nombre de usuario</p>
+              <v-row class="ml-1">
+                <v-rating
+                  class="mt-0"
+                  v-model="getData.valoracion"
+                  color="secondary"
+                  empty-icon="mdi-star-outline"
+                  full-icon="mdi-star"
+                  half-icon="mdi-star-halffull"
+                  hover
+                  length="5"
+                  size="16"
+                  readonly
+                  dense
+                ></v-rating>
+                <p class="ml-2 mt-1 mb-1 text-subtitle-2">
+                  ({{ getData.valoracion }})
+                </p>
+              </v-row>
             </div>
           </v-row>
           <v-col>
             <v-card-text class="mx-3 text--text font-light"
-              >{{ getData.resena
-              }} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-            donec integer diam nulla non adipiscing vitae sit ultrices. Gravida
-            molestie bibendum ullamcorper amet. Vel vel nulla libero magna enim
-            convallis placerat. Gravida parturient gravida venenatis, egestas id
-            euismod faucibus elementum dictum. Massa eget sed id dui quam
-            commodo amet, sit. Pellentesque id mauris sit nam rhoncus accumsan
-            egestas nunc. Commodo auctor tristique et nascetur vitae interdum
-            nunc consectetur. Ipsum pulvinar hendrerit vitae viverra sed dapibus
-            odio ipsum, quis. Vitae auctor et orci non enim massa. Diam ultrices
-            tincidunt adipiscing lobortis vestibulum mauris. Donec nisl,
-            adipiscing eleifend nisi neque mollis id amet dui. Tellus mauris,
-            tristique quis iaculis est tortor porta volutpat volutpat. Quam eget
-            pellentesque vulputate eget. In cursus elit orci justo, quisque
-            bibendum sit sed. Pellentesque mattis faucibus scelerisque
-            ullamcorper et, in nulla elementum. Diam quam volutpat ut sed
-            fringilla ut. Viverra turpis tristique purus nunc nunc. Pellentesque
-            sit risus nibh in convallis. --></v-card-text
+              >{{ getData.resena }} Lorem ipsum dolor sit amet, consectetur
+              adipiscing elit. Fusce donec integer diam nulla non adipiscing
+              vitae sit ultrices. Gravida molestie bibendum ullamcorper amet.
+              Vel vel nulla libero magna enim convallis placerat. Gravida
+              parturient gravida venenatis, egestas id euismod faucibus
+              elementum dictum. Massa eget sed id dui quam commodo amet, sit.
+              Pellentesque id mauris sit nam rhoncus accumsan egestas nunc.
+              Commodo auctor tristique et nascetur vitae interdum nunc
+              consectetur. Ipsum pulvinar hendrerit vitae viverra sed dapibus
+              odio ipsum, quis. Vitae auctor et orci non enim massa. Diam
+              ultrices tincidunt adipiscing lobortis vestibulum mauris. Donec
+              nisl, adipiscing eleifend nisi neque mollis id amet dui. Tellus
+              mauris, tristique quis iaculis est tortor porta volutpat volutpat.
+              Quam eget pellentesque vulputate eget. In cursus elit orci justo,
+              quisque bibendum sit sed. Pellentesque mattis faucibus scelerisque
+              ullamcorper et, in nulla elementum. Diam quam volutpat ut sed
+              fringilla ut. Viverra turpis tristique purus nunc nunc.
+              Pellentesque sit risus nibh in convallis. --></v-card-text
             >
           </v-col>
         </v-card>
@@ -172,6 +184,7 @@
 
 <script>
 import Firebase from "firebase";
+import { mapGetters } from "vuex";
 export default {
   data: () => ({
     userData: {
@@ -193,6 +206,10 @@ export default {
         return false;
       }
     },
+    ...mapGetters({
+      isAdmin: "session/isAdmin",
+      isUser: "session/isAdmin",
+    }),
   },
   methods: {
     saveComment() {
@@ -203,6 +220,15 @@ export default {
         },
         { merge: true }
       );
+    },
+    borrarResena() {
+      Firebase.firestore()
+        .collection("foros")
+        .doc(this.getId)
+        .delete()
+        .then(() => {
+          this.$store.dispatch("resenas/traerTodasLasResenas");
+        });
     },
   },
 };

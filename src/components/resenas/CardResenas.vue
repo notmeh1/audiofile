@@ -62,11 +62,6 @@
                   <p>Nombre de usuario</p>
                 </div>
               </v-col>
-              <v-col>
-                <v-btn v-if="isAdmin"
-                  ><v-icon>mdi-trash-can-outline</v-icon>Eliminar</v-btn
-                >
-              </v-col>
             </v-row>
           </v-card>
         </v-col>
@@ -77,15 +72,10 @@
 
 <script>
 import { mapState } from "vuex";
-import { mapGetters } from "vuex";
 export default {
   computed: {
     ...mapState({
       foroList: (state) => state.foros.foroList,
-    }),
-    ...mapGetters({
-      isAdmin: "session/isAdmin",
-      isUser: "session/isAdmin",
     }),
   },
   props: ["value"],
