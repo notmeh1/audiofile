@@ -13,7 +13,7 @@
         <h2 class="login__title py-10">Registrate</h2>
         <v-form ref="registerForm" @submit.prevent="registrarse" class="my-10">
           <v-text-field
-            v-model="form.nombre"
+            v-model="form.name"
             :rules="[required]"
             label="Ingresa tu nombre"
             solo
@@ -35,8 +35,8 @@
             color="white"
           ></v-text-field>
 
-          <v-btn color="normal" class="mr-4" type="submit"> Registrarse </v-btn>
-          <p class="login__register my-5">
+          <v-btn color="normal" type="submit"> Registrarse </v-btn>
+          <p class="login__register">
             Ya estas registrado?
             <v-btn to="/iniciar-sesion" text plain color="white"
               >Iniciar Sesión</v-btn
@@ -53,7 +53,7 @@ import Firebase from "firebase";
 export default {
   data: () => ({
     form: {
-      nombre: "",
+      name: "",
       email: "",
       password: "",
     },
@@ -94,12 +94,6 @@ export default {
   &__register {
     color: #4a2aa7;
   }
-}
-.theme--light.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state)
-  > .v-input__control
-  > .v-input__slot
-  fieldset {
-  color: white !important;
 }
 @media (min-width: 1264px) {
   .login {
