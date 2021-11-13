@@ -229,6 +229,7 @@ export default {
         .then(() => {
           this.$store.dispatch("resenas/traerTodasLasResenas");
         });
+      this.$router.push("/resenas");
     },
   },
 };
