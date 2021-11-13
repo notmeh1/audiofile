@@ -23,7 +23,7 @@ export const sessionModule = {
     CLEAN_USER(state) {
       state.user = null;
       Router.push({ name: "Home" });
-    }
+    },
   },
 
   actions: {
@@ -38,7 +38,6 @@ export const sessionModule = {
                 email: user.email,
                 rol: "user",
                 name: "",
-                lastName: "",
               };
               documents.forEach((document) => {
                 const data = document.data();
@@ -46,7 +45,6 @@ export const sessionModule = {
                   newUser.rol = data.rol;
                   newUser.id = document.id;
                   newUser.name = data.name;
-                  newUser.lastName = data.lastName;
                 }
               });
               context.commit("SET_USER", { ...newUser });
@@ -54,7 +52,6 @@ export const sessionModule = {
         } else {
           context.commit("SET_USER", null);
         }
-        
       });
     },
     async signIn(_context, credentials) {
@@ -64,9 +61,9 @@ export const sessionModule = {
       );
       Router.push({ name: "Home" });
     },
-    async signOut({commit}) {
+    async signOut({ commit }) {
       await Firebase.auth().signOut();
-      commit('CLEAN_USER')
+      commit("CLEAN_USER");
     },
   },
 };
