@@ -11,7 +11,7 @@ export const spotifyModule = {
   getters: {},
   mutations: {
     STORE_SONG_LIST(state, songList) {
-      state.songList = songList
+      state.songList = songList;
     },
     STORE_SONG_RESULT(state, resultList) {
       state.songResult = resultList;
@@ -24,8 +24,8 @@ export const spotifyModule = {
       state.songResult = filter;
     },
     CLEAN_SEARCH(state) {
-      state.songList = []
-    }
+      state.songList = [];
+    },
   },
   actions: {
     fetchSongResult({ commit }, searchInput) {
@@ -51,12 +51,13 @@ export const spotifyModule = {
           return resultList;
         });
     },
+    playMedia() {},
     filterSongId({ commit }, songId) {
-      console.log(songId)
+      console.log(songId);
       commit("FILTER_SONG_ID", songId);
     },
-    cleanSearch({commit}) {
-      commit('CLEAN_SEARCH')
-    }
+    cleanSearch({ commit }) {
+      commit("CLEAN_SEARCH");
+    },
   },
 };

@@ -50,18 +50,6 @@
             <v-text-field :disabled="disableForm" v-model="userData.nombre" solo />
           </v-col>
         </v-row>
-        <p class="white--text">Contraseña</p>
-        <v-row>
-          <v-col cols="11">
-            <v-text-field :disabled="disableForm" solo />
-          </v-col>
-        </v-row>
-        <p class="white--text">Foto de perfil ( Url )</p>
-        <v-row>
-          <v-col cols="11">
-            <v-text-field :disabled="disableForm" solo />
-          </v-col>
-        </v-row>
         <p class="white--text">Correo electronico</p>
         <v-row>
           <v-col cols="11">
@@ -70,6 +58,18 @@
               v-model="userData.email"
               solo
             />
+          </v-col>
+        </v-row>
+        <p class="white--text">Contraseña</p>
+        <v-row>
+          <v-col cols="11">
+            <v-text-field :disabled="disableForm" solo />
+          </v-col>
+        </v-row>
+        <p class="white--text">Foto de perfil ( URL )</p>
+        <v-row>
+          <v-col cols="11">
+            <v-text-field :disabled="disableForm" solo />
           </v-col>
         </v-row>
         <v-btn class="mb-3 px-5" color="primary" height="45px"><span class="text-body-1 font-weight-bold">Guardar cambios</span></v-btn>

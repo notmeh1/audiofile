@@ -15,6 +15,7 @@
 <script>
 import Navbar from "./components/navbar.vue";
 import Footer from "./components/footer.vue";
+//import Player from "./components/resenas/Player.vue";
 
 export default {
   name: "App",
@@ -25,6 +26,7 @@ export default {
   components: {
     Navbar,
     Footer,
+    //Player,
   },
   methods: {
     
