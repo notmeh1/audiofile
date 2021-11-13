@@ -21,6 +21,16 @@
         v-if="isAdmin"
         ><v-icon>mdi-trash-can-outline</v-icon>Eliminar</v-btn
       >
+      <v-btn
+        class="rounded-lg mx-3 px-8 my-5"
+        color="secondary"
+        height="50px"
+        depressed
+        exact
+        @click="editarResena()"
+        v-if="isAdmin"
+        ><v-icon>mdi-pencil-outline</v-icon>Editar</v-btn
+      >
     </v-row>
     <v-row>
       <v-col lg="3">
@@ -230,6 +240,9 @@ export default {
           this.$store.dispatch("resenas/traerTodasLasResenas");
         });
       this.$router.push("/resenas");
+    },
+    editarResena() {
+      this.$router.push(`/editarResena/${this.getId}`);
     },
   },
 };

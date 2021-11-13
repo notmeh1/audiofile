@@ -50,6 +50,7 @@
 
 <script>
 import Firebase from "firebase";
+import Router from "../../router";
 export default {
   data: () => ({
     form: {
@@ -67,7 +68,7 @@ export default {
         .createUserWithEmailAndPassword(this.form.email, this.form.password)
         .then((data) => {
           data.user.updateProfile().then(() => {
-            this.$router.push("/");
+            Router.push({ name: "Home" });
           });
         });
     },
