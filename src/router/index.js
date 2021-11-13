@@ -46,6 +46,15 @@ const routes = [
       import(/* webpackChunkName: "reseña" */ "../views/Reseña.vue"),
   },
   {
+    path: "/perfil",
+    name: "Perfil",
+    component: () =>
+      import(/* webpackChunkName: "perfil" */ "../views/Perfil.vue"),
+    meta: {
+      requiredLogin: true,
+    },
+  },
+  {
     path: "/editarResena/:id",
     name: "Editar Reseña",
     component: () =>

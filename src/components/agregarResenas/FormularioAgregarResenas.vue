@@ -4,7 +4,7 @@
     <v-container fluid>
       <v-row class="agregarResenas justify-center">
         <v-col cols="12" md="8">
-          <h2 class="agregarResenas__title my-5">
+          <h2 class="text-h4 secondary--text text-center font-weight-bold my-5">
             Busca una canción y agrega una reseña
           </h2>
           <v-form class="my-5" ref="formResena" @submit.prevent="crearResena">
@@ -109,6 +109,7 @@ export default {
       form.songImg = song.album.images[0].url
       form.songArtistOne = song.artists[0].name
       form.album = song.album.name
+      form.previewUrl = song.preview_url
       console.log(this.formResena)
     }
   },
@@ -119,11 +120,6 @@ export default {
 .agregarResenas {
   background-color: #f6faff;
   border-radius: 20px;
-  &__title {
-    color: #4a2aa7;
-    text-align: center;
-    font-size: 30px;
-  }
   &__btn {
     color: white;
   }

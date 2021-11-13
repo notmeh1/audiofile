@@ -69,7 +69,7 @@
             </v-btn>
             <p class="my-5 white--text">
               ¿Aún no te registras?
-              <v-btn to="/registrarse" text plain color="white"
+              <v-btn :to="{ name: 'Registrarse' }" text plain color="white"
                 ><span class="text-body-1">Registrate aquí</span></v-btn
               >
             </p>

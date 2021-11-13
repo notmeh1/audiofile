@@ -61,8 +61,29 @@
             </p>
           </div>
           <v-card-actions class="justify-center">
-            <v-btn color="secondary" fab large absolute depressed
-              ><v-icon large>mdi-play</v-icon></v-btn
+            <v-card-text class="px-0 pt-0 pb-10">
+              <v-slider
+                @change="volume()"
+                min="0"
+                max="1"
+                step="0.1"
+                v-model="previewVolume"
+              >
+                <v-icon color="secondary" slot="prepend"
+                  >mdi-volume-high</v-icon
+                >
+              </v-slider>
+            </v-card-text>
+            <v-btn
+              class="mt-15"
+              @click.prevent="isPlaying ? pause() : play()"
+              color="secondary"
+              fab
+              large
+              absolute
+              depressed
+              ><v-icon v-if="!isPlaying" large>mdi-play</v-icon
+              ><v-icon v-if="isPlaying" large>mdi-pause</v-icon></v-btn
             >
           </v-card-actions>
         </v-card>
@@ -71,6 +92,7 @@
         <v-card
           class="secondary--text rounded-simple px-3"
           color="cardBackground"
+          height="95%"
           flat
         >
           <v-row class="mx-1 mt-1" align="center">
@@ -105,25 +127,25 @@
             </div>
           </v-row>
           <v-col>
-            <v-card-text class="mx-3 text--text font-light"
-              >{{ getData.resena }} Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Fusce donec integer diam nulla non adipiscing
-              vitae sit ultrices. Gravida molestie bibendum ullamcorper amet.
-              Vel vel nulla libero magna enim convallis placerat. Gravida
-              parturient gravida venenatis, egestas id euismod faucibus
-              elementum dictum. Massa eget sed id dui quam commodo amet, sit.
-              Pellentesque id mauris sit nam rhoncus accumsan egestas nunc.
-              Commodo auctor tristique et nascetur vitae interdum nunc
-              consectetur. Ipsum pulvinar hendrerit vitae viverra sed dapibus
-              odio ipsum, quis. Vitae auctor et orci non enim massa. Diam
-              ultrices tincidunt adipiscing lobortis vestibulum mauris. Donec
-              nisl, adipiscing eleifend nisi neque mollis id amet dui. Tellus
-              mauris, tristique quis iaculis est tortor porta volutpat volutpat.
-              Quam eget pellentesque vulputate eget. In cursus elit orci justo,
-              quisque bibendum sit sed. Pellentesque mattis faucibus scelerisque
-              ullamcorper et, in nulla elementum. Diam quam volutpat ut sed
-              fringilla ut. Viverra turpis tristique purus nunc nunc.
-              Pellentesque sit risus nibh in convallis. --></v-card-text
+            <v-card-text class="mx-3 textColor--text text-body-1 font-light"
+              >{{ getData.resena }}
+              <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+            donec integer diam nulla non adipiscing vitae sit ultrices. Gravida
+            molestie bibendum ullamcorper amet. Vel vel nulla libero magna enim
+            convallis placerat. Gravida parturient gravida venenatis, egestas id
+            euismod faucibus elementum dictum. Massa eget sed id dui quam
+            commodo amet, sit. Pellentesque id mauris sit nam rhoncus accumsan
+            egestas nunc. Commodo auctor tristique et nascetur vitae interdum
+            nunc consectetur. Ipsum pulvinar hendrerit vitae viverra sed dapibus
+            odio ipsum, quis. Vitae auctor et orci non enim massa. Diam ultrices
+            tincidunt adipiscing lobortis vestibulum mauris. Donec nisl,
+            adipiscing eleifend nisi neque mollis id amet dui. Tellus mauris,
+            tristique quis iaculis est tortor porta volutpat volutpat. Quam eget
+            pellentesque vulputate eget. In cursus elit orci justo, quisque
+            bibendum sit sed. Pellentesque mattis faucibus scelerisque
+            ullamcorper et, in nulla elementum. Diam quam volutpat ut sed
+            fringilla ut. Viverra turpis tristique purus nunc nunc. Pellentesque
+            sit risus nibh in convallis. --></v-card-text
             >
           </v-col>
         </v-card>
@@ -150,7 +172,7 @@
 
             <v-textarea
               v-model="userData.comentario"
-              class="rounded-simple mx-4"
+              class="rounded-lg mx-4"
               width="87%"
               label="Escribir reseña"
               auto-grow
@@ -165,14 +187,16 @@
               :key="item.comentario"
               class="d-flex my-3 pb-3"
             >
-              <v-img
-                class="rounded-circle mx-auto border"
-                src="../assets/profileimg.png"
-                max-width="6%"
-                width="48px"
-                height="48px"
-                contain
-              />
+              <div class="ml-3">
+                <v-img
+                  class="rounded-lg mx-auto border"
+                  src="../assets/profileimg.png"
+                  width="48px"
+                  height="48px"
+                  contain
+                />
+                <p class="text-caption mx-auto">Nombre de usuario</p>
+              </div>
               <v-card class="rounded-simple mx-auto" width="87%" flat>
                 <v-card-text class="secondary--text"
                   >{{ item
@@ -201,7 +225,10 @@ export default {
       userId: "",
       comentario: "",
     },
-    rating: 4.3,
+    isPlaying: false,
+    previewUrl: null,
+    isMuted: false,
+    previewVolume: 0.5,
   }),
   computed: {
     getId() {
@@ -231,7 +258,18 @@ export default {
         { merge: true }
       );
     },
-    borrarResena() {
+    play() {
+      this.isPlaying = true;
+      this.previewUrl.play();
+    },
+    volume() {
+      this.previewUrl.volume = this.previewVolume;
+    },
+    pause() {
+      this.isPlaying = false;
+      this.previewUrl.pause();
+    },
+        borrarResena() {
       Firebase.firestore()
         .collection("foros")
         .doc(this.getId)
@@ -244,6 +282,12 @@ export default {
     editarResena() {
       this.$router.push(`/editarResena/${this.getId}`);
     },
+  },
+  mounted() {
+    this.previewUrl = new Audio(this.getData.previewUrl);
+    console.log(this.previewUrl);
+    },
+
   },
 };
 </script>
