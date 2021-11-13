@@ -1,6 +1,6 @@
 import Firebase from "firebase";
 
-Firebase.initializeApp({
+const firebaseConfig = Firebase.initializeApp({
   apiKey: process.env.VUE_APP_FIREBASE_APIKEY,
   authDomain: process.env.VUE_APP_FIREBASE_AUTHDOMAIN,
   projectId: process.env.VUE_APP_FIREBASE_PROJECTID,
@@ -8,3 +8,5 @@ Firebase.initializeApp({
   messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGINGSENDERID,
   appId: process.env.VUE_APP_FIREBASE_APPID,
 });
+
+export const db = Firebase.firestore(firebaseConfig)

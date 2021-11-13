@@ -1,48 +1,84 @@
-.
 <template>
-  <v-container>
-    <v-row class="login px-2">
-      <v-col class="login__bg" cols="12" md="5">
-        <img
-          class="login__img"
+  <v-container class="rounded-simple px-5 pb-0 white" fluid>
+    <v-row align="end">
+      <v-col class="pa-0" cols="6" align="right">
+        <v-img
+          width="800px"
+          height="700px"
+          class="img"
           src="../../assets/img/hero-login-img.png"
           alt="Login img"
+          absolute
         />
       </v-col>
-      <v-col class="login__form px-12" cols="12" md="7">
-        <h2 class="login__title py-10">Registrate</h2>
-        <v-form ref="registerForm" @submit.prevent="registrarse" class="my-10">
-          <v-text-field
-            v-model="form.nombre"
-            :rules="[required]"
-            label="Ingresa tu nombre"
-            solo
-            color="white"
-          ></v-text-field>
-          <v-text-field
-            v-model="form.email"
-            :rules="[required]"
-            label="Ingresa tu correo"
-            solo
-            color="white"
-          ></v-text-field>
+      <v-col cols="6" align="left">
+        <v-card
+          class="ma-0 py-5 px-10 rounded-simple"
+          color="secondary"
+          width="800px"
+          height="700px"
+        >
+          <h2 class="white--text text-h3 font-weight-bold mt-10 pt-10 pl-5">
+            Registrate
+          </h2>
+          <v-form
+            ref="registerForm"
+            @submit.prevent="registrarse"
+            lazy-validation
+            class="my-10 pl-5"
+          >
+            <p class="mb-2 font-weight-regular white--text">
+              Ingresa tu Nombre
+            </p>
+            <v-text-field
+              v-model="form.nombre"
+              :rules="[required]"
+              solo
+              type="email"
+              name="email"
+              color="white"
+            ></v-text-field>
+            <p class="mb-2 font-weight-regular white--text">
+              Ingresa tu correo
+            </p>
+            <v-text-field
+              v-model="form.email"
+              :rules="[required]"
+              solo
+              type="email"
+              name="email"
+              color="white"
+            ></v-text-field>
+            <p class="mb-2 font-weight-regular white--text">
+              Ingresa tu contraseña
+            </p>
+            <v-text-field
+              v-model="form.password"
+              :rules="[required]"
+              solo
+              type="password"
+              name="password"
+              color="white"
+            ></v-text-field>
 
-          <v-text-field
-            v-model="form.password"
-            :rules="[required]"
-            label="Ingresa tu contraseña"
-            solo
-            color="white"
-          ></v-text-field>
-
-          <v-btn color="normal" class="mr-4" type="submit"> Registrarse </v-btn>
-          <p class="login__register my-5">
-            Ya estas registrado?
-            <v-btn to="/iniciar-sesion" text plain color="white"
-              >Iniciar Sesión</v-btn
+            <v-btn
+              type="submit"
+              color="normal"
+              height="45px"
+              class="mr-4 px-10 rounded-lg"
             >
-          </p>
-        </v-form>
+              <span class="text-subtitle-2 textColor--text font-weight-bold"
+                >Crear cuenta</span
+              >
+            </v-btn>
+            <p class="my-5 white--text">
+              ¿Ya tienes cuenta?
+              <v-btn :to="{ name: 'Iniciar Sesión' }" text plain color="white"
+                ><span class="text-body-1">Inicia sesion</span></v-btn
+              >
+            </p>
+          </v-form>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -122,5 +158,8 @@ export default {
       border-radius: 0 0 50px 0;
     }
   }
+}
+.img {
+  z-index: 1;
 }
 </style>
