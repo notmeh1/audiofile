@@ -11,6 +11,26 @@
         ><v-icon class="pr-2">mdi-location-exit</v-icon
         ><span class="font-weight-regular text-body-2">Volver</span></v-btn
       >
+      <v-btn
+        class="rounded-lg mx-3 px-8 my-5"
+        color="secondary"
+        height="50px"
+        depressed
+        exact
+        @click="borrarResena()"
+        v-if="isAdmin"
+        ><v-icon>mdi-trash-can-outline</v-icon>Eliminar</v-btn
+      >
+      <v-btn
+        class="rounded-lg mx-3 px-8 my-5"
+        color="secondary"
+        height="50px"
+        depressed
+        exact
+        @click="editarResena()"
+        v-if="isAdmin"
+        ><v-icon>mdi-pencil-outline</v-icon>Editar</v-btn
+      >
     </v-row>
     <v-row>
       <v-col lg="3">
@@ -198,6 +218,7 @@
 
 <script>
 import Firebase from "firebase";
+import { mapGetters } from "vuex";
 export default {
   data: () => ({
     userData: {
@@ -222,6 +243,10 @@ export default {
         return false;
       }
     },
+    ...mapGetters({
+      isAdmin: "session/isAdmin",
+      isUser: "session/isAdmin",
+    }),
   },
   methods: {
     saveComment() {
@@ -244,10 +269,25 @@ export default {
       this.isPlaying = false;
       this.previewUrl.pause();
     },
+        borrarResena() {
+      Firebase.firestore()
+        .collection("foros")
+        .doc(this.getId)
+        .delete()
+        .then(() => {
+          this.$store.dispatch("resenas/traerTodasLasResenas");
+        });
+      this.$router.push("/resenas");
+    },
+    editarResena() {
+      this.$router.push(`/editarResena/${this.getId}`);
+    },
   },
   mounted() {
     this.previewUrl = new Audio(this.getData.previewUrl);
     console.log(this.previewUrl);
+    },
+
   },
 };
 </script>

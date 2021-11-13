@@ -86,10 +86,11 @@
 
 <script>
 import Firebase from "firebase";
+import Router from "../../router";
 export default {
   data: () => ({
     form: {
-      nombre: "",
+      name: "",
       email: "",
       password: "",
     },
@@ -103,7 +104,7 @@ export default {
         .createUserWithEmailAndPassword(this.form.email, this.form.password)
         .then((data) => {
           data.user.updateProfile().then(() => {
-            this.$router.push("/");
+            Router.push({ name: "Home" });
           });
         });
     },
@@ -130,12 +131,6 @@ export default {
   &__register {
     color: #4a2aa7;
   }
-}
-.theme--light.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state)
-  > .v-input__control
-  > .v-input__slot
-  fieldset {
-  color: white !important;
 }
 @media (min-width: 1264px) {
   .login {
