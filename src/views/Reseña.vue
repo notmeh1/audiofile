@@ -260,6 +260,7 @@ export default {
     },
     play() {
       this.isPlaying = true;
+      this.previewUrl.volume = this.previewVolume
       this.previewUrl.play();
     },
     volume() {
@@ -269,7 +270,7 @@ export default {
       this.isPlaying = false;
       this.previewUrl.pause();
     },
-        borrarResena() {
+    borrarResena() {
       Firebase.firestore()
         .collection("foros")
         .doc(this.getId)
@@ -286,8 +287,6 @@ export default {
   mounted() {
     this.previewUrl = new Audio(this.getData.previewUrl);
     console.log(this.previewUrl);
-    },
-
   },
 };
 </script>
