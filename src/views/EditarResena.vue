@@ -4,7 +4,7 @@
       <v-row class="agregarResenas justify-center">
         <v-col cols="12" md="8">
           <h2 class="agregarResenas__title my-5">
-            Busca una canción y agrega una reseña
+            Editar Reseña y/o valoración
           </h2>
           <v-form
             class="my-5"
@@ -19,7 +19,7 @@
               label="Nombre canción"
               color="#4a2aa7"
               v-model="searchInput"
-              :rules="[required]"
+              disabled
             >
             </v-text-field>
 
