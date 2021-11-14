@@ -22,7 +22,7 @@
             Registrate
           </h2>
           <v-form
-            ref="registerForm"
+            ref="userForm"
             @submit.prevent="registrarse"
             lazy-validation
             class="my-10 pl-5"
@@ -95,6 +95,9 @@ export default {
       password: "",
     },
   }),
+  created() {
+    this.form = { ...this.$store.state.session.user };
+  },
   methods: {
     required(value) {
       return !!value || "Este campo es obligatorio";
@@ -104,10 +107,22 @@ export default {
         .createUserWithEmailAndPassword(this.form.email, this.form.password)
         .then((data) => {
           data.user.updateProfile().then(() => {
-            Router.push({ name: "Home" });
+            Router.push("/");
           });
         });
     },
+    // handleFormSubmit() {
+    //   if (this.$refs.userForm.validate()) {
+    //     console.log(this.form);
+    //     if (this.form.id) {
+    //       const { id, ...userData } = this.form;
+    //       Firebase.firestore().collection("usuarios").doc(id).update(userData);
+    //     } else {
+    //       Firebase.firestore().collection("usuarios").add(this.form);
+    //     }
+    //   }
+    //   Router.push("/");
+    // },
   },
 };
 </script>
