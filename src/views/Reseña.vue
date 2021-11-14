@@ -245,6 +245,9 @@ export default {
       this.isPlaying = true;
       this.previewUrl.volume = this.previewVolume
       this.previewUrl.play();
+      this.previewUrl.onended = () => {
+        this.isPlaying = false
+      }
     },
     volume() {
       this.previewUrl.volume = this.previewVolume;
