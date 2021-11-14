@@ -9,7 +9,7 @@
           <v-form
             class="my-5"
             ref="formEditarResena"
-            @submit.prevent="editarResena"
+            @submit.prevent="editarResena()"
           >
             <v-text-field
               @input="$store.dispatch('spotify/fetchSongResult', searchInput)"
@@ -103,6 +103,21 @@ export default {
     ...mapState({
       songResult: (state) => state.spotify.songResult,
     }),
+    ...mapState({
+      foroList: (state) => state.foroList,
+    }),
+    getId() {
+      return this.$route.params.id;
+    },
+    getData() {
+      if (this.$store.state.foros.foroList) {
+        return this.$store.state.foros.foroList.find(
+          (foro) => foro.id === this.getId
+        );
+      } else {
+        return false;
+      }
+    },
   },
   methods: {
     crearResena() {
@@ -133,15 +148,14 @@ export default {
     },
     editarResena() {
       if (this.$refs.formEditarResena.validate()) {
-        this.loading = true;
         Firebase.firestore()
           .collection("foros")
-          .doc(this.foro.id)
-          .update(this.foro)
+          .doc(this.getId)
+          .update(this.formResena)
           .then(() => {
-            this.loading = false;
-            this.$router.push("/resenas");
+            this.$store.dispatch("resenas/traerTodasLasResenas");
           });
+        this.$router.push("/resenas");
       }
     },
   },
