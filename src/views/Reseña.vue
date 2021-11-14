@@ -127,26 +127,9 @@
             </div>
           </v-row>
           <v-col>
-            <v-card-text class="mx-3 textColor--text text-body-1 font-light"
-              >{{ getData.resena }}
-              <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-            donec integer diam nulla non adipiscing vitae sit ultrices. Gravida
-            molestie bibendum ullamcorper amet. Vel vel nulla libero magna enim
-            convallis placerat. Gravida parturient gravida venenatis, egestas id
-            euismod faucibus elementum dictum. Massa eget sed id dui quam
-            commodo amet, sit. Pellentesque id mauris sit nam rhoncus accumsan
-            egestas nunc. Commodo auctor tristique et nascetur vitae interdum
-            nunc consectetur. Ipsum pulvinar hendrerit vitae viverra sed dapibus
-            odio ipsum, quis. Vitae auctor et orci non enim massa. Diam ultrices
-            tincidunt adipiscing lobortis vestibulum mauris. Donec nisl,
-            adipiscing eleifend nisi neque mollis id amet dui. Tellus mauris,
-            tristique quis iaculis est tortor porta volutpat volutpat. Quam eget
-            pellentesque vulputate eget. In cursus elit orci justo, quisque
-            bibendum sit sed. Pellentesque mattis faucibus scelerisque
-            ullamcorper et, in nulla elementum. Diam quam volutpat ut sed
-            fringilla ut. Viverra turpis tristique purus nunc nunc. Pellentesque
-            sit risus nibh in convallis. --></v-card-text
-            >
+            <v-card-text class="mx-3 text--text font-light">{{
+              getData.resena
+            }}</v-card-text>
           </v-col>
         </v-card>
       </v-col>
