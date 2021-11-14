@@ -1,7 +1,7 @@
 .
 <template>
   <v-row>
-    <v-col></v-col>
+    <v-col v-if="$vuetify.breakpoint.mdAndUp"></v-col>
     <v-col lg="12" xl="6">
     <v-autocomplete
       class="mx-5 my-2 rounded-lg shrink"
@@ -15,7 +15,7 @@
       append-icon="mdi-magnify"
     ></v-autocomplete>
     </v-col>
-    <v-col></v-col>
+    <v-col v-if="$vuetify.breakpoint.mdAndUp"></v-col>
   </v-row>
 </template>
 
