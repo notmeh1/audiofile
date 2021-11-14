@@ -6,7 +6,11 @@
           <h2 class="agregarResenas__title my-5">
             Busca una canción y agrega una reseña
           </h2>
-          <v-form class="my-5" ref="formResena" @submit.prevent="crearResena">
+          <v-form
+            class="my-5"
+            ref="formEditarResena"
+            @submit.prevent="editarResena"
+          >
             <v-text-field
               @input="$store.dispatch('spotify/fetchSongResult', searchInput)"
               :value="formResena.songId"
@@ -60,7 +64,7 @@
               :rules="[required]"
             ></v-textarea>
             <v-btn class="agregarResenas__btn" color="#4a2aa7" type="submit"
-              ><v-icon>mdi-pencil</v-icon>Reseñar</v-btn
+              ><v-icon>mdi-pencil</v-icon>Editar Reseña</v-btn
             >
           </v-form>
         </v-col>
@@ -75,6 +79,17 @@ import store from "../store/index";
 import { mapState } from "vuex";
 
 export default {
+  beforeRouteEnter(to, from, next) {
+    Firebase.firestore()
+      .collection("foros")
+      .doc(to.params.id)
+      .get()
+      .then((document) => {
+        next((vm) => {
+          vm.formResena = { id: document.id, ...document.data() };
+        });
+      });
+  },
   data: () => ({
     searchInput: null,
     formResena: {
@@ -115,6 +130,19 @@ export default {
       form.songArtistOne = song.artists[0].name;
       form.album = song.album.name;
       console.log(this.formResena);
+    },
+    editarResena() {
+      if (this.$refs.formEditarResena.validate()) {
+        this.loading = true;
+        Firebase.firestore()
+          .collection("foros")
+          .doc(this.foro.id)
+          .update(this.foro)
+          .then(() => {
+            this.loading = false;
+            this.$router.push("/resenas");
+          });
+      }
     },
   },
 };
