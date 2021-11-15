@@ -24,7 +24,7 @@ export const spotifyModule = {
       state.songResult = filter;
     },
     CLEAN_SEARCH(state) {
-      state.songList = [];
+      state.songResult = [];
     },
   },
   actions: {
@@ -51,7 +51,6 @@ export const spotifyModule = {
           return resultList;
         });
     },
-    playMedia() {},
     filterSongId({ commit }, songId) {
       console.log(songId);
       commit("FILTER_SONG_ID", songId);

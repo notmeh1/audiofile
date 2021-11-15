@@ -14,14 +14,14 @@
             <v-row align="center">
               <v-col cols="1" align="center">
                 <v-img
-                  class="rounded-md mx-2"
+                  class="rounded-md mx-3"
                   :src="foro.songImg"
-                  width="48px"
-                  height="48px"
+                  width="64px"
+                  height="64px"
                   contain
                 />
               </v-col>
-              <v-col cols="2">
+              <v-col cols="5">
                 <v-row>
                   <v-card-title class="px-0 pb-0">{{
                     foro.songName
@@ -49,7 +49,7 @@
                   </p>
                 </v-row>
               </v-col>
-              <v-col cols="8"> </v-col>
+              <v-col cols="5"> </v-col>
               <v-col class="py-0 px-0" cols="1" align="center">
                 <div class="mt-4 mr-3">
                   <v-img
