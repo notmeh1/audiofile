@@ -16,6 +16,7 @@ export default new Vuetify({
         cardBackground: "#e6f1ff",
         textColor: "#2c1967",
         homeBg: "#f4b40e",
+        spotifyColor: "#1db954",
       },
     },
   },

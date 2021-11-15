@@ -54,12 +54,12 @@
                 <div class="mt-4 mr-3">
                   <v-img
                     class="rounded-simple"
-                    src="../../assets/profileimg.png"
+                    :src="foro.userImg"
                     width="48px"
                     height="48px"
                     contain
                   />
-                  <p>Nombre de usuario</p>
+                  <p>{{foro.userName}}</p>
                 </div>
               </v-col>
             </v-row>

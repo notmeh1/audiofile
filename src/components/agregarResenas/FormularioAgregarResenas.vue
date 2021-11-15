@@ -119,6 +119,7 @@ export default {
   computed: {
     ...mapState({
       songResult: (state) => state.spotify.songResult,
+      userData: (state) => state.session.user
     }),
   },
   methods: {
@@ -142,6 +143,8 @@ export default {
       this.isSelected = true;
       await store.dispatch("spotify/filterSongId", song.id);
       const form = this.formResena;
+      form.userName = this.userData.displayName
+      form.userImg = this.userData.photoURL
       form.songId = song.id;
       form.songName = song.name;
       form.songImg = song.album.images[0].url;

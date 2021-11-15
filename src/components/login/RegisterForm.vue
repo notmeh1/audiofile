@@ -31,7 +31,7 @@
               Ingresa tu Nombre
             </p>
             <v-text-field
-              v-model="form.nombre"
+              v-model="form.name"
               :rules="[required]"
               solo
               type="email"
@@ -102,11 +102,10 @@ export default {
     registrarse() {
       Firebase.auth()
         .createUserWithEmailAndPassword(this.form.email, this.form.password)
-        .then((data) => {
-          data.user.updateProfile().then(() => {
-            Router.push({ name: "Home" });
-          });
-        });
+        .then(() => {
+          Router.push({ name: "Iniciar Sesión" });
+        })
+        
     },
   },
 };

@@ -28,27 +28,18 @@ export const sessionModule = {
 
   actions: {
     subscribeToAuthStateChange(context) {
+      const current = Firebase.auth().currentUser
+      console.log(current)
       Firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-          Firebase.firestore()
-            .collection("usuarios")
-            .get()
-            .then((documents) => {
-              const newUser = {
-                email: user.email,
-                rol: "user",
-                name: "",
-              };
-              documents.forEach((document) => {
-                const data = document.data();
-                if (data.email === user.email) {
-                  newUser.rol = data.rol;
-                  newUser.id = document.id;
-                  newUser.name = data.name;
-                }
-              });
-              context.commit("SET_USER", { ...newUser });
-            });
+          console.log(user)
+          const userData = {
+            displayName : user.displayName,
+            email : user.email,
+            photoURL : user.photoURL,
+            rol: "user",
+          }
+          context.commit("SET_USER", userData)
         } else {
           context.commit("SET_USER", null);
         }
