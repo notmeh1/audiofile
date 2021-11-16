@@ -95,7 +95,7 @@
           height="95%"
           flat
         >
-          <v-row class="mx-1 mt-1" align="center">
+          <v-row v-if="creatorData" class="mx-1 mt-1" align="center">
             <v-img
               class="rounded-lg mt-2 mr-2"
               :src="creatorData.imgURL"
@@ -125,6 +125,24 @@
                 </p>
               </v-row>
             </div>
+            <v-row justify="end">
+              <v-card class="rounded-simple d-flex py-2 mr-5 px-1 mt-1" flat>
+                <v-btn
+                  @click.prevent="addLike()"
+                  icon
+                  :color="disableLike ? 'blue' : ''"
+                  ><v-icon>mdi-thumb-up</v-icon></v-btn
+                >
+                <p class="my-auto">{{ getData.like }}</p>
+                <v-btn
+                  @click.prevent="addDislike()"
+                  icon
+                  :color="disableDislike ? 'red' : ''"
+                  ><v-icon>mdi-thumb-down</v-icon></v-btn
+                >
+                <p class="my-auto">{{ getData.dislike }}</p>
+              </v-card>
+            </v-row>
           </v-row>
           <v-col>
             <v-card-text class="mx-3 text--text font-light">{{
@@ -209,6 +227,8 @@ export default {
       userId: "",
       comentario: "",
     },
+    disableLike: false,
+    disableDislike: false,
     creatorData: null,
     isPlaying: false,
     previewUrl: null,
@@ -277,10 +297,83 @@ export default {
     editarResena() {
       this.$router.push(`/editarResena/${this.getId}`);
     },
+    addLike() {
+      if (this.disableDislike) {
+        this.getData.dislike -= 1;
+        this.disableDislike = false;
+        this.getData.like += 1;
+        this.disableLike = true;
+        db.collection("foros").doc(this.getData.id).set(
+          {
+            like: this.getData.like,
+            dislike: this.getData.dislike,
+          },
+          { merge: true }
+        );
+      } else {
+        if (this.disableLike) {
+          this.getData.like -= 1;
+          this.disableLike = false;
+          db.collection("foros").doc(this.getData.id).set(
+            {
+              like: this.getData.like,
+            },
+            { merge: true }
+          );
+        } else {
+          this.getData.like += 1;
+          this.disableLike = true;
+          db.collection("foros").doc(this.getData.id).set(
+            {
+              like: this.getData.like,
+            },
+            { merge: true }
+          );
+        }
+      }
+      //db.collection("foros").doc(this.getId.id).set({
+      //
+      //}, {merge: true,})
+    },
+    addDislike() {
+      if (this.disableLike) {
+        this.getData.like -= 1;
+        this.disableLike = false;
+        this.getData.dislike += 1;
+        this.disableDislike = true;
+        db.collection("foros").doc(this.getData.id).set(
+          {
+            dislike: this.getData.dislike,
+            like: this.getData.like,
+          },
+          { merge: true }
+        );
+      } else {
+        if (this.disableDislike) {
+          this.getData.dislike -= 1;
+          this.disableDislike = false;
+          db.collection("foros").doc(this.getData.id).set(
+            {
+              dislike: this.getData.dislike,
+            },
+            { merge: true }
+          );
+        } else {
+          this.getData.dislike += 1;
+          this.disableDislike = true;
+          db.collection("foros").doc(this.getData.id).set(
+            {
+              dislike: this.getData.dislike,
+            },
+            { merge: true }
+          );
+        }
+      }
+    },
   },
   mounted() {
     this.previewUrl = new Audio(this.getData.previewUrl);
-    console.log(this.getData.uid, this.userData.id, this.isCreator)
+    console.log(this.getData.uid, this.userData.id, this.isCreator);
     db.collection("usuarios")
       .doc(this.getData.uid)
       .onSnapshot((doc) => {
