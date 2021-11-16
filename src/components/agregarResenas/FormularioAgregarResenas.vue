@@ -143,6 +143,8 @@ export default {
       this.isSelected = true;
       await store.dispatch("spotify/filterSongId", song.id);
       const form = this.formResena;
+      form.like = 0;
+      form.dislike = 0;
       form.uid = this.userData.id
       form.songId = song.id;
       form.songName = song.name;
