@@ -8,7 +8,7 @@
         depressed
         exact
         @click="borrarResena()"
-        v-if="isAdmin"
+        v-if="isAdmin || isCreator"
         ><v-icon>mdi-trash-can-outline</v-icon>Eliminar</v-btn
       >
       <v-btn
@@ -18,7 +18,7 @@
         depressed
         exact
         @click="editarResena()"
-        v-if="isAdmin"
+        v-if="isAdmin || isCreator"
         ><v-icon>mdi-pencil-outline</v-icon>Editar</v-btn
       >
       <v-btn
@@ -98,15 +98,14 @@
           <v-row class="mx-1 mt-1" align="center">
             <v-img
               class="rounded-lg mt-2 mr-2"
-              :src="getData.userImg"
+              :src="creatorData.imgURL"
               max-width="6%"
               width="48px"
               height="48px"
               contain
-              
             />
             <div>
-              <p class="mb-3 mt-1">{{getData.userName}}</p>
+              <p class="mb-3 mt-1">{{ creatorData.name }}</p>
               <v-row class="ml-1">
                 <v-rating
                   class="mt-0"
@@ -147,7 +146,7 @@
           <div class="d-flex my-3 pb-3">
             <v-img
               class="rounded-lg mx-auto"
-              :src="userData.photoURL"
+              :src="userData.imgURL"
               max-width="6%"
               width="48px"
               height="48px"
@@ -202,6 +201,7 @@
 
 <script>
 import Firebase from "firebase";
+import { db } from "../plugins/firebase";
 import { mapGetters, mapState } from "vuex";
 export default {
   data: () => ({
@@ -209,6 +209,7 @@ export default {
       userId: "",
       comentario: "",
     },
+    creatorData: null,
     isPlaying: false,
     previewUrl: null,
     isMuted: false,
@@ -227,8 +228,11 @@ export default {
         return false;
       }
     },
+    isCreator() {
+      return this.userData.id === this.getData.uid;
+    },
     ...mapState({
-      userData: (state) => state.session.user
+      userData: (state) => state.session.user,
     }),
     ...mapGetters({
       isAdmin: "session/isAdmin",
@@ -247,11 +251,11 @@ export default {
     },
     play() {
       this.isPlaying = true;
-      this.previewUrl.volume = this.previewVolume
+      this.previewUrl.volume = this.previewVolume;
       this.previewUrl.play();
       this.previewUrl.onended = () => {
-        this.isPlaying = false
-      }
+        this.isPlaying = false;
+      };
     },
     volume() {
       this.previewUrl.volume = this.previewVolume;
@@ -276,7 +280,13 @@ export default {
   },
   mounted() {
     this.previewUrl = new Audio(this.getData.previewUrl);
-    console.log(this.previewUrl);
+    console.log(this.getData.uid, this.userData.id, this.isCreator)
+    db.collection("usuarios")
+      .doc(this.getData.uid)
+      .onSnapshot((doc) => {
+        const data = { id: doc.id, ...doc.data() };
+        this.creatorData = data;
+      });
   },
 };
 </script>

@@ -59,7 +59,7 @@
                     height="48px"
                     contain
                   />
-                  <p>{{foro.userName}}</p>
+                  <p>{{ foro.userName }}</p>
                 </div>
               </v-col>
             </v-row>
@@ -72,13 +72,27 @@
 
 <script>
 import { mapState } from "vuex";
+import {db} from "../../plugins/firebase";
 export default {
+  data: () => ({
+    userList: [],
+    list: {},
+  }),
   computed: {
     ...mapState({
       foroList: (state) => state.foros.foroList,
     }),
   },
   props: ["value"],
+  mounted() {
+    this.foroList.forEach((foro) => {
+      db.collection('usuarios').doc(foro.uid).onSnapshot((doc) => {
+        const data = { id: doc.id, ...doc.data() };
+        console.log(data, this.pairs)
+        this.userList.push(data)
+      })
+    })
+  },
 };
 </script>
 

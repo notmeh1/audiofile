@@ -8,6 +8,10 @@ export const spotifyAuthModule = {
   mutations: {
     STORE_SPOTIFY_USER_DATA(state, json) {
       state.spotifyUserData = json
+    },
+    CLEAN_SPOTIFY_USER_DATA(state) {
+      localStorage.removeItem('accessToken')
+      state.spotifyUserData = null
     }
   },
   actions: {

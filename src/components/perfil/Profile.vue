@@ -8,7 +8,7 @@
         >
         <v-img
           class="rounded-circle mt-2 mr-2"
-          :src="userData.photoURL"
+          :src="userData.imgURL"
           width="256px"
           height="256px"
           contain
@@ -31,7 +31,7 @@
           >
         </v-row>
         <v-btn
-          v-if="!spotifyUserData"
+          v-if="!spotifyUserData.display_name"
           @click="loginSpotify()"
           color="spotifyColor"
           height="45px"
@@ -40,7 +40,19 @@
           <v-icon class="mr-2">mdi-spotify</v-icon>
           <span class="text-body-2 font-weight-bold">Conectar con Spotify</span>
         </v-btn>
-        <v-card v-if="spotifyUserData" class="my-5 mx-10" color="primary" flat>
+                <v-btn
+          @click="handleLogout()"
+          class="rounded-lg mt-10 px-5 ml-2 text-body-2 font-weight-bold"
+          color="error"
+          height="45px"
+          >Cerrar sesion</v-btn
+        >
+        <v-card
+          v-if="spotifyUserData.display_name"
+          class="my-5 mx-10"
+          color="spotifyColor"
+          flat
+        >
           <v-row align="center">
             <v-col cols="2" justify="center">
               <v-img
@@ -89,7 +101,7 @@
             <v-col cols="11">
               <v-text-field
                 :disabled="disableForm"
-                v-model="userData.displayName"
+                v-model="userData.name"
                 solo
               />
             </v-col>
@@ -117,7 +129,7 @@
             <v-col cols="11">
               <v-text-field
                 :disabled="disableForm"
-                v-model="userData.photoURL"
+                v-model="imgURL"
                 solo
               />
             </v-col>
@@ -139,11 +151,12 @@
 </template>
 
 <script>
-import Firebase from "firebase";
+import {db} from "../../plugins/firebase"
 import { mapState } from "vuex";
 export default {
   data: () => ({
     disableForm: true,
+    imgURL: null,
   }),
   computed: {
     ...mapState({
@@ -156,19 +169,15 @@ export default {
       this.$store.dispatch("spotifyAuth/authSpotify");
     },
     saveProfileChanges() {
-      const user = Firebase.auth().currentUser;
-      user
-        .updateProfile({
-          displayName: this.userData.name,
-          photoURL: this.userData.photoURL,
-        })
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      db.collection('usuarios').doc(this.userData.id).set({
+        name: this.userData.name,
+        email: this.userData.email,
+        imgURL: this.imgURL,
+      }, {merge: true})
       this.disableForm = true;
+    },
+    async handleLogout() {
+      await this.$store.dispatch("session/signOut");
     },
   },
   mounted() {

@@ -109,7 +109,6 @@
 
       <v-spacer></v-spacer>
       <SignIn v-if="!isUserLogged" />
-      <SignOut v-if="isUserLogged" />
       <Account v-if="isUserLogged"/>
       <div class="hidden-sm-and-up">
         <v-btn icon class="rounded-simple mr-1" @click="drawer = !drawer">
@@ -122,7 +121,7 @@
 
 <script>
 import SignIn from "./login/SignIn.vue";
-import SignOut from "./login/SignOut.vue";
+//import SignOut from "./login/SignOut.vue";
 import Account from "./login/Account.vue"
 import {mapState} from "vuex";
 export default {
@@ -131,7 +130,7 @@ export default {
   }),
   components: {
     SignIn,
-    SignOut,
+    //SignOut,
     Account,
   },
   computed: {

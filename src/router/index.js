@@ -55,6 +55,18 @@ const routes = [
     },
   },
   {
+    path: "/perfil/userlist",
+    name: "Userlist",
+    component: () =>
+    import(/* webpackChunkName: "userlist" */ "../views/admin/userList.vue"),
+  },
+  {
+    path: "/perfil/forolist",
+    name: "Forolist",
+    component: () =>
+    import(/* webpackChunkName: "forolist" */ "../views/admin/foroList.vue"),
+  },
+  {
     path: "/editarResena/:id",
     name: "Editar Reseña",
     component: () =>

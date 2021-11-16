@@ -86,7 +86,8 @@
 
 <script>
 import Firebase from "firebase";
-import Router from "../../router";
+import {db} from "../../plugins/firebase";
+//import Router from "../../router";
 export default {
   data: () => ({
     form: {
@@ -102,8 +103,13 @@ export default {
     registrarse() {
       Firebase.auth()
         .createUserWithEmailAndPassword(this.form.email, this.form.password)
-        .then(() => {
-          Router.push({ name: "Iniciar Sesión" });
+        .then((data) => {
+          return db.collection('usuarios').doc(data.user.uid).set({
+            name: this.form.name,
+            rol: 'user',
+            email: this.form.email,
+          })
+          //Router.push({ name: "Iniciar Sesión" });
         })
         
     },

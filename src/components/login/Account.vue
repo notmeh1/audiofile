@@ -1,6 +1,6 @@
 <template>
   <v-btn :to="{ name: 'Perfil' }" class="mr-7" color="cardBackground" fab small>
-    <v-avatar>
+    <v-avatar size="40">
       <img class="rounded-circle" :src="userImg" alt="">
     </v-avatar>
     <!-- <v-icon color="black">mdi-account</v-icon>-->
@@ -12,7 +12,7 @@ import {mapState} from "vuex";
 export default {
   computed: {
     ...mapState({
-      userImg: (state) => state.session.user.photoURL
+      userImg: (state) => state.session.user.imgURL
     })
   }
 }

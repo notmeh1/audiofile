@@ -143,8 +143,7 @@ export default {
       this.isSelected = true;
       await store.dispatch("spotify/filterSongId", song.id);
       const form = this.formResena;
-      form.userName = this.userData.displayName
-      form.userImg = this.userData.photoURL
+      form.uid = this.userData.id
       form.songId = song.id;
       form.songName = song.name;
       form.songImg = song.album.images[0].url;
