@@ -1,8 +1,19 @@
 export const spotifyAuthModule = {
   namespaced: true,
-  state: {},
+  state: {
+    isAuthed: false,
+    spotifyUserData: null,
+  },
   getters: {},
-  mutations: {},
+  mutations: {
+    STORE_SPOTIFY_USER_DATA(state, json) {
+      state.spotifyUserData = json
+    },
+    CLEAN_SPOTIFY_USER_DATA(state) {
+      localStorage.removeItem('accessToken')
+      state.spotifyUserData = null
+    }
+  },
   actions: {
     authSpotify() {
       const client_id = "a97c91eefb5b468ebc720b375cd75603";
@@ -33,7 +44,7 @@ export const spotifyAuthModule = {
       url += "&state=" + encodeURIComponent(state);
       window.location.href = url;
     },
-    handleRedirect() {
+    handleRedirect({dispatch}) {
       let accessToken = getAccessToken();
       //const redirect_uri = "http://localhost:8080/"
       console.log(accessToken);
@@ -52,27 +63,28 @@ export const spotifyAuthModule = {
         }
         return accessToken;
       }
-      fetchProfileInformation()
-      function fetchProfileInformation() {
-          const API_ENDPOINT = 'https://api.spotify.com/v1/me';
-          let ACCESS_TOKEN = localStorage.getItem('accessToken')
-          console.log(ACCESS_TOKEN)
-  
-          const fetchOptions = {
-              method: 'GET',
-              headers: new Headers({
-                  'Authorization': `Bearer ${ACCESS_TOKEN}`
-              })
-          };
-  
-          fetch(API_ENDPOINT, fetchOptions).then(function (response) {
-              return response.json();
-          }).then(function (json) {
-              console.log(json);
-          }).catch(function (error) {
-              console.log(error);
-          });
-      }
+      dispatch('fetchProfileInformation')
     },
+    fetchProfileInformation({commit}) {
+        const API_ENDPOINT = 'https://api.spotify.com/v1/me';
+        let ACCESS_TOKEN = localStorage.getItem('accessToken')
+        console.log(ACCESS_TOKEN)
+
+        const fetchOptions = {
+            method: 'GET',
+            headers: new Headers({
+                'Authorization': `Bearer ${ACCESS_TOKEN}`
+            })
+        };
+
+        fetch(API_ENDPOINT, fetchOptions).then(function (response) {
+            return response.json();
+        }).then(function (json) {
+          commit('STORE_SPOTIFY_USER_DATA', json)
+          console.log(json);
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
   },
 };

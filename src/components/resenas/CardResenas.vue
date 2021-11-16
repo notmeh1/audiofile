@@ -14,14 +14,14 @@
             <v-row align="center">
               <v-col cols="1" align="center">
                 <v-img
-                  class="rounded-md mx-2"
+                  class="rounded-md mx-3"
                   :src="foro.songImg"
-                  width="48px"
-                  height="48px"
+                  width="64px"
+                  height="64px"
                   contain
                 />
               </v-col>
-              <v-col cols="2">
+              <v-col cols="5">
                 <v-row>
                   <v-card-title class="px-0 pb-0">{{
                     foro.songName
@@ -49,17 +49,17 @@
                   </p>
                 </v-row>
               </v-col>
-              <v-col cols="8"> </v-col>
+              <v-col cols="5"> </v-col>
               <v-col class="py-0 px-0" cols="1" align="center">
                 <div class="mt-4 mr-3">
                   <v-img
                     class="rounded-simple"
-                    src="../../assets/profileimg.png"
+                    :src="foro.userImg"
                     width="48px"
                     height="48px"
                     contain
                   />
-                  <p>Nombre de usuario</p>
+                  <p>{{ foro.userName }}</p>
                 </div>
               </v-col>
             </v-row>
@@ -72,13 +72,27 @@
 
 <script>
 import { mapState } from "vuex";
+import {db} from "../../plugins/firebase";
 export default {
+  data: () => ({
+    userList: [],
+    list: {},
+  }),
   computed: {
     ...mapState({
       foroList: (state) => state.foros.foroList,
     }),
   },
   props: ["value"],
+  mounted() {
+    this.foroList.forEach((foro) => {
+      db.collection('usuarios').doc(foro.uid).onSnapshot((doc) => {
+        const data = { id: doc.id, ...doc.data() };
+        console.log(data, this.pairs)
+        this.userList.push(data)
+      })
+    })
+  },
 };
 </script>
 

@@ -2,6 +2,26 @@
   <v-container class="rounded-simple px-5 white" fluid>
     <v-row justify="end">
       <v-btn
+        class="rounded-lg mx-3 px-8 my-5"
+        color="error"
+        height="50px"
+        depressed
+        exact
+        @click="borrarResena()"
+        v-if="isAdmin || isCreator"
+        ><v-icon>mdi-trash-can-outline</v-icon>Eliminar</v-btn
+      >
+      <v-btn
+        class="white--text rounded-lg mx-3 px-8 my-5"
+        color="blue"
+        height="50px"
+        depressed
+        exact
+        @click="editarResena()"
+        v-if="isAdmin || isCreator"
+        ><v-icon>mdi-pencil-outline</v-icon>Editar</v-btn
+      >
+      <v-btn
         :to="{ name: 'Reseñas' }"
         class="rounded-lg mx-3 px-8 my-5"
         color="secondary"
@@ -10,26 +30,6 @@
         exact
         ><v-icon class="pr-2">mdi-location-exit</v-icon
         ><span class="font-weight-regular text-body-2">Volver</span></v-btn
-      >
-      <v-btn
-        class="rounded-lg mx-3 px-8 my-5"
-        color="secondary"
-        height="50px"
-        depressed
-        exact
-        @click="borrarResena()"
-        v-if="isAdmin"
-        ><v-icon>mdi-trash-can-outline</v-icon>Eliminar</v-btn
-      >
-      <v-btn
-        class="rounded-lg mx-3 px-8 my-5"
-        color="secondary"
-        height="50px"
-        depressed
-        exact
-        @click="editarResena()"
-        v-if="isAdmin"
-        ><v-icon>mdi-pencil-outline</v-icon>Editar</v-btn
       >
     </v-row>
     <v-row>
@@ -97,15 +97,15 @@
         >
           <v-row class="mx-1 mt-1" align="center">
             <v-img
-              class="rounded-circle mt-2 mr-2"
-              src="../assets/profileimg.png"
+              class="rounded-lg mt-2 mr-2"
+              :src="creatorData.imgURL"
               max-width="6%"
               width="48px"
               height="48px"
               contain
             />
             <div>
-              <p class="mb-3 mt-1">Nombre de usuario</p>
+              <p class="mb-3 mt-1">{{ creatorData.name }}</p>
               <v-row class="ml-1">
                 <v-rating
                   class="mt-0"
@@ -145,8 +145,8 @@
           <h2 class="mx-5 pt-2 font-weight-black">Comentarios</h2>
           <div class="d-flex my-3 pb-3">
             <v-img
-              class="rounded-circle mx-auto"
-              src="../assets/profileimg.png"
+              class="rounded-lg mx-auto"
+              :src="userData.imgURL"
               max-width="6%"
               width="48px"
               height="48px"
@@ -154,7 +154,7 @@
             />
 
             <v-textarea
-              v-model="userData.comentario"
+              v-model="form.comentario"
               class="rounded-lg mx-4"
               width="87%"
               label="Escribir reseña"
@@ -201,13 +201,15 @@
 
 <script>
 import Firebase from "firebase";
-import { mapGetters } from "vuex";
+import { db } from "../plugins/firebase";
+import { mapGetters, mapState } from "vuex";
 export default {
   data: () => ({
-    userData: {
+    form: {
       userId: "",
       comentario: "",
     },
+    creatorData: null,
     isPlaying: false,
     previewUrl: null,
     isMuted: false,
@@ -226,6 +228,12 @@ export default {
         return false;
       }
     },
+    isCreator() {
+      return this.userData.id === this.getData.uid;
+    },
+    ...mapState({
+      userData: (state) => state.session.user,
+    }),
     ...mapGetters({
       isAdmin: "session/isAdmin",
       isUser: "session/isAdmin",
@@ -243,11 +251,11 @@ export default {
     },
     play() {
       this.isPlaying = true;
-      this.previewUrl.volume = this.previewVolume
+      this.previewUrl.volume = this.previewVolume;
       this.previewUrl.play();
       this.previewUrl.onended = () => {
-        this.isPlaying = false
-      }
+        this.isPlaying = false;
+      };
     },
     volume() {
       this.previewUrl.volume = this.previewVolume;
@@ -272,7 +280,13 @@ export default {
   },
   mounted() {
     this.previewUrl = new Audio(this.getData.previewUrl);
-    console.log(this.previewUrl);
+    console.log(this.getData.uid, this.userData.id, this.isCreator)
+    db.collection("usuarios")
+      .doc(this.getData.uid)
+      .onSnapshot((doc) => {
+        const data = { id: doc.id, ...doc.data() };
+        this.creatorData = data;
+      });
   },
 };
 </script>

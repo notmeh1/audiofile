@@ -55,18 +55,6 @@
                 >Iniciar sesión</span
               >
             </v-btn>
-
-            <v-btn
-              @click="loginSpotify()"
-              color="#F4B40E"
-              height="45px"
-              class="mr-4 px-7 rounded-lg"
-            >
-              <v-icon class="mr-2">mdi-spotify</v-icon>
-              <span class="text-body-2 font-weight-bold"
-                >Iniciar sesión con Spotify</span
-              >
-            </v-btn>
             <p class="my-5 white--text">
               ¿Aún no te registras?
               <v-btn :to="{ name: 'Registrarse' }" text plain color="white"
