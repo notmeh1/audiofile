@@ -27,7 +27,8 @@
                   <th class="text-left">Hecho por</th>
                   <th class="text-left">Canción</th>
                   <th class="text-left">Album</th>
-                  <th class="text-left">Vistas</th>
+                  <th class="text-left">Me gusta</th>
+                  <th class="text-left">No me gusta</th>
                   <th class="text-left">Puntuación</th>
                   <th class="text-left">Accion</th>
                 </tr>
@@ -38,7 +39,8 @@
                   <td>Quien lo creo</td>
                   <td>{{ foro.songName }}</td>
                   <td>{{ foro.songArtistOne }}</td>
-                  <td>Numero de vistas</td>
+                  <td>{{ foro.like }}</td>
+                  <td>{{ foro.dislike }}</td>
                   <td>{{ foro.valoracion }}</td>
                   <td>
                     <div class="d-flex">

@@ -133,14 +133,14 @@
                   :color="disableLike ? 'blue' : ''"
                   ><v-icon>mdi-thumb-up</v-icon></v-btn
                 >
-                <span>{{ getData.like }}</span>
+                <p class="my-auto">{{ getData.like }}</p>
                 <v-btn
                   @click.prevent="addDislike()"
                   icon
                   :color="disableDislike ? 'red' : ''"
                   ><v-icon>mdi-thumb-down</v-icon></v-btn
                 >
-                <span>{{ getData.dislike }}</span>
+                <p class="my-auto">{{ getData.dislike }}</p>
               </v-card>
             </v-row>
           </v-row>
