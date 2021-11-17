@@ -113,7 +113,7 @@ export default {
       songId: "",
       resena: "",
       valoracion: null,
-      comentarios: {},
+      comentarios: [],
     },
   }),
   computed: {

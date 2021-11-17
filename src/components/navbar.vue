@@ -97,7 +97,7 @@
           >Reseñas</v-btn
         >
         <v-btn
-          v-if="isUserLogged"
+          v-if="isSpotify"
           :to="{ name: 'Agregar Reseñas' }"
           class="font-weight-light text-body-2 mx-2"
           color="secondary"
@@ -135,7 +135,8 @@ export default {
   },
   computed: {
     ...mapState({
-      isUserLogged: (state) => state.session.user
+      isUserLogged: (state) => state.session.user,
+      isSpotify: (state) => state.spotifyAuth.spotifyUserData
     })
   },
 };

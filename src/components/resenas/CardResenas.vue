@@ -72,7 +72,7 @@
 
 <script>
 import { mapState } from "vuex";
-import {db} from "../../plugins/firebase";
+//import {db} from "../../plugins/firebase";
 export default {
   data: () => ({
     userList: [],
@@ -85,13 +85,13 @@ export default {
   },
   props: ["value"],
   mounted() {
-    this.foroList.forEach((foro) => {
-      db.collection('usuarios').doc(foro.uid).onSnapshot((doc) => {
-        const data = { id: doc.id, ...doc.data() };
-        console.log(data, this.pairs)
-        this.userList.push(data)
-      })
-    })
+    //this.foroList.forEach((foro) => {
+    //  db.collection('usuarios').doc(foro.uid).onSnapshot((doc) => {
+    //    const data = { id: doc.id, ...doc.data() };
+    //    console.log(data, this.pairs)
+    //    this.userList.push(data)
+    //  })
+    //})
   },
 };
 </script>

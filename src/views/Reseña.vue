@@ -102,7 +102,6 @@
               max-width="6%"
               width="48px"
               height="48px"
-              contain
             />
             <div>
               <p class="mb-3 mt-1">{{ creatorData.name }}</p>
@@ -163,12 +162,11 @@
           <h2 class="mx-5 pt-2 font-weight-black">Comentarios</h2>
           <div class="d-flex my-3 pb-3">
             <v-img
-              class="rounded-lg mx-auto"
+              class="rounded-lg mx-2"
               :src="userData.imgURL"
               max-width="6%"
               width="48px"
               height="48px"
-              contain
             />
 
             <v-textarea
@@ -184,23 +182,25 @@
           </div>
           <template v-if="getData">
             <div
-              v-for="item in getData.comentarios"
-              :key="item.comentario"
+              v-for="pair in pairs"
+              :key="pair.id"
               class="d-flex my-3 pb-3"
             >
               <div class="ml-3">
+                <div>
                 <v-img
                   class="rounded-lg mx-auto border"
-                  src="../assets/profileimg.png"
+                  :src="pair.user.imgURL"
                   width="48px"
                   height="48px"
                   contain
                 />
-                <p class="text-caption mx-auto">Nombre de usuario</p>
+                <p class="text-caption mx-auto">{{pair.user.name}}</p>
+                </div>
               </div>
               <v-card class="rounded-simple mx-auto" width="87%" flat>
                 <v-card-text class="secondary--text"
-                  >{{ item
+                  >{{ pair.item.comentario
                   }}<!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
                 donec integer diam nulla non adipiscing vitae sit ultrices.
                 Gravida molestie bibendum ullamcorper amet. Vel vel nulla libero
@@ -224,18 +224,35 @@ import { mapGetters, mapState } from "vuex";
 export default {
   data: () => ({
     form: {
-      userId: "",
+      id: 0,
+      userId: null,
       comentario: "",
     },
     disableLike: false,
     disableDislike: false,
     creatorData: null,
+    commentUsers: [],
     isPlaying: false,
     previewUrl: null,
     isMuted: false,
     previewVolume: 0.5,
   }),
   computed: {
+    getComentarioId() {
+      if (this.getData.comentarios.at(0)) {
+        return this.getData.comentarios.at(0).id++;
+      } else {
+        return 0;
+      }
+    },
+    pairs() {
+      return this.getData.comentarios.map((item, id) => {
+        return {
+          item: item,
+          user: this.commentUsers[id]
+        }
+      })
+    },
     getId() {
       return this.$route.params.id;
     },
@@ -261,13 +278,16 @@ export default {
   },
   methods: {
     saveComment() {
-      const jaja = this.userData;
-      Firebase.firestore().collection("foros").doc(this.getId).set(
-        {
-          comentarios: { jaja },
-        },
-        { merge: true }
-      );
+      this.getData.comentarios.push({
+        id: this.getComentarioId,
+        userId: this.form.userId,
+        comentario: this.form.comentario,
+      });
+      const comentarios = this.getData.comentarios;
+      Firebase.firestore()
+        .collection("foros")
+        .doc(this.getId)
+        .set({ comentarios }, { merge: true });
     },
     play() {
       this.isPlaying = true;
@@ -372,6 +392,11 @@ export default {
     },
   },
   mounted() {
+    //if (this.getData.comentarios.length > 0) {
+    //  let count = this.getData.comentarios.at(-1).id++
+    //  this.form.id = count
+    //}
+    this.form.userId = this.userData.id;
     this.previewUrl = new Audio(this.getData.previewUrl);
     console.log(this.getData.uid, this.userData.id, this.isCreator);
     db.collection("usuarios")
@@ -380,6 +405,13 @@ export default {
         const data = { id: doc.id, ...doc.data() };
         this.creatorData = data;
       });
+    this.getData.comentarios.forEach((item) => {
+      db.collection('usuarios').doc(item.userId).onSnapshot((doc) => {
+        const data = { id: doc.id, ...doc.data() };
+        console.log(this.pairs)
+        this.commentUsers.push(data)
+      })
+    })
   },
 };
 </script>

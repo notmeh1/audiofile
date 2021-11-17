@@ -40,7 +40,7 @@
           <v-icon class="mr-2">mdi-spotify</v-icon>
           <span class="text-body-2 font-weight-bold">Conectar con Spotify</span>
         </v-btn>
-                <v-btn
+        <v-btn
           @click="handleLogout()"
           class="rounded-lg mt-10 px-5 ml-2 text-body-2 font-weight-bold"
           color="error"
@@ -57,7 +57,9 @@
             <v-col cols="2" justify="center">
               <v-img
                 class="rounded-lg ml-3"
-                :src="isImagesEmpty ? defaultImage : spotifyUserData.images[0].url"
+                :src="
+                  isImagesEmpty ? defaultImage : spotifyUserData.images[0].url
+                "
                 width="48px"
                 height="48px"
               />
@@ -127,11 +129,7 @@
           <p class="white--text">Foto de perfil ( URL )</p>
           <v-row>
             <v-col cols="11">
-              <v-text-field
-                :disabled="disableForm"
-                v-model="imgURL"
-                solo
-              />
+              <v-text-field :disabled="disableForm" v-model="imgURL" solo />
             </v-col>
           </v-row>
 
@@ -151,7 +149,7 @@
 </template>
 
 <script>
-import {db} from "../../plugins/firebase"
+import { db } from "../../plugins/firebase";
 import { mapState } from "vuex";
 export default {
   data: () => ({
@@ -160,10 +158,10 @@ export default {
   }),
   computed: {
     isImagesEmpty() {
-      return this.spotifyUserData.images.length === 0
+      return this.spotifyUserData.images.length === 0;
     },
     defaultImage() {
-      return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPfCfynXv42fOnrTQAs-99j09O8uz7mDilOQ&usqp=CAU'
+      return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPfCfynXv42fOnrTQAs-99j09O8uz7mDilOQ&usqp=CAU";
     },
     ...mapState({
       userData: (state) => state.session.user,
@@ -175,11 +173,14 @@ export default {
       this.$store.dispatch("spotifyAuth/authSpotify");
     },
     saveProfileChanges() {
-      db.collection('usuarios').doc(this.userData.id).set({
-        name: this.userData.name,
-        email: this.userData.email,
-        imgURL: this.imgURL,
-      }, {merge: true})
+      db.collection("usuarios").doc(this.userData.id).set(
+        {
+          name: this.userData.name,
+          email: this.userData.email,
+          imgURL: this.imgURL,
+        },
+        { merge: true }
+      );
       this.disableForm = true;
     },
     async handleLogout() {
@@ -187,7 +188,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.userData, this.isImagesEmpty);
+    this.$store.dispatch("spotifyAuth/fetchProfileInformation");
   },
 };
 </script>

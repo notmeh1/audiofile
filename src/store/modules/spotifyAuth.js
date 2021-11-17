@@ -7,12 +7,12 @@ export const spotifyAuthModule = {
   getters: {},
   mutations: {
     STORE_SPOTIFY_USER_DATA(state, json) {
-      state.spotifyUserData = json
+      state.spotifyUserData = json;
     },
     CLEAN_SPOTIFY_USER_DATA(state) {
-      localStorage.removeItem('accessToken')
-      state.spotifyUserData = null
-    }
+      localStorage.removeItem("accessToken");
+      state.spotifyUserData = null;
+    },
   },
   actions: {
     authSpotify() {
@@ -44,7 +44,7 @@ export const spotifyAuthModule = {
       url += "&state=" + encodeURIComponent(state);
       window.location.href = url;
     },
-    handleRedirect({dispatch}) {
+    handleRedirect({ dispatch }) {
       let accessToken = getAccessToken();
       //const redirect_uri = "http://localhost:8080/"
       console.log(accessToken);
@@ -63,28 +63,31 @@ export const spotifyAuthModule = {
         }
         return accessToken;
       }
-      dispatch('fetchProfileInformation')
+      dispatch("fetchProfileInformation");
     },
-    fetchProfileInformation({commit}) {
-        const API_ENDPOINT = 'https://api.spotify.com/v1/me';
-        let ACCESS_TOKEN = localStorage.getItem('accessToken')
-        console.log(ACCESS_TOKEN)
+    fetchProfileInformation({ commit }) {
+      const API_ENDPOINT = "https://api.spotify.com/v1/me";
+      let ACCESS_TOKEN = localStorage.getItem("accessToken");
+      console.log(ACCESS_TOKEN);
 
-        const fetchOptions = {
-            method: 'GET',
-            headers: new Headers({
-                'Authorization': `Bearer ${ACCESS_TOKEN}`
-            })
-        };
+      const fetchOptions = {
+        method: "GET",
+        headers: new Headers({
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
+        }),
+      };
 
-        fetch(API_ENDPOINT, fetchOptions).then(function (response) {
-            return response.json();
-        }).then(function (json) {
-          commit('STORE_SPOTIFY_USER_DATA', json)
-          console.log(json);
-        }).catch(function (error) {
-            console.log(error);
+      fetch(API_ENDPOINT, fetchOptions)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (json) {
+          if (json.error) {
+            commit("CLEAN_SPOTIFY_USER_DATA");
+          } else {
+            commit("STORE_SPOTIFY_USER_DATA", json);
+          }
         });
-    }
+    },
   },
 };
