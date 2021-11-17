@@ -119,7 +119,7 @@ export default {
   computed: {
     ...mapState({
       songResult: (state) => state.spotify.songResult,
-      userData: (state) => state.session.user
+      userData: (state) => state.session.user,
     }),
   },
   methods: {
@@ -139,20 +139,18 @@ export default {
       return !!value || "Este campo es obligatorio";
     },
     async selectSong(song) {
-      console.log(song);
       this.isSelected = true;
       await store.dispatch("spotify/filterSongId", song.id);
       const form = this.formResena;
       form.like = 0;
       form.dislike = 0;
-      form.uid = this.userData.id
+      form.uid = this.userData.id;
       form.songId = song.id;
       form.songName = song.name;
       form.songImg = song.album.images[0].url;
       form.songArtistOne = song.artists[0].name;
       form.album = song.album.name;
       form.previewUrl = song.preview_url;
-      console.log(this.formResena);
     },
     async cleanSearch() {
       this.searchInput = null;

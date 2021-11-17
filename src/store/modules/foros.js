@@ -4,6 +4,7 @@ export const forosModule = {
   namespaced: true,
   state: {
     foroList: null,
+    creatorData: null,
     songInput: null,
   },
   getters: {
@@ -15,6 +16,9 @@ export const forosModule = {
     GET_FORO_LIST(state, list) {
       state.foroList = list;
     },
+    GET_CREATOR_DATA(state, data) {
+      state.creatorData = data
+    }
   },
   actions: {
      getForoList({commit}) {
@@ -26,5 +30,13 @@ export const forosModule = {
         }, list = [])
       })
     },
+    getCreatorData({commit}, uid) {
+      Firebase.firestore().collection("usuarios")
+      .doc(uid)
+      .onSnapshot((doc) => {
+        const data = { id: doc.id, ...doc.data() };
+        commit("GET_CREATOR_DATA", data)
+      });
+    }
   },
 };

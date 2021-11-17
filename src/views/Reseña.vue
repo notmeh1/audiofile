@@ -162,9 +162,9 @@
           <h2 class="mx-5 pt-2 font-weight-black">Comentarios</h2>
           <div class="d-flex my-3 pb-3">
             <v-img
-              class="rounded-lg mx-2"
+              class="rounded-simple mx-2"
               :src="userData.imgURL"
-              max-width="6%"
+              max-width="5%"
               width="48px"
               height="48px"
             />
@@ -173,34 +173,44 @@
               v-model="form.comentario"
               class="rounded-lg mx-4"
               width="87%"
-              label="Escribir reseña"
+              label="Escribir comentario"
               auto-grow
               solo
             >
+              <template slot="append">
+                <v-btn
+                  @click="saveComment()"
+                  class="mt-auto"
+                  color="secondary"
+                  fab
+                  depressed
+                >
+                  <v-icon>mdi-send</v-icon>
+                </v-btn>
+              </template>
             </v-textarea>
-            <v-btn color="secondary" @click="saveComment()">Enviar</v-btn>
           </div>
-          <template v-if="getData">
+          <template>
             <div
-              v-for="pair in pairs"
-              :key="pair.id"
+              v-for="item in getData.comentarios"
+              :key="item.id"
               class="d-flex my-3 pb-3"
             >
               <div class="ml-3">
                 <div>
-                <v-img
-                  class="rounded-lg mx-auto border"
-                  :src="pair.user.imgURL"
-                  width="48px"
-                  height="48px"
-                  contain
-                />
-                <p class="text-caption mx-auto">{{pair.user.name}}</p>
+                  <v-img
+                    class="rounded-lg mx-auto border"
+                    :src="item.userImg"
+                    width="48px"
+                    height="48px"
+                    contain
+                  />
+                  <p class="text-caption mx-auto">{{ item.userName }}</p>
                 </div>
               </div>
               <v-card class="rounded-simple mx-auto" width="87%" flat>
                 <v-card-text class="secondary--text"
-                  >{{ pair.item.comentario
+                  >{{ item.comentario
                   }}<!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
                 donec integer diam nulla non adipiscing vitae sit ultrices.
                 Gravida molestie bibendum ullamcorper amet. Vel vel nulla libero
@@ -224,35 +234,18 @@ import { mapGetters, mapState } from "vuex";
 export default {
   data: () => ({
     form: {
-      id: 0,
-      userId: null,
+      userName: null,
+      userImg: null,
       comentario: "",
     },
     disableLike: false,
     disableDislike: false,
-    creatorData: null,
-    commentUsers: [],
     isPlaying: false,
     previewUrl: null,
     isMuted: false,
     previewVolume: 0.5,
   }),
   computed: {
-    getComentarioId() {
-      if (this.getData.comentarios.at(0)) {
-        return this.getData.comentarios.at(0).id++;
-      } else {
-        return 0;
-      }
-    },
-    pairs() {
-      return this.getData.comentarios.map((item, id) => {
-        return {
-          item: item,
-          user: this.commentUsers[id]
-        }
-      })
-    },
     getId() {
       return this.$route.params.id;
     },
@@ -270,6 +263,7 @@ export default {
     },
     ...mapState({
       userData: (state) => state.session.user,
+      creatorData: (state) => state.foros.creatorData,
     }),
     ...mapGetters({
       isAdmin: "session/isAdmin",
@@ -278,9 +272,25 @@ export default {
   },
   methods: {
     saveComment() {
+      const characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+      function generateString(length) {
+        let result = " ";
+        const charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+          result += characters.charAt(
+            Math.floor(Math.random() * charactersLength)
+          );
+        }
+
+        return result;
+      }
       this.getData.comentarios.push({
-        id: this.getComentarioId,
-        userId: this.form.userId,
+        id: generateString(10),
+        userId: this.userData.id,
+        userName: this.userData.name,
+        userImg: this.userData.imgURL,
         comentario: this.form.comentario,
       });
       const comentarios = this.getData.comentarios;
@@ -288,6 +298,7 @@ export default {
         .collection("foros")
         .doc(this.getId)
         .set({ comentarios }, { merge: true });
+      this.form.comentario = null;
     },
     play() {
       this.isPlaying = true;
@@ -351,9 +362,6 @@ export default {
           );
         }
       }
-      //db.collection("foros").doc(this.getId.id).set({
-      //
-      //}, {merge: true,})
     },
     addDislike() {
       if (this.disableLike) {
@@ -392,26 +400,8 @@ export default {
     },
   },
   mounted() {
-    //if (this.getData.comentarios.length > 0) {
-    //  let count = this.getData.comentarios.at(-1).id++
-    //  this.form.id = count
-    //}
-    this.form.userId = this.userData.id;
     this.previewUrl = new Audio(this.getData.previewUrl);
-    console.log(this.getData.uid, this.userData.id, this.isCreator);
-    db.collection("usuarios")
-      .doc(this.getData.uid)
-      .onSnapshot((doc) => {
-        const data = { id: doc.id, ...doc.data() };
-        this.creatorData = data;
-      });
-    this.getData.comentarios.forEach((item) => {
-      db.collection('usuarios').doc(item.userId).onSnapshot((doc) => {
-        const data = { id: doc.id, ...doc.data() };
-        console.log(this.pairs)
-        this.commentUsers.push(data)
-      })
-    })
+    this.$store.dispatch("foros/getCreatorData", this.getData.uid);
   },
 };
 </script>

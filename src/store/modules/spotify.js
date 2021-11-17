@@ -52,7 +52,6 @@ export const spotifyModule = {
         });
     },
     filterSongId({ commit }, songId) {
-      console.log(songId);
       commit("FILTER_SONG_ID", songId);
     },
     cleanSearch({ commit }) {

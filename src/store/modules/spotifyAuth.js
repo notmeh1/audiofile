@@ -18,6 +18,7 @@ export const spotifyAuthModule = {
     authSpotify() {
       const client_id = "a97c91eefb5b468ebc720b375cd75603";
       const redirect_uri = "http://localhost:8080/";
+      // redirect_uri hosting: "https://audiofile-61a00.web.app/" 
 
       var state = generateRandomString(16);
 
@@ -47,7 +48,6 @@ export const spotifyAuthModule = {
     handleRedirect({ dispatch }) {
       let accessToken = getAccessToken();
       //const redirect_uri = "http://localhost:8080/"
-      console.log(accessToken);
       localStorage.setItem("accessToken", accessToken);
       //window.history.pushState("", "", redirect_uri); // remove param from url
       function getAccessToken() {
@@ -68,7 +68,6 @@ export const spotifyAuthModule = {
     fetchProfileInformation({ commit }) {
       const API_ENDPOINT = "https://api.spotify.com/v1/me";
       let ACCESS_TOKEN = localStorage.getItem("accessToken");
-      console.log(ACCESS_TOKEN);
 
       const fetchOptions = {
         method: "GET",
