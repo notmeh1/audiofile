@@ -33,6 +33,7 @@ export default {
     },
   mounted() {
     this.$store.dispatch("session/subscribeToAuthStateChange");
+    this.$store.dispatch("spotifyAuth/fetchProfileInformation");
     this.$store.dispatch("foros/getForoList");
     if (window.location.hash.length > 0) {
       this.$store.dispatch("spotifyAuth/handleRedirect")

@@ -139,6 +139,7 @@ export default {
       return !!value || "Este campo es obligatorio";
     },
     async selectSong(song) {
+      console.log(song)
       this.isSelected = true;
       await store.dispatch("spotify/filterSongId", song.id);
       const form = this.formResena;
