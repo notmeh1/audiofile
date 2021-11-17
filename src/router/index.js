@@ -44,6 +44,9 @@ const routes = [
     name: "Reseña",
     component: () =>
       import(/* webpackChunkName: "reseña" */ "../views/Reseña.vue"),
+    meta: {
+      requiredLogin: true,
+    },
   },
   {
     path: "/perfil",
@@ -58,13 +61,13 @@ const routes = [
     path: "/perfil/userlist",
     name: "Userlist",
     component: () =>
-    import(/* webpackChunkName: "userlist" */ "../views/admin/userList.vue"),
+      import(/* webpackChunkName: "userlist" */ "../views/admin/userList.vue"),
   },
   {
     path: "/perfil/forolist",
     name: "Forolist",
     component: () =>
-    import(/* webpackChunkName: "forolist" */ "../views/admin/foroList.vue"),
+      import(/* webpackChunkName: "forolist" */ "../views/admin/foroList.vue"),
   },
   {
     path: "/editarResena/:id",
