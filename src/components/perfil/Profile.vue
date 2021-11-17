@@ -31,7 +31,7 @@
           >
         </v-row>
         <v-btn
-          v-if="!spotifyUserData.display_name"
+          v-if="!spotifyUserData"
           @click="loginSpotify()"
           color="spotifyColor"
           height="45px"
@@ -48,7 +48,7 @@
           >Cerrar sesion</v-btn
         >
         <v-card
-          v-if="spotifyUserData.display_name"
+          v-if="spotifyUserData"
           class="my-5 mx-10"
           color="spotifyColor"
           flat
@@ -57,7 +57,7 @@
             <v-col cols="2" justify="center">
               <v-img
                 class="rounded-lg ml-3"
-                :src="spotifyUserData.images[0].url"
+                :src="isImagesEmpty ? defaultImage : spotifyUserData.images[0].url"
                 width="48px"
                 height="48px"
               />
@@ -159,6 +159,12 @@ export default {
     imgURL: null,
   }),
   computed: {
+    isImagesEmpty() {
+      return this.spotifyUserData.images.length === 0
+    },
+    defaultImage() {
+      return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPfCfynXv42fOnrTQAs-99j09O8uz7mDilOQ&usqp=CAU'
+    },
     ...mapState({
       userData: (state) => state.session.user,
       spotifyUserData: (state) => state.spotifyAuth.spotifyUserData,
@@ -181,8 +187,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.userData);
-    this.$store.dispatch("spotifyAuth/fetchProfileInformation");
+    console.log(this.userData, this.isImagesEmpty);
   },
 };
 </script>
