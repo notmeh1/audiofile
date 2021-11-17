@@ -1,33 +1,54 @@
 <template>
   <v-container class="rounded-simple white pt-0" fluid>
     <v-row>
-      <v-col lg="4" xl="6" sm="12" align=right>
+      <v-col lg="4" xl="6" sm="12" align="center">
         <v-card class="mx-3 mt-5" flat>
-          <p class="mt-10 text-h2 secondary--text text-center font-weight-black">Lorem ipsum dolor sit amet, consectetur</p>
-          <p class="text-h5 secondary--text text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras volutpat
-          suscipit porta odio justo, egestas. Auctor porttitor sed augue
-          elementum interdum.</p>
-          <Search/>
+          <p
+            class="mt-10 text-h2 secondary--text text-center font-weight-black"
+          >
+            Comparte al mundo tus canciones favoritas!
+          </p>
+          <p class="text-h5 secondary--text text-center">
+            Estas a una reseña de dar a conocer esa canción que te esta volando
+            la cabeza.
+          </p>
+          <v-btn
+            :to="{ name: 'Agregar Reseñas' }"
+            class="rounded-lg mx-3 px-8 my-5"
+            color="secondary"
+            height="50px"
+            depressed
+            exact
+            >Crear una reseña</v-btn
+          >
+          <!-- <Search /> -->
         </v-card>
       </v-col>
-      <v-col v-if="$vuetify.breakpoint.mdAndUp" class="homeBg rounded-r-simple pb-0" lg="8" xl="6" sm="12" align=left>
+      <v-col
+        v-if="$vuetify.breakpoint.mdAndUp"
+        class="homeBg rounded-r-simple pb-0"
+        lg="8"
+        xl="6"
+        sm="12"
+        align="left"
+      >
         <v-card class="rounded-r-simple" color="homeBg" width="1200px" flat>
-        <v-img
-        class=""
-        src="../../assets/img/hero-img.png"
-        width="100%"
-        height="700px"
-        />
+          <v-img
+            class=""
+            src="../../assets/img/hero-img.png"
+            width="100%"
+            height="700px"
+          />
         </v-card>
       </v-col>
     </v-row>
   </v-container>
 </template>
 <script>
-import Search from "./Search.vue";
+// import Search from "./Search.vue";
 export default {
   components: {
-    Search,
+    // Search,
   },
 };
 </script>
