@@ -10,7 +10,7 @@ export const spotifyAuthModule = {
       state.spotifyUserData = json;
     },
     CLEAN_SPOTIFY_USER_DATA(state) {
-      localStorage.removeItem("accessToken");
+      //localStorage.removeItem("accessToken");
       state.spotifyUserData = null;
     },
   },

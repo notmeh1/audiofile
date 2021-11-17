@@ -8,9 +8,9 @@ export const forosModule = {
     songInput: null,
   },
   getters: {
-    //searchBySongName(state) {
-    //    return state.foroList.filter((song) => song.cancion.toLowerCase().includes(state.songInput))
-    //}
+    filterByPopular(state) {
+      return state.foroList.filter((song) => song.like >= 20)
+    }
   },
   mutations: {
     GET_FORO_LIST(state, list) {

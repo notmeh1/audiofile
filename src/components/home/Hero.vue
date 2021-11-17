@@ -32,48 +32,5 @@ export default {
 };
 </script>
 <style lang="scss">
-.hero {
-  display: flex;
-  flex-direction: column;
-  &__bg-left {
-    background-color: #f0f6ff;
-    border-radius: 0 0 50px 50px;
-  }
-  &__bg-right {
-    display: none;
-  }
-  &__title {
-    font-size: 50px;
-    line-height: 60px;
-    text-align: center;
-    color: #4a2aa7;
-    font-weight: 900;
-  }
-  &__text {
-    line-height: 30px;
-  }
-}
 
-@media (min-width: 1264px) {
-  .hero {
-    flex-direction: row;
-    &__bg-left {
-      border-radius: 0 0 0 50px;
-      padding-top: 10% !important;
-    }
-    &__bg-right {
-      background-color: #f4b40e;
-      border-radius: 0 0 50px 0;
-      display: inline-block;
-    }
-    &__img {
-      width: 120%;
-      margin-bottom: -6px;
-    }
-  }
-  .col-md-8 {
-    padding: 0 !important;
-    overflow: hidden;
-  }
-}
 </style>

@@ -13,11 +13,6 @@
       </v-row>
       <v-row>
         <v-col>
-          <CarruselPlaylist />
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col>
           <RegisterFooter v-if="!isUserLogged" />
         </v-col>
       </v-row>
@@ -28,13 +23,12 @@
 <script>
 import Hero from "../components/home/Hero.vue";
 import CarruselResenas from "../components/home/CarruselResenas.vue";
-import CarruselPlaylist from "../components/home/CarruselPlaylist.vue";
 import RegisterFooter from "../components/home/RegisterFooter.vue";
 import { mapState } from "vuex";
 
 export default {
   name: "Home",
-  components: { Hero, CarruselResenas, CarruselPlaylist, RegisterFooter },
+  components: { Hero, CarruselResenas, RegisterFooter },
   computed: {
     ...mapState({
       isUserLogged: (state) => state.session.user,

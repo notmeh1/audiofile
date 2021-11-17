@@ -60,7 +60,7 @@
               >{{ getData.album }}
             </p>
           </div>
-          <v-card-actions class="justify-center">
+          <v-card-actions v-if="getData.previewUrl" class="justify-center">
             <v-card-text class="px-0 pt-0 pb-10">
               <v-slider
                 @change="volume()"
