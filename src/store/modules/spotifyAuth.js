@@ -17,7 +17,7 @@ export const spotifyAuthModule = {
   actions: {
     authSpotify() {
       const client_id = "a97c91eefb5b468ebc720b375cd75603";
-      const redirect_uri = "http://localhost:8080/";
+      const redirect_uri = "https://audiofile-61a00.web.app/";
       // redirect_uri hosting: "https://audiofile-61a00.web.app/" 
 
       var state = generateRandomString(16);
