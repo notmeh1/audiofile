@@ -49,7 +49,23 @@
               contain
             />
           </v-row>
-          <h2 class="mx-3 py-3 font-weight-black">{{ getData.songName }}</h2>
+          <v-row>
+            <h2 class="ml-6 py-3 font-weight-black">{{ getData.songName }}</h2>
+            <v-spacer></v-spacer>
+            <v-tooltip right>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  @click="openSong()"
+                  class="mr-5"
+                  v-bind="attrs"
+                  v-on="on"
+                  icon
+                  ><v-icon color="secondary">mdi-launch</v-icon></v-btn
+                >
+              </template>
+              <span>Abrir canción en Spotify</span>
+            </v-tooltip>
+          </v-row>
           <div class="mb-10">
             <p class="px-3 my-2">
               <v-icon class="mr-2" color="secondary">mdi-account-music</v-icon
@@ -216,15 +232,9 @@
                 </div>
               </div>
               <v-card class="rounded-simple mx-auto" width="87%" flat>
-                <v-card-text class="secondary--text"
-                  >{{ item.comentario
-                  }}<!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-                donec integer diam nulla non adipiscing vitae sit ultrices.
-                Gravida molestie bibendum ullamcorper amet. Vel vel nulla libero
-                magna enim convallis placerat. Gravida parturient gravida
-                venenatis, egestas id euismod faucibus elementum
-                dictum. --></v-card-text
-                >
+                <v-card-text class="secondary--text">{{
+                  item.comentario
+                }}</v-card-text>
               </v-card>
             </div>
           </template>
@@ -278,6 +288,9 @@ export default {
     }),
   },
   methods: {
+    openSong() {
+      window.open(`spotify:track:${this.getData.songId}`, "_blank");
+    },
     saveComment() {
       const characters =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

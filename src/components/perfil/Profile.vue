@@ -7,13 +7,12 @@
           >Perfil de usuario</v-card-title
         >
         <v-avatar size="256">
-        <v-img
-          class="mt-2 mr-2"
-          :src="userData.imgURL"
-          width="256px"
-          height="256px"
-        />
-
+          <v-img
+            class="mt-2 mr-2"
+            :src="userData.imgURL"
+            width="256px"
+            height="256px"
+          />
         </v-avatar>
         <v-row class="mt-5" justify="center">
           <v-chip
@@ -58,13 +57,13 @@
           <v-row align="center">
             <v-col cols="2" justify="center">
               <v-avatar class="ml-5 rounded-simple">
-              <v-img
-                :src="
-                  isImagesEmpty ? defaultImage : spotifyUserData.images[0].url
-                "
-                width="48px"
-                height="48px"
-              />
+                <v-img
+                  :src="
+                    isImagesEmpty ? defaultImage : spotifyUserData.images[0].url
+                  "
+                  width="48px"
+                  height="48px"
+                />
               </v-avatar>
             </v-col>
             <v-col cols="4">
@@ -76,7 +75,7 @@
               </p>
             </v-col>
             <v-col align="end">
-              <v-btn class="mr-3" icon>
+              <v-btn @click="openProfile()" class="mr-3" icon>
                 <v-icon color="white" x-large>mdi-spotify</v-icon>
               </v-btn>
             </v-col>
@@ -132,7 +131,11 @@
           <p class="white--text">Foto de perfil ( URL )</p>
           <v-row>
             <v-col cols="11">
-              <v-text-field :disabled="disableForm" v-model="userData.imgURL" solo />
+              <v-text-field
+                :disabled="disableForm"
+                v-model="userData.imgURL"
+                solo
+              />
             </v-col>
           </v-row>
 
@@ -171,6 +174,9 @@ export default {
     }),
   },
   methods: {
+    openProfile() {
+      window.open(this.spotifyUserData.uri, "_blank");
+    },
     loginSpotify() {
       this.$store.dispatch("spotifyAuth/authSpotify");
     },
