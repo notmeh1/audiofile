@@ -1,6 +1,7 @@
 <template>
   <v-container class="rounded-simple px-5 white" fluid>
-    <v-row v-if="isLogged" justify="end">
+    <v-row justify="end">
+      <div v-if="isLogged">
       <v-btn
         class="rounded-lg mx-3 px-8 my-5"
         color="error"
@@ -21,6 +22,7 @@
         v-if="isAdmin || isCreator"
         ><v-icon>mdi-pencil-outline</v-icon>Editar</v-btn
       >
+      </div>
       <v-btn
         :to="{ name: 'Reseñas' }"
         class="rounded-lg mx-3 px-8 my-5"
@@ -32,7 +34,7 @@
         ><span class="font-weight-regular text-body-2">Volver</span></v-btn
       >
     </v-row>
-    <v-row :class="!isLogged ? 'mt-5' : ''">
+    <v-row>
       <v-col lg="3" sm="12">
         <v-card
           v-if="getData"
