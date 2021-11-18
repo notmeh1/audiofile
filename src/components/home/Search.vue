@@ -10,6 +10,7 @@
         background-color="cardBackground"
         flat
         item-value="id"
+        item-text="songName"
         hide-no-data
         hide-details
         placeholder="Busca tu canción favorita"
