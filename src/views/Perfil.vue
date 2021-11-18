@@ -4,7 +4,7 @@
       <v-btn
         :to="{ name: 'Userlist' }"
         color="primary"
-        class="rounded-lg mx-2 px-5 text-body-1"
+        class="rounded-lg mx-2 px-5 text-body-1 mb-1"
         height="45px"
         depressed
         >Listado de usuarios</v-btn
@@ -12,7 +12,7 @@
       <v-btn
         color="primary"
         :to="{ name: 'Forolist' }"
-        class="rounded-lg mx-2 px-5 text-body-1"
+        class="rounded-lg mx-2 px-5 text-body-1 mb-1"
         height="45px"
         depressed
         >Listado de reseñas</v-btn

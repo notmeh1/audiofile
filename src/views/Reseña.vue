@@ -33,7 +33,7 @@
       >
     </v-row>
     <v-row>
-      <v-col lg="3">
+      <v-col lg="3" sm="12">
         <v-card
           v-if="getData"
           class="secondary--text rounded-simple px-3 mb-5"
@@ -88,7 +88,7 @@
           </v-card-actions>
         </v-card>
       </v-col>
-      <v-col class="pt-0" lg="9">
+      <v-col class="pt-0" lg="9" sm="12">
         <v-card
           class="secondary--text rounded-simple px-3"
           color="cardBackground"
@@ -96,14 +96,10 @@
           flat
         >
           <v-row v-if="creatorData" class="mx-1 mt-1" align="center">
-            <v-img
-              class="rounded-lg mt-2 mr-2"
-              :src="creatorData.imgURL"
-              max-width="6%"
-              width="48px"
-              height="48px"
-            />
-            <div>
+            <v-avatar class="mt-2">
+              <v-img :src="creatorData.imgURL" width="48px" height="48px" />
+            </v-avatar>
+            <div class="ml-2">
               <p class="mb-3 mt-1">{{ creatorData.name }}</p>
               <v-row class="ml-1">
                 <v-rating
@@ -126,25 +122,39 @@
             </div>
             <v-row justify="end">
               <v-card class="rounded-simple d-flex py-2 mr-5 px-1 mt-1" flat>
-                <v-btn
-                  @click.prevent="addLike()"
-                  icon
-                  :color="disableLike ? 'blue' : ''"
-                  ><v-icon>mdi-thumb-up</v-icon></v-btn
-                >
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      @click.prevent="addLike()"
+                      icon
+                      :color="disableLike ? 'blue' : ''"
+                      v-bind="attrs"
+                      v-on="on"
+                      ><v-icon>mdi-thumb-up</v-icon></v-btn
+                    >
+                  </template>
+                  <span>Me gusta</span>
+                </v-tooltip>
                 <p class="my-auto">{{ getData.like }}</p>
-                <v-btn
-                  @click.prevent="addDislike()"
-                  icon
-                  :color="disableDislike ? 'red' : ''"
-                  ><v-icon>mdi-thumb-down</v-icon></v-btn
-                >
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      @click.prevent="addDislike()"
+                      icon
+                      :color="disableDislike ? 'red' : ''"
+                      v-bind="attrs"
+                      v-on="on"
+                      ><v-icon>mdi-thumb-down</v-icon></v-btn
+                    >
+                  </template>
+                  <span>No me gusta</span>
+                </v-tooltip>
                 <p class="my-auto">{{ getData.dislike }}</p>
               </v-card>
             </v-row>
           </v-row>
           <v-col>
-            <v-card-text class="mx-3 text--text font-light">{{
+            <v-card-text class="mx-3 text--text text-body-1 font-light">{{
               getData.resena
             }}</v-card-text>
           </v-col>
@@ -161,13 +171,9 @@
         >
           <h2 class="mx-5 pt-2 font-weight-black">Comentarios</h2>
           <div class="d-flex my-3 pb-3">
-            <v-img
-              class="rounded-simple mx-2"
-              :src="userData.imgURL"
-              max-width="5%"
-              width="48px"
-              height="48px"
-            />
+            <v-avatar class="mx-2">
+              <v-img :src="userData.imgURL" width="48px" height="48px" />
+            </v-avatar>
 
             <v-textarea
               v-model="form.comentario"
@@ -180,7 +186,7 @@
               <template slot="append">
                 <v-btn
                   @click="saveComment()"
-                  class="mt-auto"
+                  class="mt-auto mr-2"
                   color="secondary"
                   fab
                   depressed
@@ -198,13 +204,14 @@
             >
               <div class="ml-3">
                 <div>
-                  <v-img
-                    class="rounded-lg mx-auto border"
-                    :src="item.userImg"
-                    width="48px"
-                    height="48px"
-                    contain
-                  />
+                  <v-avatar>
+                    <v-img
+                      class="mx-auto border"
+                      :src="item.userImg"
+                      width="48px"
+                      height="48px"
+                    />
+                  </v-avatar>
                   <p class="text-caption mx-auto">{{ item.userName }}</p>
                 </div>
               </div>

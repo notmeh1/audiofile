@@ -5,7 +5,7 @@
         <h2 class="secondary--text text-center font-weight-bold text-h3 py-10">
           Reseñas más populares
         </h2>
-        <v-sheet class="mx-auto" max-width="75%">
+        <v-sheet class="mx-auto" :max-width="$vuetify.breakpoint.smAndDown ? '100%' : '75%'">
           <v-slide-group multiple show-arrows>
             <v-slide-item v-for="foro in filteredList" :key="foro.id">
               <v-col cols="auto">

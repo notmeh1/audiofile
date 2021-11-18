@@ -2,7 +2,7 @@
   <div>
     <v-container>
       <v-row>
-        <v-col>
+        <v-col v-if="foros">
           <v-card
             v-for="foro in foroList"
             :key="foro.id"
@@ -12,7 +12,7 @@
             flat
           >
             <v-row align="center">
-              <v-col cols="1" align="center">
+              <v-col cols="1" md="2" align="center">
                 <v-img
                   class="rounded-md mx-3"
                   :src="foro.songImg"
@@ -21,7 +21,7 @@
                   contain
                 />
               </v-col>
-              <v-col cols="5">
+              <v-col cols="5" md="4">
                 <v-row>
                   <v-card-title class="px-0 pb-0">{{
                     foro.songName
@@ -52,14 +52,12 @@
               <v-col cols="5"> </v-col>
               <v-col class="py-0 px-0" cols="1" align="center">
                 <div class="mt-4 mr-3">
-                  <v-img
-                    class="rounded-simple"
-                    :src="foro.userImg"
-                    width="48px"
-                    height="48px"
-                    contain
-                  />
-                  <p>{{ foro.userName }}</p>
+                  <v-icon>mdi-thumb-up</v-icon>
+                  <p>{{ foro.like }}</p>
+                </div>
+                <div class="mr-3">
+                  <v-icon>mdi-thumb-down</v-icon>
+                  <p>{{foro.dislike}}</p>
                 </div>
               </v-col>
             </v-row>
@@ -71,7 +69,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 //import {db} from "../../plugins/firebase";
 export default {
   data: () => ({
@@ -79,9 +77,12 @@ export default {
     list: {},
   }),
   computed: {
-    ...mapState({
-      foroList: (state) => state.foros.foroList,
+    ...mapGetters({
+      foroList: 'foros/filterByName',
     }),
+    ...mapState({
+      foros: (state) => state.foros.foroList
+    })
   },
   props: ["value"],
   mounted() {

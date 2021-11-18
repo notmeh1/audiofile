@@ -1,18 +1,20 @@
 <template>
   <v-card v-if="userData" class="rounded-simple" flat>
     <v-row>
-      <v-col class="pt-0" cols="6" align="center">
+      <v-col class="pt-0" lg="6" sm="12" align="center">
         <v-card-title
           class="text-h4 justify-center secondary--text font-weight-bold"
           >Perfil de usuario</v-card-title
         >
+        <v-avatar size="256">
         <v-img
-          class="rounded-circle mt-2 mr-2"
+          class="mt-2 mr-2"
           :src="userData.imgURL"
           width="256px"
           height="256px"
-          contain
         />
+
+        </v-avatar>
         <v-row class="mt-5" justify="center">
           <v-chip
             v-if="userData.rol === 'user'"
@@ -55,14 +57,15 @@
         >
           <v-row align="center">
             <v-col cols="2" justify="center">
+              <v-avatar class="ml-5 rounded-simple">
               <v-img
-                class="rounded-lg ml-3"
                 :src="
                   isImagesEmpty ? defaultImage : spotifyUserData.images[0].url
                 "
                 width="48px"
                 height="48px"
               />
+              </v-avatar>
             </v-col>
             <v-col cols="4">
               <p class="white--text text-left my-0 text-caption">
@@ -80,7 +83,7 @@
           </v-row>
         </v-card>
       </v-col>
-      <v-col class="py-0" cols="6">
+      <v-col class="py-0" lg="6" sm="12">
         <v-card
           class="ml-5 px-10 rounded-r-simple"
           color="secondary"
@@ -129,7 +132,7 @@
           <p class="white--text">Foto de perfil ( URL )</p>
           <v-row>
             <v-col cols="11">
-              <v-text-field :disabled="disableForm" v-model="imgURL" solo />
+              <v-text-field :disabled="disableForm" v-model="userData.imgURL" solo />
             </v-col>
           </v-row>
 
@@ -154,7 +157,6 @@ import { mapState } from "vuex";
 export default {
   data: () => ({
     disableForm: true,
-    imgURL: null,
   }),
   computed: {
     isImagesEmpty() {
@@ -177,7 +179,7 @@ export default {
         {
           name: this.userData.name,
           email: this.userData.email,
-          imgURL: this.imgURL,
+          imgURL: this.userData.imgURL,
         },
         { merge: true }
       );

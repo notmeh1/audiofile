@@ -25,13 +25,15 @@
           exact
           >Inicio</v-btn
         >
-        <v-btn class="font-weight-light mx-2" color="secondary" depressed exact
+        <v-btn :to="{ name: 'Reseñas'}" class="font-weight-light mx-2" color="secondary" depressed exact
           >Reseñas</v-btn
         >
-        <v-btn class="font-weight-light mx-2" color="secondary" depressed exact
+        <v-btn v-if="isSpotify" :to="{ name: 'Agregar Reseñas'}" class="font-weight-light mx-2" color="secondary" depressed exact
           >Agregar Reseña</v-btn
         >
         <v-btn
+          :to="{ name: 'Iniciar Sesión' }"
+        v-if="!isUserLogged"
           class="rounded-simple"
           width="190px"
           height="35px"
@@ -43,6 +45,17 @@
             >Iniciar sesion</span
           ></v-btn
         >
+        <v-btn  
+        :to="{ name: 'Perfil' }"
+               v-if="isUserLogged"
+          class="rounded-simple"
+          width="190px"
+          height="35px"
+          color="white"
+          light
+          depressed>
+          <span class="font-weight-regular" color="secondary">Perfil</span>
+        </v-btn>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
@@ -82,6 +95,7 @@
       <v-toolbar-items class="hidden-xs-only">
         <v-btn
           :to="{ name: 'Home' }"
+          active-class="amber--text font-weight-medium"
           class="font-weight-light text-body-2 mx-2"
           color="secondary"
           depressed
@@ -90,6 +104,7 @@
         >
         <v-btn
           :to="{ name: 'Reseñas' }"
+          active-class="amber--text font-weight-medium"
           class="font-weight-light text-body-2 mx-2"
           color="secondary"
           depressed
@@ -99,6 +114,7 @@
         <v-btn
           v-if="isSpotify"
           :to="{ name: 'Agregar Reseñas' }"
+          active-class="amber--text font-weight-medium"
           class="font-weight-light text-body-2 mx-2"
           color="secondary"
           depressed
@@ -109,7 +125,7 @@
 
       <v-spacer></v-spacer>
       <SignIn v-if="!isUserLogged" />
-      <Account v-if="isUserLogged"/>
+      <Account v-if="isUserLogged && $vuetify.breakpoint.smAndUp"/>
       <div class="hidden-sm-and-up">
         <v-btn icon class="rounded-simple mr-1" @click="drawer = !drawer">
           <v-icon>mdi-dots-horizontal</v-icon>
