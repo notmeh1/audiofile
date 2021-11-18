@@ -17,6 +17,9 @@ export const sessionModule = {
     isUser(state) {
       return state.user.rol === "user";
     },
+    isLogged(state) {
+      return state.user
+    },
   },
 
   mutations: {

@@ -1,6 +1,6 @@
 <template>
   <v-container class="rounded-simple px-5 white" fluid>
-    <v-row justify="end">
+    <v-row v-if="isLogged" justify="end">
       <v-btn
         class="rounded-lg mx-3 px-8 my-5"
         color="error"
@@ -32,7 +32,7 @@
         ><span class="font-weight-regular text-body-2">Volver</span></v-btn
       >
     </v-row>
-    <v-row>
+    <v-row :class="!isLogged ? 'mt-5' : ''">
       <v-col lg="3" sm="12">
         <v-card
           v-if="getData"
@@ -136,7 +136,7 @@
                 </p>
               </v-row>
             </div>
-            <v-row justify="end">
+            <v-row v-if="isLogged" justify="end">
               <v-card class="rounded-simple d-flex py-2 mr-5 px-1 mt-1" flat>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
@@ -186,8 +186,8 @@
           flat
         >
           <h2 class="mx-5 pt-2 font-weight-black">Comentarios</h2>
-          <div class="d-flex my-3 pb-3">
-            <v-avatar class="mx-2">
+          <div v-if="isLogged" class="d-flex my-3 pb-3">
+            <v-avatar v-if="userData" class="mx-2">
               <v-img :src="userData.imgURL" width="48px" height="48px" />
             </v-avatar>
 
@@ -285,6 +285,7 @@ export default {
     ...mapGetters({
       isAdmin: "session/isAdmin",
       isUser: "session/isAdmin",
+      isLogged: "session/isLogged"
     }),
   },
   methods: {

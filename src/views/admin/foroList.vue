@@ -24,9 +24,9 @@
               <thead>
                 <tr>
                   <th class="text-left">Codigo de documento</th>
-                  <th class="text-left">Hecho por</th>
+                  <th class="text-left">UID</th>
                   <th class="text-left">Canción</th>
-                  <th class="text-left">Album</th>
+                  <th class="text-left">Artista</th>
                   <th class="text-left">Me gusta</th>
                   <th class="text-left">No me gusta</th>
                   <th class="text-left">Puntuación</th>
@@ -36,7 +36,7 @@
               <tbody>
                 <tr v-for="foro in foroList" :key="foro.id">
                   <td>{{ foro.id }}</td>
-                  <td>Quien lo creo</td>
+                  <td>{{ foro.uid }}</td>
                   <td>{{ foro.songName }}</td>
                   <td>{{ foro.songArtistOne }}</td>
                   <td>{{ foro.like }}</td>
