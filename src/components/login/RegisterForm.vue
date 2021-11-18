@@ -1,7 +1,7 @@
 <template>
   <v-container class="rounded-simple px-5 pb-0 white" fluid>
     <v-row align="end">
-      <v-col class="pa-0" cols="6" align="right">
+      <v-col v-if="!$vuetify.breakpoint.smAndDown" class="pa-0" lg="6" md="6" sm="12" align="right">
         <v-img
           width="800px"
           height="700px"
@@ -11,7 +11,7 @@
           absolute
         />
       </v-col>
-      <v-col cols="6" align="left">
+      <v-col lg="6" md="6" sm="12" align="left">
         <v-card
           class="ma-0 py-5 px-10 rounded-simple"
           color="secondary"
