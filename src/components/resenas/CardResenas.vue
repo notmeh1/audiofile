@@ -1,188 +1,104 @@
-.
 <template>
   <div>
     <v-container>
       <v-row>
-        <v-col>
-          <v-card class="mx-auto card" color="#F9F6F6" flat>
-            <v-list-item three-line>
-              <v-list-item-avatar
-                tile
-                size="80"
-                height="100"
-                color="grey"
-              ></v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="text-h5 mb-1 card__title">
-                  Lorem ipsum
-                </v-list-item-title>
-                <v-list-item-subtitle class="card__text"
-                  >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Elementum, nisl arcu elit turpis in quisque
-                  turpis...</v-list-item-subtitle
-                >
-                <v-card-actions>
-                  <v-btn color="#4A2AA7"> Ver reseña </v-btn>
-                </v-card-actions>
-              </v-list-item-content>
-            </v-list-item>
+        <v-col v-if="foros">
+          <v-card
+            v-for="foro in foroList"
+            :key="foro.id"
+            :to="{ path: `/resenas/${foro.id}` }"
+            class="pointer rounded-md mb-5"
+            color="cardBackground"
+            flat
+          >
+            <v-row align="center">
+              <v-col cols="1" md="2" align="center">
+                <v-img
+                  class="rounded-md mx-3"
+                  :src="foro.songImg"
+                  width="64px"
+                  height="64px"
+                  contain
+                />
+              </v-col>
+              <v-col cols="5" md="4">
+                <v-row>
+                  <v-card-title class="px-0 pb-0">{{
+                    foro.songName
+                  }}</v-card-title>
+                </v-row>
+                <v-row>
+                  <p class="my-0 text-body-2">{{ foro.songArtistOne }}</p>
+                </v-row>
+                <v-row>
+                  <v-rating
+                    class="pb-4"
+                    v-model="foro.valoracion"
+                    color="secondary"
+                    empty-icon="mdi-star-outline"
+                    full-icon="mdi-star"
+                    half-icon="mdi-star-halffull"
+                    hover
+                    length="5"
+                    size="16"
+                    readonly
+                    dense
+                  ></v-rating>
+                  <p class="ml-2 mt-1 text-subtitle-2">
+                    ({{ foro.valoracion }})
+                  </p>
+                </v-row>
+              </v-col>
+              <v-col cols="5"> </v-col>
+              <v-col class="py-0 px-0" cols="1" align="center">
+                <div class="mt-4 mr-3">
+                  <v-icon>mdi-thumb-up</v-icon>
+                  <p>{{ foro.like }}</p>
+                </div>
+                <div class="mr-3">
+                  <v-icon>mdi-thumb-down</v-icon>
+                  <p>{{foro.dislike}}</p>
+                </div>
+              </v-col>
+            </v-row>
           </v-card>
         </v-col>
-        <v-col>
-          <v-card class="mx-auto card" color="#F9F6F6" flat>
-            <v-list-item three-line>
-              <v-list-item-avatar
-                tile
-                size="80"
-                height="100"
-                color="grey"
-              ></v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="text-h5 mb-1 card__title">
-                  Lorem ipsum
-                </v-list-item-title>
-                <v-list-item-subtitle class="card__text"
-                  >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Elementum, nisl arcu elit turpis in quisque
-                  turpis...</v-list-item-subtitle
-                >
-                <v-card-actions>
-                  <v-btn color="#4A2AA7"> Ver reseña </v-btn>
-                </v-card-actions>
-              </v-list-item-content>
-            </v-list-item>
-          </v-card>
-        </v-col>
-        <v-col>
-          <v-card class="mx-auto card" color="#F9F6F6" flat>
-            <v-list-item three-line>
-              <v-list-item-avatar
-                tile
-                size="80"
-                height="100"
-                color="grey"
-              ></v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="text-h5 mb-1 card__title">
-                  Lorem ipsum
-                </v-list-item-title>
-                <v-list-item-subtitle class="card__text"
-                  >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Elementum, nisl arcu elit turpis in quisque
-                  turpis...</v-list-item-subtitle
-                >
-                <v-card-actions>
-                  <v-btn color="#4A2AA7"> Ver reseña </v-btn>
-                </v-card-actions>
-              </v-list-item-content>
-            </v-list-item>
-          </v-card>
-        </v-col>
-        <v-col>
-          <v-card class="mx-auto card" color="#F9F6F6" flat>
-            <v-list-item three-line>
-              <v-list-item-avatar
-                tile
-                size="80"
-                height="100"
-                color="grey"
-              ></v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="text-h5 mb-1 card__title">
-                  Lorem ipsum
-                </v-list-item-title>
-                <v-list-item-subtitle class="card__text"
-                  >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Elementum, nisl arcu elit turpis in quisque
-                  turpis...</v-list-item-subtitle
-                >
-                <v-card-actions>
-                  <v-btn color="#4A2AA7"> Ver reseña </v-btn>
-                </v-card-actions>
-              </v-list-item-content>
-            </v-list-item>
-          </v-card>
-        </v-col>
-        <v-col>
-          <v-card class="mx-auto card" color="#F9F6F6" flat>
-            <v-list-item three-line>
-              <v-list-item-avatar
-                tile
-                size="80"
-                height="100"
-                color="grey"
-              ></v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="text-h5 mb-1 card__title">
-                  Lorem ipsum
-                </v-list-item-title>
-                <v-list-item-subtitle class="card__text"
-                  >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Elementum, nisl arcu elit turpis in quisque
-                  turpis...</v-list-item-subtitle
-                >
-                <v-card-actions>
-                  <v-btn color="#4A2AA7"> Ver reseña </v-btn>
-                </v-card-actions>
-              </v-list-item-content>
-            </v-list-item>
-          </v-card>
-        </v-col>
-        <v-col>
-          <v-card class="mx-auto card" color="#F9F6F6" flat>
-            <v-list-item three-line>
-              <v-list-item-avatar
-                tile
-                size="80"
-                height="100"
-                color="grey"
-              ></v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="text-h5 mb-1 card__title">
-                  Lorem ipsum
-                </v-list-item-title>
-                <v-list-item-subtitle class="card__text"
-                  >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Elementum, nisl arcu elit turpis in quisque
-                  turpis...</v-list-item-subtitle
-                >
-                <v-card-actions>
-                  <v-btn color="#4A2AA7"> Ver reseña </v-btn>
-                </v-card-actions>
-              </v-list-item-content>
-            </v-list-item>
-          </v-card>
-        </v-col>
-      </v-row>
-      <v-row class="justify-center">
-        <v-pagination v-model="page" :length="6" color="#4A2AA7"></v-pagination>
       </v-row>
     </v-container>
   </div>
 </template>
 
 <script>
-export default {};
+import { mapState, mapGetters } from "vuex";
+//import {db} from "../../plugins/firebase";
+export default {
+  data: () => ({
+    userList: [],
+    list: {},
+  }),
+  computed: {
+    ...mapGetters({
+      foroList: 'foros/filterByName',
+    }),
+    ...mapState({
+      foros: (state) => state.foros.foroList
+    })
+  },
+  props: ["value"],
+  mounted() {
+    //this.foroList.forEach((foro) => {
+    //  db.collection('usuarios').doc(foro.uid).onSnapshot((doc) => {
+    //    const data = { id: doc.id, ...doc.data() };
+    //    console.log(data, this.pairs)
+    //    this.userList.push(data)
+    //  })
+    //})
+  },
+};
 </script>
 
 <style lang="scss">
-.v-sheet.v-card {
-  border-radius: 20px !important;
-}
-.v-application .rounded-0 {
-  border-radius: 15px !important;
-}
-.theme--light.v-btn {
-  color: white;
-}
-.card {
-  margin-bottom: 10px;
-  &__title {
-    color: #4a2aa7;
-    font-weight: 900 !important;
-  }
-  &__text {
-    color: #4a2aa7;
-  }
+.pointer {
+  cursor: pointer;
 }
 </style>

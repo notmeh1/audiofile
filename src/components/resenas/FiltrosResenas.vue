@@ -2,23 +2,25 @@
 <template>
   <div>
     <v-container>
-      <v-row class="filtros">
-        <v-col class="filtros__inputs" cols="12" md="9">
-          <p class="filtros__title">Filtrar:</p>
+      <v-card class="my-2" flat>
+        <p class="text-h4 text-center mb-5 secondary--text font-weight-bold">Busca alguna reseña</p>
+        <v-row class="d-flex">
           <v-text-field
-            label="Nombre canción"
+          @input="$store.dispatch('foros/filterInput', songInput)"
+            v-model="songInput"
+            class="mx-2 mt-5 rounded-simple"
+            placeholder="Busca por canción o album"
             outlined
-            append-icon="mdi-playlist-music"
-            color="#4A2AA7"
-            class="mx-2 filtros__border"
-          ></v-text-field>
-          <v-text-field
-            label="Album"
-            outlined
-            append-icon="mdi-music-box-outline"
-            color="#4A2AA7"
-            class="mx-2 filtros__border"
-          ></v-text-field>
+            color="secondary"
+            solo
+            flat
+          >
+          <template slot="prepend-inner">
+            <v-icon color="primary">mdi-playlist-music</v-icon>
+          </template>
+          </v-text-field>
+          <!-- spotify api no da info sobre generos en musica-->
+          <!--
           <v-text-field
             label="Genero"
             outlined
@@ -26,51 +28,20 @@
             color="#4A2AA7"
             class="mx-2 filtros__border"
           ></v-text-field>
-        </v-col>
-        <v-col class="text-center" cols="12" md="3">
-          <v-btn class="filtros__btn mb-2" color="#4A2AA7"
-            ><v-icon>mdi-plus-circle-outline</v-icon> Agregar Reseña</v-btn
-          >
-        </v-col>
-      </v-row>
+          --->
+        </v-row>
+      </v-card>
     </v-container>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data: () => ({
+    songInput: null,
+  }),
+};
 </script>
 
 <style lang="scss">
-.filtros {
-  background-color: #f6faff;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  &__title {
-    text-align: center;
-    color: #4a2aa7;
-    font-weight: 900;
-  }
-  &__border {
-    border-radius: 10px !important;
-  }
-}
-@media (min-width: 1264px) {
-  .filtros {
-    flex-direction: row;
-    align-items: center;
-    &__inputs {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
-  }
-}
-.v-text-field.v-text-field--enclosed .v-text-field__details {
-  display: none;
-}
-.v-btn__content {
-  color: white;
-}
 </style>

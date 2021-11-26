@@ -1,18 +1,15 @@
 .
 <template>
   <div>
-    <v-container class="home">
-      <v-row justify="center">
-        <v-col align="center">
-          <h1>Reseñas view</h1>
-        </v-col>
-      </v-row>
-    </v-container>
-    <v-container class="resenas">
+    <v-container class="resenas" fluid>
       <v-row>
         <v-col>
           <FiltrosResenas />
-          <CardResenas />
+          <v-row>
+            <v-col>
+              <CardResenas />
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
     </v-container>
@@ -22,6 +19,7 @@
 <script>
 import FiltrosResenas from "../components/resenas/FiltrosResenas.vue";
 import CardResenas from "../components/resenas/CardResenas.vue";
+
 export default {
   components: { FiltrosResenas, CardResenas },
 };

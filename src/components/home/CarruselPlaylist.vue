@@ -29,7 +29,7 @@
               </v-card-subtitle>
 
               <v-expand-transition>
-                <div v-show="show">
+                <div>
                   <v-divider></v-divider>
 
                   <v-card-text>
@@ -61,7 +61,7 @@
               </v-card-subtitle>
 
               <v-expand-transition>
-                <div v-show="show">
+                <div>
                   <v-divider></v-divider>
 
                   <v-card-text>
@@ -93,7 +93,7 @@
               </v-card-subtitle>
 
               <v-expand-transition>
-                <div v-show="show">
+                <div>
                   <v-divider></v-divider>
 
                   <v-card-text>
@@ -117,6 +117,9 @@
 <script>
 import { Carousel, Slide } from "vue-carousel";
 export default {
+  data: () => ({
+    show: true,
+  }),
   components: {
     Carousel,
     Slide,

@@ -4,66 +4,41 @@
       <v-row class="justify-center">
         <v-col cols="12" md="8">
           <h2 class="text-h4 secondary--text text-center font-weight-bold my-5">
-            Busca una canción y agrega una reseña
+            Editar Reseña
           </h2>
-          <v-form class="my-5" ref="formResena" @submit.prevent="crearResena">
-            <v-text-field
-              v-if="!isSelected"
-              @input="$store.dispatch('spotify/fetchSongResult', searchInput)"
-              class="rounded-lg"
-              :value="formResena.songId"
-              outlined
-              append-icon="mdi-playlist-music"
-              placeholder="Canción"
-              color="secondary"
-              v-model="searchInput"
-              :rules="[required]"
-              solo
-              flat
-            >
-            </v-text-field>
-
+          <v-form
+            class="my-5"
+            ref="formEditarResena"
+            @submit.prevent="editarResena()"
+          >
             <v-card
-              v-for="song in songResult"
-              @click="selectSong(song)"
-              :key="song.id"
-              class="pointer rounded-md mb-5"
+              class="rounded-md mb-5"
               color="cardBackground"
               flat
+              disabled
             >
               <v-row align="center">
-                <v-col cols="1" align="center">
+                <v-col cols="2" align="center">
                   <v-img
                     class="rounded-md mx-2"
-                    :src="song.album.images[0].url"
-                    width="48px"
-                    height="48px"
+                    :src="getData.songImg"
+                    width="64px"
+                    height="64px"
                     contain
                   />
                 </v-col>
-                <v-col cols="2">
+                <v-col cols="10">
                   <v-row>
-                    <v-card-title class="px-0 pb-0">
-                      {{ song.name }}
+                    <v-card-title class="px-0 py-0">
+                      {{ getData.songName }}
                     </v-card-title>
                   </v-row>
                   <v-row>
-                    <p class="my-0 text-body-2">{{ song.artists[0].name }}</p>
+                    <p class="my-0 text-body-2">{{ getData.songArtistOne }}</p>
                   </v-row>
-                </v-col>
-                <v-col cols="8"> </v-col>
-                <v-col cols="1">
-                  <v-btn
-                    @click.stop="cleanSearch()"
-                    v-if="isSelected"
-                    color="error"
-                    icon
-                    ><v-icon>mdi-close-circle</v-icon></v-btn
-                  >
                 </v-col>
               </v-row>
             </v-card>
-
             <v-textarea
               class="rounded-lg"
               outlined
@@ -90,7 +65,7 @@
             </v-input>
             <v-btn class="secondary px-5 mt-5" type="submit" height="45px"
               ><span class="text-body-2 font-weight-bold"
-                >Agregar reseña</span
+                >Guardar cambios</span
               ></v-btn
             >
           </v-form>
@@ -102,25 +77,49 @@
 
 <script>
 import Firebase from "firebase";
-import store from "../../store/index";
+import store from "../store/index";
 import { mapState } from "vuex";
 
 export default {
+  beforeRouteEnter(to, from, next) {
+    Firebase.firestore()
+      .collection("foros")
+      .doc(to.params.id)
+      .get()
+      .then((document) => {
+        next((vm) => {
+          vm.formResena = { id: document.id, ...document.data() };
+        });
+      });
+  },
   data: () => ({
     searchInput: null,
-    isSelected: false,
     formResena: {
       songId: "",
       resena: "",
       valoracion: null,
-      comentarios: [],
+      comentarios: {},
     },
   }),
   computed: {
     ...mapState({
       songResult: (state) => state.spotify.songResult,
-      userData: (state) => state.session.user,
     }),
+    ...mapState({
+      foroList: (state) => state.foroList,
+    }),
+    getId() {
+      return this.$route.params.id;
+    },
+    getData() {
+      if (this.$store.state.foros.foroList) {
+        return this.$store.state.foros.foroList.find(
+          (foro) => foro.id === this.getId
+        );
+      } else {
+        return false;
+      }
+    },
   },
   methods: {
     crearResena() {
@@ -138,35 +137,31 @@ export default {
     required(value) {
       return !!value || "Este campo es obligatorio";
     },
-    async selectSong(song) {
-      console.log(song)
-      this.isSelected = true;
-      await store.dispatch("spotify/filterSongId", song.id);
+    selectSong(song) {
+      console.log(song);
+      store.dispatch("spotify/filterSongId", song.id);
       const form = this.formResena;
-      form.like = 0;
-      form.dislike = 0;
-      form.uid = this.userData.id;
       form.songId = song.id;
       form.songName = song.name;
       form.songImg = song.album.images[0].url;
       form.songArtistOne = song.artists[0].name;
       form.album = song.album.name;
-      form.previewUrl = song.preview_url;
+      console.log(this.formResena);
     },
-    async cleanSearch() {
-      this.searchInput = null;
-      await store.dispatch("spotify/cleanSearch");
-      this.isSelected = false;
+    editarResena() {
+      if (this.$refs.formEditarResena.validate()) {
+        Firebase.firestore()
+          .collection("foros")
+          .doc(this.getId)
+          .update(this.formResena)
+          .then(() => {
+            this.$store.dispatch("resenas/traerTodasLasResenas");
+          });
+        this.$router.push("/resenas");
+      }
     },
-  },
-  mounted() {
-    store.dispatch("spotify/cleanSearch");
   },
 };
 </script>
 
-<style lang="scss">
-.pointer {
-  cursor: pointer;
-}
-</style>
+<style></style>
